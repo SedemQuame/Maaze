@@ -8,24 +8,25 @@ public class PlayerController : MonoBehaviour
     private float movementX, movementY;
     public float speed = 5.0f;
     private GameObject lastFloor;
-    private Rigidbody rb;
+    private Rigidbody rigidbody;
+    private string lastCreatedCell;
     // Start is called before the first frame update
     void Start()
     {
         GameObject gameManager = GameObject.Find("GameManager (Maze Loader Holder)");
         MazeLoader loader = gameManager.GetComponent<MazeLoader>();
 
-        string lastCreatedCell = "Floor " + --loader.mazeRows + "," + --loader.mazeColumns;
+        lastCreatedCell = "Floor " + --loader.mazeRows + "," + --loader.mazeColumns;
         lastFloor = GameObject.Find(lastCreatedCell);
 
-        rb = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
         Vector3 playerJumpOffset = new Vector3(-5, 30, -5);
-        rb.transform.position = lastFloor.transform.position + playerJumpOffset;
+        rigidbody.transform.position = lastFloor.transform.position + playerJumpOffset;
     }
 
     void FixedUpdate(){
         Vector3 movement = new Vector3(movementX, 0, movementY);
-        rb.AddForce(movement * speed * Time.deltaTime, ForceMode.Impulse);
+        rigidbody.AddForce(movement * speed * Time.deltaTime, ForceMode.Impulse);
     }
 
 

@@ -1,27 +1,25 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MazeLoader : MonoBehaviour {
 	public int mazeRows, mazeColumns;
+	public GameObject gameOver, wall, restartButton;
 
-	public GameObject wall;
 	public float size = 2f;
-
 	private MazeCell[,] mazeCells;
-
 	// Use this for initialization
 	void Start () {
 		InitializeMaze (); 
 		MazeAlgorithm ma = new HuntAndKillMazeAlgorithm (mazeCells);
 		ma.CreateMaze ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+		gameOver.SetActive(false);
+		restartButton.GetComponent<Button>().onClick.AddListener(RestartGame);
 	}
 
 	private void InitializeMaze() {
-
 		mazeCells = new MazeCell[mazeRows,mazeColumns];
 		// instantiate the player at the center position.
 		for (int r = 0; r < mazeRows; r++) {
@@ -56,6 +54,13 @@ public class MazeLoader : MonoBehaviour {
 				mazeCells [r, c].southWall.transform.Rotate (Vector3.up * 90f);
 			}
 		}
+	}
 
+	public void GameOver(){
+        gameOver.SetActive(true);
+    }
+
+	private void RestartGame(){
+ 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 }

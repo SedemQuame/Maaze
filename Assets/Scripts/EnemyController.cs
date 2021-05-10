@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        direction = patrolDirections[0];
+        direction = patrolDirections[Random.Range(0, 3)];
     }
 
     // Update is called once per frame
@@ -24,9 +24,16 @@ public class EnemyController : MonoBehaviour
         transform.Translate(direction * Time.deltaTime * speed);
     }
 
-    void OnCollisionEnter(Collision coll){
+    void OnCollisionEnter(Collision collider){
         // set collision boolean to true, and move in new direction.
         collidedWithWall = true;
+
+        // if collided with the player, kill him.
+        if(collider.gameObject.CompareTag("Player")){
+            Destroy(collider.gameObject);
+            // Upon the destruction of the player, show the gameOver UI.
+            GameObject.Find("GameManager (Maze Loader Holder)").GetComponent<MazeLoader>().GameOver();
+        }
     }
 
     void OnCollisionExit(Collision coll){

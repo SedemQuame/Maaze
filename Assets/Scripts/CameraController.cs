@@ -11,7 +11,6 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        // offset = transform.position - player.GetComponent<Rigidbody>().position;
         offset = new Vector3(0,60,0);
     }
 
