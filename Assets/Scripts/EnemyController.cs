@@ -8,11 +8,13 @@ public class EnemyController : MonoBehaviour
     private Vector3 direction;
     private Vector3 [] patrolDirections = {Vector3.right, Vector3.left, Vector3.forward, Vector3.back};
     private bool collidedWithWall = false;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         direction = patrolDirections[Random.Range(0, 3)];
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -31,8 +33,11 @@ public class EnemyController : MonoBehaviour
         // if collided with the player, kill him.
         if(collider.gameObject.CompareTag("Player")){
             Destroy(collider.gameObject);
-            // Upon the destruction of the player, show the gameOver UI.
-            GameObject.Find("GameManager (Maze Loader Holder)").GetComponent<MazeLoader>().GameOver();
+            // // Pause Movement.
+            gameManager.PauseGame();
+            // Show the gameOver UI.
+            bool gameWon = false;
+            gameManager.GameOver(gameWon);
         }
     }
 

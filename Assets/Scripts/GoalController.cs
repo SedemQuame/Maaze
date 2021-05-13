@@ -7,7 +7,7 @@ public class GoalController : MonoBehaviour
     private GameObject firstFloor;
     // private Rigidbody rigidbody;
     private string firstCreatedCell;
-    private Vector3 goalOffset = new Vector3(0, 10, 0);
+    private Vector3 goalOffset = new Vector3(0, 3, 0);
     // Start is called before the first frame update
     void Start()
     {

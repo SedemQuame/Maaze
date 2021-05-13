@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
     private GameObject lastFloor;
     private Rigidbody rigidbody;
     private string lastCreatedCell;
-    // Start is called before the first frame update
-    void Start()
+    private GameManager gameManager;
+
+        // Start is called before the first frame update
+        void Start()
     {
-        GameObject gameManager = GameObject.Find("GameManager (Maze Loader Holder)");
-        MazeLoader loader = gameManager.GetComponent<MazeLoader>();
+        GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
+        MazeLoader loader = mazeLoader.GetComponent<MazeLoader>();
 
         lastCreatedCell = "Floor " + --loader.mazeRows + "," + --loader.mazeColumns;
         lastFloor = GameObject.Find(lastCreatedCell);
@@ -22,6 +24,8 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         Vector3 playerJumpOffset = new Vector3(-5, 30, -5);
         rigidbody.transform.position = lastFloor.transform.position + playerJumpOffset;
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void FixedUpdate(){
@@ -34,13 +38,9 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.CompareTag("Goal")){
             // Destroy the goal object.
             Destroy(other.gameObject);
-            Debug.Log("Goal reached, game over");
-        }
-
-        if(other.gameObject.CompareTag("Enemy")){
-            // Destroy the goal object.
-            Destroy(gameObject);
-            Debug.Log("Player killed, game over");
+            // Display Game Won Menu
+            bool gameWon = true;
+            gameManager.GameOver(gameWon);
         }
     }
 

@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/UI.unity
+    path: Assets/Scenes/Maaze Main Menu.unity
     guid: efb08771ac416447a9ab6cd2770f1544
   - enabled: 1
-    path: Assets/Scenes/Sandbox.unity
+    path: Assets/Scenes/Maaze Game Play.unity
     guid: 03ace6102d521654d82119a05e91f81e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 81461bca7de4fba258b09d2bbdebc183,

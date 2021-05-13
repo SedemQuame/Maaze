@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class MazeLoader : MonoBehaviour {
 	public int mazeRows, mazeColumns;
-	public GameObject gameOver, wall, restartButton;
+	public GameObject wall;
 
 	public float size = 2f;
 	private MazeCell[,] mazeCells;
@@ -15,8 +13,6 @@ public class MazeLoader : MonoBehaviour {
 		InitializeMaze (); 
 		MazeAlgorithm ma = new HuntAndKillMazeAlgorithm (mazeCells);
 		ma.CreateMaze ();
-		gameOver.SetActive(false);
-		restartButton.GetComponent<Button>().onClick.AddListener(RestartGame);
 	}
 
 	private void InitializeMaze() {
@@ -54,13 +50,5 @@ public class MazeLoader : MonoBehaviour {
 				mazeCells [r, c].southWall.transform.Rotate (Vector3.up * 90f);
 			}
 		}
-	}
-
-	public void GameOver(){
-        gameOver.SetActive(true);
-    }
-
-	private void RestartGame(){
- 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 }
