@@ -12,12 +12,6 @@ public class SpawnManager : MonoBehaviour
         spawn(enemyArr[0], new Vector3(10,0,10));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void spawn(GameObject enemy, Vector3 position){
         Instantiate(enemy, position, transform.rotation);
     }

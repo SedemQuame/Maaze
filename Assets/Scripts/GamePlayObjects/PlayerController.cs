@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private float movementX, movementY;
     public float speed = 5.0f;
     private GameObject lastFloor;
-    private Rigidbody rigidbody;
+    private Rigidbody playerBody;
     private string lastCreatedCell;
     private GameManager gameManager;
 
@@ -21,16 +21,17 @@ public class PlayerController : MonoBehaviour
         lastCreatedCell = "Floor " + --loader.mazeRows + "," + --loader.mazeColumns;
         lastFloor = GameObject.Find(lastCreatedCell);
 
-        rigidbody = GetComponent<Rigidbody>();
+        playerBody = GetComponent<Rigidbody>();
+
         Vector3 playerJumpOffset = new Vector3(-5, 30, -5);
-        rigidbody.transform.position = lastFloor.transform.position + playerJumpOffset;
+        transform.position = lastFloor.transform.position + playerJumpOffset;
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void FixedUpdate(){
         Vector3 movement = new Vector3(movementX, 0, movementY);
-        rigidbody.AddForce(movement * speed * Time.deltaTime, ForceMode.Impulse);
+        playerBody.AddForce(movement * speed * Time.deltaTime, ForceMode.Impulse);
     }
 
 
