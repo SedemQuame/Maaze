@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOver;
@@ -35,11 +34,9 @@ public class GameManager : MonoBehaviour
         if(gameWon){
             // Set the game over text to "Game Over /n You Win!!"
             gameMessage.text = "You Win!!";
-            // gameMessage.color = Color.green;
         }else{
             // Set the game over text to "Game Over /n You Lose!!"
             gameMessage.text = "You Lose!!";
-            // gameMessage.color = Color.red;
         }
     }
 

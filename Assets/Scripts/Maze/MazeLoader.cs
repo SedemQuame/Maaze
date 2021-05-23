@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MazeLoader : MonoBehaviour {
-	public int mazeRows, mazeColumns;
+	public int defaultRowAndColumnNumber = 3;
+	private int mazeRows;
+	private int mazeColumns;
 	public GameObject wall;
+	public int levelNumber = 0;
 
 	public float size = 2f;
 	private MazeCell[,] mazeCells;
 	// Use this for initialization
 	void Start () {
+		mazeColumns = defaultRowAndColumnNumber + levelNumber;
+		mazeRows = mazeColumns;
 		InitializeMaze (); 
 		MazeAlgorithm ma = new HuntAndKillMazeAlgorithm (mazeCells);
 		ma.CreateMaze ();
@@ -20,16 +25,12 @@ public class MazeLoader : MonoBehaviour {
 		// instantiate the player at the center position.
 		for (int r = 0; r < mazeRows; r++) {
 			for (int c = 0; c < mazeColumns; c++) {
-				// Instantiate the goal object in the first generated cell.
-				if(r == 0 && c == 0){
-					// generate the goal object
-				}
 				mazeCells [r, c] = new MazeCell ();
 
 				// For now, use the same wall object for the floor!
-				mazeCells [r, c] .floor = Instantiate (wall, new Vector3 (r*size, -(size/2f), c*size), Quaternion.identity) as GameObject;
-				mazeCells [r, c] .floor.name = "Floor " + r + "," + c;
-				mazeCells [r, c] .floor.transform.Rotate (Vector3.right, 90f);
+				mazeCells [r, c].floor = Instantiate (wall, new Vector3 (r*size, -(size/2f), c*size), Quaternion.identity) as GameObject;
+				mazeCells [r, c].floor.name = "Floor " + r + "," + c;
+				mazeCells [r, c].floor.transform.Rotate (Vector3.right, 90f);
 
 				if (c == 0) {
 					mazeCells[r,c].westWall = Instantiate (wall, new Vector3 (r*size, 0, (c*size) - (size/2f)), Quaternion.identity) as GameObject;
@@ -50,5 +51,14 @@ public class MazeLoader : MonoBehaviour {
 				mazeCells [r, c].southWall.transform.Rotate (Vector3.up * 90f);
 			}
 		}
+	}
+
+	public void setRowAndColumnNumber(){
+		mazeColumns = defaultRowAndColumnNumber + levelNumber;
+		mazeRows = mazeColumns;
+	}
+
+	public int getRowAndColumnNumber(){
+		return mazeRows;
 	}
 }

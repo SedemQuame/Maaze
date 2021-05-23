@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         direction = patrolDirections[Random.Range(0, 3)];
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame

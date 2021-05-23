@@ -5,7 +5,6 @@ public class HuntAndKillMazeAlgorithm : MazeAlgorithm {
 
 	private int currentRow = 0;
 	private int currentColumn = 0;
-
 	private bool courseComplete = false;
 
 	public HuntAndKillMazeAlgorithm(MazeCell[,] mazeCells) : base(mazeCells) {

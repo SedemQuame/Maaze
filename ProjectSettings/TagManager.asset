@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Goal
+  - Money
+  - Bomb
+  - music
   layers:
   - Default
   - TransparentFX

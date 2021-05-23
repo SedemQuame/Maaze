@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private float movementX, movementY;
-    public float speed = 5.0f;
+    public float speed = 15.0f;
+    private float playerHealth = 100.0f;
     private GameObject lastFloor;
     private Rigidbody playerBody;
     private string lastCreatedCell;
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
         MazeLoader loader = mazeLoader.GetComponent<MazeLoader>();
 
-        lastCreatedCell = "Floor " + --loader.mazeRows + "," + --loader.mazeColumns;
+        lastCreatedCell = "Floor " + (loader.getRowAndColumnNumber() - 1) + "," + (loader.getRowAndColumnNumber() - 1);
         lastFloor = GameObject.Find(lastCreatedCell);
 
         playerBody = GetComponent<Rigidbody>();
@@ -26,12 +27,13 @@ public class PlayerController : MonoBehaviour
         Vector3 playerJumpOffset = new Vector3(-5, 30, -5);
         transform.position = lastFloor.transform.position + playerJumpOffset;
 
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
     }
 
     void FixedUpdate(){
         Vector3 movement = new Vector3(movementX, 0, movementY);
-        playerBody.AddForce(movement * speed * Time.deltaTime, ForceMode.Impulse);
+        playerBody.AddForce(movement * speed, ForceMode.Impulse);
+        // playerBody.AddForce(movement * speed * Time.deltaTime, ForceMode.Impulse);
     }
 
 
