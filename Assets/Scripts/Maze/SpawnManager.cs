@@ -8,8 +8,16 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawn(enemyArr[0], new Vector3(0,0,0));
-        spawn(enemyArr[0], new Vector3(10,0,10));
+        spawnEnemiesByLevelDifficulty();
+    }
+
+    void spawnEnemiesByLevelDifficulty(){
+        int enemyType = Random.Range(0, 2);
+        for (int i = 0; i < (LevelDifficulty.levelDifficulty + 1); i++)
+        {
+            if(LevelDifficulty.levelDifficulty == 1) return;
+            spawn(enemyArr[enemyType], new Vector3(0,0,0));
+        }
     }
 
     void spawn(GameObject enemy, Vector3 position){

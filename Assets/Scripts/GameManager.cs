@@ -8,14 +8,13 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOver;
-    public GameObject restartButton;
     public TMP_Text gameMessage;
-    private bool isGamePaused = false;
+    private bool isGamePaused;
     // Start is called before the first frame update
     void Start()
     {
+        isGamePaused = false;
         gameOver.SetActive(false);
-		restartButton.GetComponent<Button>().onClick.AddListener(RestartGame);
     }
 
     // Pauses the game, by reducing the TimeScale for animations to 0.
@@ -39,8 +38,4 @@ public class GameManager : MonoBehaviour
             gameMessage.text = "You Lose!!";
         }
     }
-
-	public void RestartGame(){
- 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-	}
 }

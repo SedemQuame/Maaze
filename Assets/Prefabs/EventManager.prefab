@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: 7fc4ee03311a4f84e8c995add2b70b6b, type: 3}
+  eventSystem: {fileID: 2730564855594460181}
 --- !u!82 &1117141918
 AudioSource:
   m_ObjectHideFlags: 0

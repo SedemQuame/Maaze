@@ -33,9 +33,14 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate(){
         Vector3 movement = new Vector3(movementX, 0, movementY);
         playerBody.AddForce(movement * speed, ForceMode.Impulse);
-        // playerBody.AddForce(movement * speed * Time.deltaTime, ForceMode.Impulse);
+        endGameOnPlayerFallOff();
     }
 
+    void endGameOnPlayerFallOff(){
+        if(transform.position.y < -5){
+            gameManager.GameOver(true);
+        }
+    }
 
     void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Goal")){

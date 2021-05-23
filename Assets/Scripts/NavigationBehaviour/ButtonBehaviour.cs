@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class ButtonBehaviour : MonoBehaviour
 {
     private AudioSource source;
     public AudioClip clickSound;
+    // public GameObject eventSystem
 
     public void Start(){
         source = GetComponent<AudioSource>();
@@ -31,7 +33,14 @@ public class ButtonBehaviour : MonoBehaviour
     }
 
     public void loadGamePlayLevelNumber(){
+        GameObject selectedLevelButton = EventSystem.current.currentSelectedGameObject;
+        // get the difficulty value from the clicked level button.
+        LevelDifficulty.levelDifficulty = int.Parse(selectedLevelButton.transform.GetChild(0).gameObject.GetComponent<TMPro.TextMeshProUGUI>().text);
         SceneManager.LoadScene("Maaze Game Play");
+    }
+
+    public void restartGameLevel(){
+        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
     }
 
     public void quitGame(){

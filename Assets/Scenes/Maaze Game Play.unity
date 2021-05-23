@@ -683,7 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: {fileID: 1798159797}
-  restartButton: {fileID: 1641228095}
+  restartButton: {fileID: 0}
   gameMessage: {fileID: 89319903}
 --- !u!1 &548962054
 GameObject:
@@ -1198,9 +1198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38de6d3de48228918919afb57c0bc235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeRows: 10
-  mazeColumns: 10
   wall: {fileID: 101274, guid: 2a571ace6952b154ca2ff06b0540f264, type: 3}
+  levelNumber: 0
   size: 6
 --- !u!4 &1062459227
 Transform:
@@ -1772,7 +1771,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1958556567}
         m_TargetAssemblyTypeName: ButtonBehaviour, Assembly-CSharp
-        m_MethodName: playClickSound
+        m_MethodName: restartGameLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

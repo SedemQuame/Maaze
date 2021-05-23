@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float speed = 2.0f;
+    public float speed = 6.0f;
     private Vector3 direction;
     private Vector3 [] patrolDirections = {Vector3.right, Vector3.left, Vector3.forward, Vector3.back};
     private bool collidedWithWall = false;

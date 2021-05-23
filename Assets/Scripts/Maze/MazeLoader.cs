@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MazeLoader : MonoBehaviour {
-	public int defaultRowAndColumnNumber = 3;
 	private int mazeRows;
 	private int mazeColumns;
 	public GameObject wall;
@@ -13,8 +12,11 @@ public class MazeLoader : MonoBehaviour {
 	private MazeCell[,] mazeCells;
 	// Use this for initialization
 	void Start () {
-		mazeColumns = defaultRowAndColumnNumber + levelNumber;
-		mazeRows = mazeColumns;
+		if(LevelDifficulty.levelDifficulty == 0){
+			setRowAndColumnNumber(3);
+		}else{
+			setRowAndColumnNumber(LevelDifficulty.levelDifficulty + 3);
+		}
 		InitializeMaze (); 
 		MazeAlgorithm ma = new HuntAndKillMazeAlgorithm (mazeCells);
 		ma.CreateMaze ();
@@ -53,8 +55,8 @@ public class MazeLoader : MonoBehaviour {
 		}
 	}
 
-	public void setRowAndColumnNumber(){
-		mazeColumns = defaultRowAndColumnNumber + levelNumber;
+	public void setRowAndColumnNumber(int levelDifficulty = 3){
+		mazeColumns = levelDifficulty + levelNumber;
 		mazeRows = mazeColumns;
 	}
 
