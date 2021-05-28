@@ -11,8 +11,13 @@ public class SpawnManager : MonoBehaviour
     public GameObject [] enemyArr;
     private GameObject spawnManagerFloor;
 
+<<<<<<< Updated upstream
     // public Material [] materials;
     // private Renderer renderer;
+=======
+    public Material [] materials;
+    private Renderer renderer;
+>>>>>>> Stashed changes
     private float blinkRate = 1.5f;
 
     // Start is called before the first frame update
@@ -20,6 +25,9 @@ public class SpawnManager : MonoBehaviour
     {
         spawnReward();
         spawnEnemiesByLevelDifficulty();
+    }
+
+    void Update(){
     }
 
     void spawnReward(){
@@ -39,28 +47,28 @@ public class SpawnManager : MonoBehaviour
             string spawnManagerCell = "Floor " + 0 + "," + (loader.getRowAndColumnNumber() - 1);
             spawnManagerFloor = GameObject.Find(spawnManagerCell);
 
-            // renderer = spawnManagerFloor.GetComponent<Renderer>();
-            // renderer.enabled = true;
-            // StartCoroutine("ToggleColor");
+            renderer = spawnManagerFloor.GetComponent<Renderer>();
+            renderer.enabled = true;
+            StartCoroutine("ToggleColor");
 
             // spawnEnemy(enemyArr[enemyType], spawnManagerFloor.transform.position +  new Vector3(0, 5, 0));
         }
     }
 
-    // IEnumerator ToggleColor() 
-    // {
-    //     while(true){
-    //         if(renderer.sharedMaterial == materials[0]){
-    //             renderer.sharedMaterial = materials[1];
-    //         }else{
-    //             renderer.sharedMaterial = materials[0];
-    //         }
+    IEnumerator ToggleColor() 
+    {
+        while(true){
+            if(renderer.sharedMaterial == materials[0]){
+                renderer.sharedMaterial = materials[1];
+            }else{
+                renderer.sharedMaterial = materials[0];
+            }
             
-    //         int enemyType = Random.Range(0, 2);
-    //         spawnEnemy(enemyArr[enemyType], spawnManagerFloor.transform.position +  new Vector3(0, 5, 0));
-    //         yield return new WaitForSeconds(blinkRate);
-    //     }
-    // }
+            int enemyType = Random.Range(0, 2);
+            spawnEnemy(enemyArr[enemyType], spawnManagerFloor.transform.position +  new Vector3(0, 5, 0));
+            yield return new WaitForSeconds(blinkRate);
+        }
+    }
 
     void spawnEnemy(GameObject enemy, Vector3 position){
         Instantiate(enemy, position, transform.rotation);
