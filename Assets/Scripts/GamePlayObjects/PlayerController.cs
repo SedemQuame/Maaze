@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private float movementX, movementY;
     public float speed = 15.0f;
-    private float playerHealth = 100.0f;
+    // private float playerHealth = 100.0f;
     private GameObject lastFloor;
     private Rigidbody playerBody;
     private string lastCreatedCell;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
         playerBody = GetComponent<Rigidbody>();
 
-        Vector3 playerJumpOffset = new Vector3(-5, 30, -5);
+        Vector3 playerJumpOffset = new Vector3(0, 10, 0);
         transform.position = lastFloor.transform.position + playerJumpOffset;
 
         gameManager = GameObject.Find("Manager").GetComponent<GameManager>();

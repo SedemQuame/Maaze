@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MazeLoader : MonoBehaviour {
 	private int mazeRows;
 	private int mazeColumns;
 	public GameObject wall;
+	public GameObject ground;
 	public int levelNumber = 0;
+	public NavMeshSurface surface;
 
 	public float size = 2f;
 	private MazeCell[,] mazeCells;
@@ -20,6 +23,8 @@ public class MazeLoader : MonoBehaviour {
 		InitializeMaze (); 
 		MazeAlgorithm ma = new HuntAndKillMazeAlgorithm (mazeCells);
 		ma.CreateMaze ();
+
+		// surface.BuildNavMesh();
 	}
 
 	private void InitializeMaze() {
@@ -30,7 +35,7 @@ public class MazeLoader : MonoBehaviour {
 				mazeCells [r, c] = new MazeCell ();
 
 				// For now, use the same wall object for the floor!
-				mazeCells [r, c].floor = Instantiate (wall, new Vector3 (r*size, -(size/2f), c*size), Quaternion.identity) as GameObject;
+				mazeCells [r, c].floor = Instantiate (ground, new Vector3 (r*size, -(size/2f), c*size), Quaternion.identity) as GameObject;
 				mazeCells [r, c].floor.name = "Floor " + r + "," + c;
 				mazeCells [r, c].floor.transform.Rotate (Vector3.right, 90f);
 

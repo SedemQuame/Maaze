@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        offset = new Vector3(0,60,0);
+        offset = new Vector3(0,40,0);
     }
 
     // Update is called once per frame
