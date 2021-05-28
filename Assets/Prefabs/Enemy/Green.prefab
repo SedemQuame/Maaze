@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 8900931915959413573}
   - component: {fileID: 8638024924959670308}
   m_Layer: 7
-  m_Name: Cylinder
+  m_Name: Green
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 0fd775f1c14ef73b4b5675cdc85bed6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -225,3 +225,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  damagePoints: -10

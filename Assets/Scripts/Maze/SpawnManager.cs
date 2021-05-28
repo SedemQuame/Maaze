@@ -11,13 +11,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject [] enemyArr;
     private GameObject spawnManagerFloor;
 
-<<<<<<< Updated upstream
-    // public Material [] materials;
-    // private Renderer renderer;
-=======
     public Material [] materials;
     private Renderer renderer;
->>>>>>> Stashed changes
     private float blinkRate = 1.5f;
 
     // Start is called before the first frame update

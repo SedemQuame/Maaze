@@ -7,14 +7,14 @@ public class PlayerController : MonoBehaviour
 {
     private float movementX, movementY;
     public float speed = 15.0f;
-    // private float playerHealth = 100.0f;
+    public float playerHealth = 100.0f;
     private GameObject lastFloor;
     private Rigidbody playerBody;
     private string lastCreatedCell;
     private GameManager gameManager;
 
         // Start is called before the first frame update
-        void Start()
+    void Start()
     {
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
         MazeLoader loader = mazeLoader.GetComponent<MazeLoader>();
@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
         transform.position = lastFloor.transform.position + playerJumpOffset;
 
         gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
+
+        // set health bar
+        HealthBarControl.SetHealthBarValue(playerHealth * 0.02f);
     }
 
     void FixedUpdate(){
@@ -56,5 +59,11 @@ public class PlayerController : MonoBehaviour
         Vector2 movementVector = value.Get<Vector2>();
         movementX = movementVector.x;
         movementY = movementVector.y;
+    }
+
+    public void updateHealthBar(float damagePoints)
+    {
+        playerHealth -= damagePoints;
+        HealthBarControl.SetHealthBarValue(HealthBarControl.GetHealthBarValue() - (0.01f * damagePoints));
     }
 }

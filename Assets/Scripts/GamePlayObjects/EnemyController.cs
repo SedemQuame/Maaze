@@ -5,16 +5,19 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float speed = 6.0f;
+    public float damagePoints = 10.0f;
     private Vector3 direction;
     private Vector3 [] patrolDirections = {Vector3.right, Vector3.left, Vector3.forward, Vector3.back};
     private bool collidedWithWall = false;
     private GameManager gameManager;
+    private PlayerController player;
 
     // Start is called before the first frame update
     void Start()
     {
         direction = patrolDirections[Random.Range(0, 3)];
         gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -32,12 +35,19 @@ public class EnemyController : MonoBehaviour
 
         // if collided with the player, kill him.
         if(collider.gameObject.CompareTag("Player")){
-            Destroy(collider.gameObject);
+            // reduce player health by number of damage points.
+            player.updateHealthBar(damagePoints);
+
+            // if player health is 0, destory the player.
+            if(player.playerHealth < 1){
+                Destroy(collider.gameObject);
+
+                // Show the gameOver UI.
+                bool gameWon = false;
+                gameManager.GameOver(gameWon);
+            }
             // // Pause Movement.
-            gameManager.PauseGame();
-            // Show the gameOver UI.
-            bool gameWon = false;
-            gameManager.GameOver(gameWon);
+            // gameManager.PauseGame();
         }
     }
 
