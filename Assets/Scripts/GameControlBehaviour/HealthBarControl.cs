@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Modifies the value of the player's health bar.
+/// </summary>
 public class HealthBarControl : MonoBehaviour
 {
+    [Tooltip("Reference to the health bar image.")] 
     private static Image HealthBarImage;
 
     /// <summary>

@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private string lastCreatedCell;
     private GameManager gameManager;
 
-        // Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
@@ -33,20 +33,25 @@ public class PlayerController : MonoBehaviour
         HealthBarControl.SetHealthBarValue(playerHealth * 0.02f);
     }
 
-    void FixedUpdate(){
+    void FixedUpdate()
+    {
         Vector3 movement = new Vector3(movementX, 0, movementY);
         playerBody.AddForce(movement * speed, ForceMode.Impulse);
         endGameOnPlayerFallOff();
     }
 
-    void endGameOnPlayerFallOff(){
-        if(transform.position.y < -5){
+    void endGameOnPlayerFallOff()
+    {
+        if (transform.position.y < -5)
+        {
             gameManager.GameOver(true);
         }
     }
 
-    void OnTriggerEnter(Collider other){
-        if(other.gameObject.CompareTag("Goal")){
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Goal"))
+        {
             // Destroy the goal object.
             Destroy(other.gameObject);
             // Display Game Won Menu
@@ -55,7 +60,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnMove(InputValue value){
+    public void OnMove(InputValue value)
+    {
         Vector2 movementVector = value.Get<Vector2>();
         movementX = movementVector.x;
         movementY = movementVector.y;

@@ -8,42 +8,51 @@ public class ButtonBehaviour : MonoBehaviour
 {
     private AudioSource source;
     public AudioClip clickSound;
-    // public GameObject eventSystem
 
-    public void Start(){
+    public void Start()
+    {
         source = GetComponent<AudioSource>();
     }
-    public void playClickSound(){
+    public void playClickSound()
+    {
         source.PlayOneShot(clickSound, 0.8f);
     }
-    public void loadMainMenuScene(){
+    public void loadMainMenuScene()
+    {
         SceneManager.LoadScene("Maaze Main Menu");
     }
 
-    public void loadLevelsMenuScene(){
+    public void loadLevelsMenuScene()
+    {
         SceneManager.LoadScene("Maaze Levels Menu");
     }
 
-    public void loadSettingsScene(){
+    public void loadSettingsScene()
+    {
         SceneManager.LoadScene("Maaze Settings");
     }
 
-    public void loadCreditsMenu(){
+    public void loadCreditsMenu()
+    {
         SceneManager.LoadScene("Maaze Creator Credits");
     }
 
-    public void loadGamePlayLevelNumber(){
+    public void loadGamePlayLevelNumber()
+    {
         GameObject selectedLevelButton = EventSystem.current.currentSelectedGameObject;
-        // get the difficulty value from the clicked level button.
+
+        // Get the difficulty value from the clicked level button.
         LevelDifficulty.levelDifficulty = int.Parse(selectedLevelButton.transform.GetChild(0).gameObject.GetComponent<TMPro.TextMeshProUGUI>().text);
         SceneManager.LoadScene("Maaze Game Play");
     }
 
-    public void restartGameLevel(){
+    public void restartGameLevel()
+    {
         Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
     }
 
-    public void quitGame(){
+    public void quitGame()
+    {
         Application.Quit();
     }
 }

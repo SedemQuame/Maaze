@@ -9,6 +9,8 @@ TagManager:
   - Money
   - Bomb
   - music
+  - Wall
+  - Ground
   - wall
   layers:
   - Default
