@@ -92,6 +92,7 @@ public class EnemyAI : MonoBehaviour
         }
         return false;
     }
+
     //-------------------------------------------------- 
     //Draw forward vector of enemy for line of sight 
     void OnDrawGizmos()
@@ -113,7 +114,9 @@ public class EnemyAI : MonoBehaviour
         // check to see if navMeshAgent is near destination
         // how do we check if the GameObject has reached it's destination?
         // once we can test that feature how do we make it such that it will choose and new patrol destination again?
-        destinationCell = "Floor " + Random.Range(0, level) + "," + Random.Range(0, level);
+        GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
+        MazeLoader loader = mazeLoader.GetComponent<MazeLoader>();
+        destinationCell = "Floor " + Random.Range(0, loader.getRowAndColumnNumber()) + "," + Random.Range(0, loader.getRowAndColumnNumber());
         Debug.Log(destinationCell);
         if (Vector3.Distance(transform.position, floorDestination) <= minimumDistance || !isDestinationSet)
         {
