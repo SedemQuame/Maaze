@@ -3,20 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// MazeLoader class for positioning prefabs, in line with what the values received from the ProceduralNumberGenerator.
+/// </summary>
+[RequireComponent(typeof(GameObject))]
+[RequireComponent(typeof(NavMeshSurface))]
 public class MazeLoader : MonoBehaviour
 {
+    [Tooltip("The wall game object prefab.")]
     public GameObject wall;
+    [Tooltip("The ground object prefab.")]
     public GameObject ground;
+    [Tooltip("Script reference to the NavMeshSurface.")]
     public NavMeshSurface surface;
     private int mazeRows;
     private int mazeColumns;
     private int levelNumber = 0;
 
-    public float size = 2f;
+    public float size;
     private MazeCell[,] mazeCells;
     // Use this for initialization
     void Start()
-    {
+    {   
         if (LevelDifficulty.levelDifficulty == 0)
         {
             setRowAndColumnNumber(3);
@@ -25,6 +33,7 @@ public class MazeLoader : MonoBehaviour
         {
             setRowAndColumnNumber(LevelDifficulty.levelDifficulty + 3);
         }
+
         InitializeMaze();
         MazeAlgorithm ma = new HuntAndKillMazeAlgorithm(mazeCells);
         ma.CreateMaze();
@@ -36,7 +45,7 @@ public class MazeLoader : MonoBehaviour
     private void InitializeMaze()
     {
         mazeCells = new MazeCell[mazeRows, mazeColumns];
-        // instantiate the player at the center position.
+
         for (int r = 0; r < mazeRows; r++)
         {
             for (int c = 0; c < mazeColumns; c++)

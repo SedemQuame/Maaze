@@ -5,13 +5,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private float movementX, movementY;
-    public float speed = 15.0f;
+    [Tooltip("Forward speed of the player game object.")]
+    [Range(3, 12)]
+    public float speed;
+
+    [Tooltip("Health value of the player")]
+    [Range(3, 15)]
     public float playerHealth = 100.0f;
-    private GameObject lastFloor;
     private Rigidbody playerBody;
-    private string lastCreatedCell;
     private GameManager gameManager;
+    private GameObject lastFloor;
+    private string lastCreatedCell;
+    private float movementX, movementY;
 
     // Start is called before the first frame update
     void Start()

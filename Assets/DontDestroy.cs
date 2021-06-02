@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The DontDestroy class ensures that only one instance of the music gameobject exists in a scene.
+/// </summary>
 public class DontDestroy : MonoBehaviour
 {
     void Awake()

@@ -2,33 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The SpawnManager is responsible for spawning all guard or enemy game objects in the scene.
+/// </summary>
+
+[RequireComponent(typeof(GameObject))]
+[RequireComponent(typeof(Material))]
+[RequireComponent(typeof(Renderer))]
+
 public class SpawnManager : MonoBehaviour
 {
 
-    private string firstCreatedCell = "Floor " + 0 + "," + 0;
-    private Vector3 goalOffset = new Vector3(0, 2, 0);
+    public Material[] materials;
     public GameObject reward;
     public GameObject[] enemyArr;
+    public Vector3 goalOffset;
     private GameObject spawnManagerFloor;
-
-    public Material[] materials;
     private Renderer renderer;
+    private string firstCreatedCell;
     private float spawnRate = 30.0f;
     private float blinkRate = 0.8f;
 
     // Start is called before the first frame update
     void Start()
     {
-        spawnReward();
-        spawnEnemiesByLevelDifficulty();
+        firstCreatedCell = "Floor " + 0 + "," + 0;
+        goalOffset = new Vector3(0, 2, 0);
         spawnRate /= (LevelDifficulty.levelDifficulty);
+
+        spawnReward();
+
+        spawnEnemiesByLevelDifficulty();
     }
 
+    /// <summary>
+    /// Spawns the reward game object, in the first created cell (genesis cell).
+    /// Todo: this will be later extended to spawn multiple times in varying cells.
+    /// </summary>
     void spawnReward()
     {
+        // Make is such that reward can be spawned multiple times, and in various cells.
         Instantiate(reward, (GameObject.Find(firstCreatedCell).transform.position + goalOffset), transform.rotation);
     }
 
+    /// <summary>
+    /// Spawns the Enemy game objects, in a randomized patterns.
+    /// Creates a blinking cell to alert the Player that an Enemy is about to be spawned in a particular cell.
+    /// </summary>
     void spawnEnemiesByLevelDifficulty()
     {
         // todo, find a smarter way of spawning enemies such that the enemies are not all spawned at once?
@@ -43,33 +63,48 @@ public class SpawnManager : MonoBehaviour
 
         renderer = spawnManagerFloor.GetComponent<Renderer>();
         renderer.enabled = true;
+
+        ToggleColor();
         StartCoroutine("SpawnEnemy");
     }
 
+    /// <summary>
+    /// A coroutine for timing the spawning of Enemy gameObjects.
+    /// </summary>
     IEnumerator SpawnEnemy()
     {
         for (int i = 0; i < LevelDifficulty.levelDifficulty + 2; i++)
         {
             int enemyType = Random.Range(0, enemyArr.Length);
             spawnEnemy(enemyArr[enemyType], spawnManagerFloor.transform.position + new Vector3(0, 2, 0), Quaternion.Euler(0.0f, 90.0f, 0.0f));
-            StartCoroutine("ToggleColor");
             yield return new WaitForSeconds(blinkRate);
         }
     }
 
-    IEnumerator ToggleColor()
+    /// <summary>
+    /// A coroutine that changes the color of a cell's ground between two materials to indicated spawning of an Enemy gameObject.
+    /// </summary>
+    void ToggleColor()
     {
-        if (renderer.sharedMaterial == materials[0])
+        int blinkNumber = 10, i = 0;
+        while (blinkNumber > i)
         {
-            renderer.sharedMaterial = materials[1];
-        }
-        else
-        {
-            renderer.sharedMaterial = materials[0];
-        }
-        yield return new WaitForSeconds(spawnRate);
-    }
 
+            if (renderer.sharedMaterial == materials[0])
+            {
+                renderer.sharedMaterial = materials[1];
+            }
+            else
+            {
+                renderer.sharedMaterial = materials[0];
+            }
+            i++;
+        }
+
+    }
+    /// <summary>
+    /// Spawns of an Enemy gameObject in a given position.
+    /// </summary>
     void spawnEnemy(GameObject enemy, Vector3 position, Quaternion rotation)
     {
         Instantiate(enemy, position, rotation);

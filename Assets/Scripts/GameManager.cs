@@ -5,36 +5,58 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+[RequireComponent(typeof(GameObject))]
+[RequireComponent(typeof(TMP_Text))]
+/// <summary>
+/// The game manager class is used for managing all the states of the game, across all scenes.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
+    [Tooltip("Displays the gameover text.")]
     public GameObject gameOver;
+
+    [Tooltip("Displays the gameover state(win or lose).")]
     public TMP_Text gameMessage;
     private bool isGamePaused;
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// Ensures that the game is not paused. Hides the gameOver canvas to false.
+    /// </summary>
     void Start()
     {
         isGamePaused = false;
         gameOver.SetActive(false);
     }
 
-    // Pauses the game, by reducing the TimeScale for animations to 0.
-    public void PauseGame(){
-        if(isGamePaused){
+    /// <summary>
+    /// Pauses the game, by setting the TimeScale for animations to 0.
+    /// </summary>
+    public void PauseGame()
+    {
+        if (isGamePaused)
+        {
             Time.timeScale = 1.0f;
-        }else{
+        }
+        else
+        {
             Time.timeScale = 0.0f;
         }
         isGamePaused = !isGamePaused;
     }
 
-    // Displays Main Menu after a game has been won or lost.
-	public void GameOver(bool gameWon){
+
+    /// <summary>
+    /// Displays Main Menu after a game has been won or lost.
+    /// </summary>
+    public void GameOver(bool gameWon)
+    {
         gameOver.SetActive(true);
-        if(gameWon){
-            // Set the game over text to "Game Over /n You Win!!"
+        if (gameWon)
+        {
             gameMessage.text = "You Win!!";
-        }else{
-            // Set the game over text to "Game Over /n You Lose!!"
+        }
+        else
+        {
             gameMessage.text = "You Lose!!";
         }
     }
