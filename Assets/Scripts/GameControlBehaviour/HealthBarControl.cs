@@ -8,21 +8,21 @@ using UnityEngine.UI;
 /// </summary>
 public class HealthBarControl : MonoBehaviour
 {
-    [Tooltip("Reference to the health bar image.")] 
-    private static Image HealthBarImage;
+    [Tooltip("Reference to the health bar image.")]
+    private Image HealthBarImage;
 
     /// <summary>
     /// Sets the health bar value
     /// </summary>
     /// <param name="value">should be between 0 to 1</param>
-    public static void SetHealthBarValue(float value)
+    public void SetHealthBarValue(float value)
     {
         HealthBarImage.fillAmount = value;
-        if(HealthBarImage.fillAmount < 0.2f)
+        if (HealthBarImage.fillAmount < 0.2f)
         {
             SetHealthBarColor(Color.red);
         }
-        else if(HealthBarImage.fillAmount < 0.4f)
+        else if (HealthBarImage.fillAmount < 0.4f)
         {
             SetHealthBarColor(Color.yellow);
         }
@@ -32,7 +32,7 @@ public class HealthBarControl : MonoBehaviour
         }
     }
 
-    public static float GetHealthBarValue()
+    public float GetHealthBarValue()
     {
         return HealthBarImage.fillAmount;
     }
@@ -41,7 +41,7 @@ public class HealthBarControl : MonoBehaviour
     /// Sets the health bar color
     /// </summary>
     /// <param name="healthColor">Color </param>
-    public static void SetHealthBarColor(Color healthColor)
+    public void SetHealthBarColor(Color healthColor)
     {
         HealthBarImage.color = healthColor;
     }

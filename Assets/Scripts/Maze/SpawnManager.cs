@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] enemyArr;
     public Vector3 goalOffset;
     private GameObject spawnManagerFloor;
-    private Renderer renderer;
+    private Renderer rend;
     private string firstCreatedCell;
     private float spawnRate = 30.0f;
     private float blinkRate = 0.8f;
@@ -61,8 +61,8 @@ public class SpawnManager : MonoBehaviour
         string spawnManagerCell = "Floor " + 0 + "," + (loader.getRowAndColumnNumber() - 1);
         spawnManagerFloor = GameObject.Find(spawnManagerCell);
 
-        renderer = spawnManagerFloor.GetComponent<Renderer>();
-        renderer.enabled = true;
+        rend = spawnManagerFloor.GetComponent<Renderer>();
+        rend.enabled = true;
 
         ToggleColor();
         StartCoroutine("SpawnEnemy");
@@ -90,13 +90,13 @@ public class SpawnManager : MonoBehaviour
         while (blinkNumber > i)
         {
 
-            if (renderer.sharedMaterial == materials[0])
+            if (rend.sharedMaterial == materials[0])
             {
-                renderer.sharedMaterial = materials[1];
+                rend.sharedMaterial = materials[1];
             }
             else
             {
-                renderer.sharedMaterial = materials[0];
+                rend.sharedMaterial = materials[0];
             }
             i++;
         }

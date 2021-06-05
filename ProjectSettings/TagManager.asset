@@ -12,6 +12,8 @@ TagManager:
   - Wall
   - Ground
   - wall
+  - NavMesh
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,11 @@ public class EnemyController : MonoBehaviour
 {
     public float speed = 6.0f;
     public float damagePoints = 10.0f;
+    [Range(0, 1)]
+    public float damageResistance;
+    public HealthBarControl healthBarControl;
+
+    private float health = 100.0f;
     private Vector3 direction;
     private Vector3[] patrolDirections = { Vector3.right, Vector3.left, Vector3.forward, Vector3.back };
     // private bool collidedWithWall = false;
@@ -25,12 +30,29 @@ public class EnemyController : MonoBehaviour
         enemyAI = transform.GetComponent<EnemyAI>();
     }
 
+    public void updateHealthBar(float damagePoints)
+    {
+        health -= damagePoints;
+        Debug.Log("Enemy health: " + health);
+        healthBarControl.SetHealthBarValue(healthBarControl.GetHealthBarValue() - (0.01f * damagePoints));
+    }
+
     void OnCollisionEnter(Collision collider)
     {
-        // set collision boolean to true, and move in new direction.
-        if (collider.gameObject.CompareTag("Wall"))
-        {   
-            // enemyAI.movement(collider.gameObject);
+        // // set collision boolean to true, and move in new direction.
+        if (collider.gameObject.CompareTag("Bullet"))
+        {
+            // get gameObject
+            // find the damage points.
+            // subtract damage points from enemy health.
+            // update enemy health bar.
+            float bulletDamage = collider.gameObject.GetComponent<BulletBehaviour>().bulletDamage;
+            updateHealthBar(bulletDamage);
+            if(health < 1){
+                // play enemy destroy prefab.
+                // Destroy enemy gameObject
+                Destroy(transform.gameObject);
+            }
         }
 
         // if collided with the player, kill him.
