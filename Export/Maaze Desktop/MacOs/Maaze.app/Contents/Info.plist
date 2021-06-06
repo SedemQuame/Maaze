@@ -5,17 +5,17 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>English</string>
     <key>CFBundleExecutable</key>
-    <string>Procedural Generation</string>
+    <string>Maaze</string>
     <key>CFBundleGetInfoString</key>
     <string>Unity Player version 2021.1.2f1 (e5d502d80fbb). (c) 2021 Unity Technologies ApS. All rights reserved.</string>
     <key>CFBundleIconFile</key>
     <string>PlayerIcon.icns</string>
     <key>CFBundleIdentifier</key>
-    <string>com.DefaultCompany.ProceduralGeneration</string>
+    <string>com.DefaultCompany.Maaze</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>Procedural Generation</string>
+    <string>Maaze</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>

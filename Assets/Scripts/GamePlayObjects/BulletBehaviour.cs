@@ -1,23 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class BulletBehaviour : MonoBehaviour
 {
     public float bulletSpeed;
     public float bulletDamage;
+    private Rigidbody rigidbody;
+    private Vector3 shootDir;
+    private float playerRotationAxis;
+
+    public void Setup(Vector3 shootDir)
+    {
+        this.shootDir = shootDir;
+        this.shootDir.y = 0;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(0.05f * bulletSpeed, 0, 0);
+        transform.position += shootDir * bulletSpeed * Time.deltaTime;
     }
+
     void OnCollisionEnter(Collision collision)
     {
         // play sound everytime we collide with

@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public AudioClip[] playerSound;
     public HealthBarControl healthBarControl;
+    public GameObject nozzel;
     /// <summary>
     /// Represents the source that plays the audio sound.
     /// </summary>
@@ -30,12 +31,14 @@ public class PlayerController : MonoBehaviour
     private float movementX, movementY;
     private bool isColliding;
     private bool hasHitGround;
+    // private float playerRotationAxis;
 
     // Start is called before the first frame update
     void Start()
     {
         isColliding = false;
         hasHitGround = false;
+        // playerRotationAxis = 0;
         source = GetComponent<AudioSource>();
 
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
@@ -119,10 +122,18 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
-        Debug.Log("Player fired a project");
+        Debug.Log("Player fired a projectile");
         // make sure that the player can rotate.
         // play shooting particle system
-        Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        Transform bulletProjectile = Instantiate(bulletPrefab.transform, nozzel.transform.position, nozzel.transform.rotation);
+        Vector3 shootDir = (nozzel.transform.position - transform.position).normalized;
+        bulletProjectile.GetComponent<BulletBehaviour>().Setup(shootDir);
+    }
+
+    public void OnRotate(InputValue value)
+    {
+        float playerRotationAxis = value.Get<float>();
+        transform.Rotate(new Vector3(0, playerRotationAxis * 90));
     }
 
     public void updateHealthBar(float damagePoints)
