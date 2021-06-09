@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
     public float damageResistance;
     public HealthBarControl healthBarControl;
 
-    private float health = 100.0f;
+    public float health = 100.0f;
     private Vector3 direction;
     private Vector3[] patrolDirections = { Vector3.right, Vector3.left, Vector3.forward, Vector3.back };
     // private bool collidedWithWall = false;
@@ -62,7 +62,7 @@ public class EnemyController : MonoBehaviour
             player.updateHealthBar(damagePoints);
 
             // if player health is 0, destory the player.
-            if (player.playerHealth < 1)
+            if (player.health < 1)
             {
                 Destroy(collider.gameObject);
 

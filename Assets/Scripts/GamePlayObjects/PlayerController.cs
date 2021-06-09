@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [Tooltip("Health value of the player")]
     [Range(3, 15)]
-    public float playerHealth = 100.0f;
+    public float health = 100.0f;
     [Tooltip("The sound played when player collides with a given game object.")]
     public VariableJoystick variableJoystick;
     public GameObject bulletPrefab;
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
 
         // set health bar
-        healthBarControl.SetHealthBarValue(playerHealth * 0.02f);
+        healthBarControl.SetHealthBarValue(health * 0.02f);
     }
 
     void FixedUpdate()
@@ -133,12 +133,12 @@ public class PlayerController : MonoBehaviour
     public void OnRotate(InputValue value)
     {
         float playerRotationAxis = value.Get<float>();
-        transform.Rotate(new Vector3(0, playerRotationAxis * 90));
+        transform.Rotate(new Vector3(0, playerRotationAxis * 5));
     }
 
     public void updateHealthBar(float damagePoints)
     {
-        playerHealth -= damagePoints;
+        health -= damagePoints;
         healthBarControl.SetHealthBarValue(healthBarControl.GetHealthBarValue() - (0.01f * damagePoints));
     }
 

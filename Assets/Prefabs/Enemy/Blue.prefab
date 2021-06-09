@@ -135,6 +135,7 @@ MonoBehaviour:
   damagePoints: 2
   damageResistance: 0.3
   healthBarControl: {fileID: 3021391377469708247}
+  health: 100
 --- !u!114 &6218069756892443873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,8 +149,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 3344908575417602244}
-  attackDistance: 0
-  fieldOfView: 0
+  attackDistance: 1.2
+  fieldOfView: 120
+  face: {fileID: 2163167300458444816}
+  projectilePrefab: {fileID: 5052485727038421745, guid: fd04a2ae20a77da6396e678a2c2ffd0b,
+    type: 3}
   currentState: 0
 --- !u!195 &3344908575417602244
 NavMeshAgent:

@@ -54,10 +54,12 @@ public class GameManager : MonoBehaviour
         if (gameWon)
         {
             gameMessage.text = "You Win!!";
+            gameMessage.color = Color.green;
         }
         else
         {
             gameMessage.text = "You Lose!!";
+            gameMessage.color = Color.red;
         }
     }
 }
