@@ -14,35 +14,50 @@ public class SpawnManager : MonoBehaviour
 {
 
     public Material[] materials;
-    public GameObject reward;
+    public GameObject[] reward;
     public GameObject[] enemyArr;
     public Vector3 goalOffset;
     private GameObject spawnManagerFloor;
     private Renderer rend;
     private string firstCreatedCell;
     private float spawnRate = 30.0f;
-    private float blinkRate = 0.8f;
+    // private float blinkRate = 0.8f;
+    private MazeLoader loader;
 
     // Start is called before the first frame update
     void Start()
     {
         firstCreatedCell = "Floor " + 0 + "," + 0;
-        goalOffset = new Vector3(0, 2, 0);
+        goalOffset = new Vector3(0, -0.4f, 0);
         spawnRate /= (LevelDifficulty.levelDifficulty);
 
-        spawnReward();
 
+        GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
+        loader = mazeLoader.GetComponent<MazeLoader>();
+
+        spawnRewardsByLevelDifficulty();
         spawnEnemiesByLevelDifficulty();
     }
 
     /// <summary>
+    /// Spawns a number of rewards according to the level difficulty.
+    /// </summary>
+    void spawnRewardsByLevelDifficulty()
+    {
+        for (int i = 0; i <= LevelDifficulty.levelDifficulty; i++)
+        {
+            spawnReward();
+        }
+    }
+
+    /// <summary>
     /// Spawns the reward game object, in the first created cell (genesis cell).
-    /// Todo: this will be later extended to spawn multiple times in varying cells.
     /// </summary>
     void spawnReward()
     {
         // Make is such that reward can be spawned multiple times, and in various cells.
-        Instantiate(reward, (GameObject.Find(firstCreatedCell).transform.position + goalOffset), transform.rotation);
+        string cell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
+        Instantiate(reward[Random.Range(0, 3)], new Vector3(GameObject.Find(cell).transform.position.x, -0.4f, GameObject.Find(cell).transform.position.z), transform.rotation);
     }
 
     /// <summary>
@@ -54,17 +69,6 @@ public class SpawnManager : MonoBehaviour
         // todo, find a smarter way of spawning enemies such that the enemies are not all spawned at once?
         // tood, update the spawn manager to spawn a number of enemies at a given rate, every X amount of time.
         if (LevelDifficulty.levelDifficulty == 1) return;
-
-        GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
-        MazeLoader loader = mazeLoader.GetComponent<MazeLoader>();
-
-        string spawnManagerCell = "Floor " + 0 + "," + (loader.getRowAndColumnNumber() - 1);
-        spawnManagerFloor = GameObject.Find(spawnManagerCell);
-
-        rend = spawnManagerFloor.GetComponent<Renderer>();
-        rend.enabled = true;
-
-        ToggleColor();
         StartCoroutine("SpawnEnemy");
     }
 
@@ -76,8 +80,17 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < LevelDifficulty.levelDifficulty + 2; i++)
         {
             int enemyType = Random.Range(0, enemyArr.Length);
+
+            string spawnManagerCell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
+            spawnManagerFloor = GameObject.Find(spawnManagerCell);
+
+            rend = spawnManagerFloor.GetComponent<Renderer>();
+            rend.enabled = true;
+
+            ToggleColor();
+
             spawnEnemy(enemyArr[enemyType], spawnManagerFloor.transform.position + new Vector3(0, 2, 0), Quaternion.Euler(0.0f, 90.0f, 0.0f));
-            yield return new WaitForSeconds(blinkRate);
+            yield return new WaitForSeconds(spawnRate);
         }
     }
 

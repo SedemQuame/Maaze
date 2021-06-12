@@ -12,18 +12,23 @@ using TMPro;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+
+    [Tooltip("Menu that shows when button is clicked.")]
+    public GameObject gameMenu;
     [Tooltip("Displays the gameover text.")]
     public GameObject gameOver;
 
     [Tooltip("Displays the gameover state(win or lose).")]
     public TMP_Text gameMessage;
     private bool isGamePaused;
+    public bool isGameOver;
 
     /// <summary>
     /// Ensures that the game is not paused. Hides the gameOver canvas to false.
     /// </summary>
     void Start()
     {
+        isGameOver = false;
         isGamePaused = false;
         gameOver.SetActive(false);
     }
@@ -50,7 +55,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GameOver(bool gameWon)
     {
+        isGameOver = true;
+        gameMenu.SetActive(true);
         gameOver.SetActive(true);
+
         if (gameWon)
         {
             gameMessage.text = "You Win!!";

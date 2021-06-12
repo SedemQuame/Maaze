@@ -29,16 +29,16 @@ public class PlayerController : MonoBehaviour
     private GameObject lastFloor;
     private string lastCreatedCell;
     private float movementX, movementY;
+
     private bool isColliding;
     private bool hasHitGround;
-    // private float playerRotationAxis;
 
     // Start is called before the first frame update
     void Start()
     {
         isColliding = false;
         hasHitGround = false;
-        // playerRotationAxis = 0;
+        
         source = GetComponent<AudioSource>();
 
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
@@ -69,6 +69,9 @@ public class PlayerController : MonoBehaviour
         Debug.Log(direction);
         playerBody.AddForce(direction * speed, ForceMode.VelocityChange);
 
+        // player rotation
+        // transform.rotation = playerRotation;
+
         playerOutOfBounds();
     }
 
@@ -77,10 +80,14 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Goal"))
         {
+            // play particle system.
+
             // Destroy the goal object.
             Destroy(other.gameObject);
+
+            
             // Display Game Won Menu
-            gameManager.GameOver(true);
+            // gameManager.GameOver(true);
         }
     }
 
@@ -132,8 +139,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnRotate(InputValue value)
     {
-        float playerRotationAxis = value.Get<float>();
-        transform.Rotate(new Vector3(0, playerRotationAxis * 5));
+        Vector2 rotationVector = value.Get<Vector2>();
+        Debug.Log("Player rotation: " + rotationVector);
+        //Always turn the turret toward the player 
+        Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 15 * rotationVector.x, 0), 0.5f);
+        transform.Rotate(new Vector3(0, 15 * rotationVector.x, 0));
     }
 
     public void updateHealthBar(float damagePoints)

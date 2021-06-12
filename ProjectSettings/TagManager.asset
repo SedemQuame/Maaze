@@ -15,6 +15,7 @@ TagManager:
   - NavMesh
   - Bullet
   - Nozzle
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX

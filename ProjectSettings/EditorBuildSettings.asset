@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Maaze Splash Screen.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Maaze Main Menu.unity
-    guid: 71bd359be2c5fb7bd9b3b970a7d072cf
-  - enabled: 1
     path: Assets/Scenes/Maaze Levels Menu.unity
     guid: 4bfbe19f321c15ed48c278bb1ef8a879
   - enabled: 1
