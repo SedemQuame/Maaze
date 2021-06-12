@@ -140,7 +140,7 @@ public class EnemyAI : MonoBehaviour
 
     public void chaseState()
     {
-        Debug.Log("In the chase state");
+        // Debug.Log("In the chase state");
         // set new destination to the player's location.
         if (!isGameOver)
         {
@@ -165,7 +165,7 @@ public class EnemyAI : MonoBehaviour
 
     public void attackState()
     {
-        Debug.Log("In the attack state");
+        // Debug.Log("In the attack state");
         // the attack state would work, by firing projectiles in the direction of the player, till it dies, or is out of firing distance.
         // the various enemy prefabs, should be made to shoot different types of projectiles.
         // make sure that the player can rotate.

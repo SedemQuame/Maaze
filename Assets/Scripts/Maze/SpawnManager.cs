@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// The SpawnManager is responsible for spawning all guard or enemy game objects in the scene.
@@ -23,14 +24,19 @@ public class SpawnManager : MonoBehaviour
     private float spawnRate = 30.0f;
     // private float blinkRate = 0.8f;
     private MazeLoader loader;
+    private int numberOfRewards;
+    public TMP_Text rewardCountText;
 
     // Start is called before the first frame update
     void Start()
     {
         firstCreatedCell = "Floor " + 0 + "," + 0;
         goalOffset = new Vector3(0, -0.4f, 0);
-        spawnRate /= (LevelDifficulty.levelDifficulty);
+        spawnRate /= LevelDifficulty.levelDifficulty;
+        numberOfRewards = LevelDifficulty.levelDifficulty;
 
+        // set initial value for rewards left.
+        rewardCountText.text = numberOfRewards.ToString();
 
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
         loader = mazeLoader.GetComponent<MazeLoader>();
@@ -39,12 +45,24 @@ public class SpawnManager : MonoBehaviour
         spawnEnemiesByLevelDifficulty();
     }
 
+    public void setRewardCount(int rewards)
+    {
+        // set initial value for rewards left.
+        numberOfRewards = rewards - 1;
+        rewardCountText.text = rewards.ToString();
+    }
+
+    public int getNumberOfRewards(){
+        return numberOfRewards;
+    }
+
+
     /// <summary>
     /// Spawns a number of rewards according to the level difficulty.
     /// </summary>
     void spawnRewardsByLevelDifficulty()
     {
-        for (int i = 0; i <= LevelDifficulty.levelDifficulty; i++)
+        for (int i = 0; i < LevelDifficulty.levelDifficulty; i++)
         {
             spawnReward();
         }

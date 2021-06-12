@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip[] playerSound;
     public HealthBarControl healthBarControl;
     public GameObject nozzel;
+    public GameObject spawnManager;
     /// <summary>
     /// Represents the source that plays the audio sound.
     /// </summary>
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         isColliding = false;
         hasHitGround = false;
-        
+
         source = GetComponent<AudioSource>();
 
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
@@ -66,11 +67,7 @@ public class PlayerController : MonoBehaviour
 
         // joystick controls.
         Vector3 direction = Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
-        Debug.Log(direction);
         playerBody.AddForce(direction * speed, ForceMode.VelocityChange);
-
-        // player rotation
-        // transform.rotation = playerRotation;
 
         playerOutOfBounds();
     }
@@ -85,9 +82,15 @@ public class PlayerController : MonoBehaviour
             // Destroy the goal object.
             Destroy(other.gameObject);
 
-            
+            // reduce reward count
+            spawnManager.GetComponent<SpawnManager>().setRewardCount(spawnManager.GetComponent<SpawnManager>().getNumberOfRewards() - 1);
+
             // Display Game Won Menu
-            // gameManager.GameOver(true);
+            if (spawnManager.GetComponent<SpawnManager>().getNumberOfRewards() <= 0)
+            {
+                gameManager.GameOver(true);
+
+            }
         }
     }
 
@@ -101,20 +104,20 @@ public class PlayerController : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Ground":
-                Debug.Log("Collided with the ground");
+                // Debug.Log("Collided with the ground");
                 break;
             case "Wall":
-                Debug.Log("Collided with the wall");
+                // Debug.Log("Collided with the wall");
                 break;
             case "Enemy":
-                Debug.Log("Collided with the enemy");
+                // Debug.Log("Collided with the enemy");
                 break;
             case "NavMesh":
-                Debug.Log("Collided with the NavMesh");
+                // Debug.Log("Collided with the NavMesh");
                 hasHitGround = true;
                 break;
             default:
-                Debug.Log("Colliding with empty space.");
+                // Debug.Log("Colliding with empty space.");
                 isColliding = false;
                 break;
         }
