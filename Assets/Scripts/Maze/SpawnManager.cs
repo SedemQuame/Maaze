@@ -19,6 +19,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] enemyArr;
     public Vector3 goalOffset;
     private GameObject spawnManagerFloor;
+    private GameManager gameManager;
+
     private Renderer rend;
     private string firstCreatedCell;
     private float spawnRate = 30.0f;
@@ -33,27 +35,46 @@ public class SpawnManager : MonoBehaviour
         firstCreatedCell = "Floor " + 0 + "," + 0;
         goalOffset = new Vector3(0, -0.4f, 0);
         spawnRate /= LevelDifficulty.levelDifficulty;
-        numberOfRewards = LevelDifficulty.levelDifficulty;
-
-        // set initial value for rewards left.
-        rewardCountText.text = numberOfRewards.ToString();
 
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
         loader = mazeLoader.GetComponent<MazeLoader>();
 
+        gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
+
         spawnRewardsByLevelDifficulty();
+        updateRewardCountText();
         spawnEnemiesByLevelDifficulty();
     }
 
-    public void setRewardCount(int rewards)
+    void FixedUpdate()
     {
-        // set initial value for rewards left.
-        numberOfRewards = rewards - 1;
-        rewardCountText.text = rewards.ToString();
+        if (numberOfRewards > GameObject.FindGameObjectsWithTag("Goal").Length)
+        {
+            reduceRewardCount();
+            updateRewardCountText();
+        }
+        checkGameOverStatus();
     }
 
-    public int getNumberOfRewards(){
-        return numberOfRewards;
+    public void reduceRewardCount()
+    {
+        // set initial value for rewards left.
+        numberOfRewards -= 1;
+    }
+
+    void updateRewardCountText()
+    {
+        rewardCountText.text = numberOfRewards.ToString();
+    }
+
+    void checkGameOverStatus()
+    {
+
+        if (numberOfRewards < 1)
+        {
+            // game over player won.
+            gameManager.GameOver(true);
+        }
     }
 
 
@@ -66,6 +87,7 @@ public class SpawnManager : MonoBehaviour
         {
             spawnReward();
         }
+        numberOfRewards = LevelDifficulty.levelDifficulty;
     }
 
     /// <summary>
@@ -89,6 +111,17 @@ public class SpawnManager : MonoBehaviour
         if (LevelDifficulty.levelDifficulty == 1) return;
         StartCoroutine("SpawnEnemy");
     }
+
+    // void OnCollisionEnter(Collision collision)
+    // {
+    //     switch (collision.gameObject.tag)
+    //     {
+    //         case "Player":
+    //             // Debug.Log("Collided with the player");
+    //             reduceRewardCount();
+    //             break;
+    //     }
+    // }
 
     /// <summary>
     /// A coroutine for timing the spawning of Enemy gameObjects.

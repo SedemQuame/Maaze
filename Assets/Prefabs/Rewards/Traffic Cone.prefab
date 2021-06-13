@@ -110,6 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d5fa71718cf33e297dda009d0b0b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupEffect: {fileID: 4748730675913877244, guid: 9c074aa299cf88f4a9ce34d50a5bbff3,
+    type: 3}
 --- !u!54 &-232671793685851473
 Rigidbody:
   m_ObjectHideFlags: 0

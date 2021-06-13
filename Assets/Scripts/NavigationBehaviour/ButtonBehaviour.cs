@@ -36,6 +36,8 @@ public class ButtonBehaviour : MonoBehaviour
     /// </summary>
     public void loadMainMenuScene()
     {
+        Time.timeScale = 1.0f;
+
         SceneManager.LoadScene("Maaze Main Menu");
     }
     /// <summary>
@@ -43,6 +45,8 @@ public class ButtonBehaviour : MonoBehaviour
     /// </summary>
     public void loadLevelsMenuScene()
     {
+        Time.timeScale = 1.0f;
+
         SceneManager.LoadScene("Maaze Levels Menu");
     }
     /// <summary>
@@ -64,6 +68,8 @@ public class ButtonBehaviour : MonoBehaviour
     /// </summary>
     public void loadGamePlayLevelNumber()
     {
+        Time.timeScale = 1.0f;
+
         // Get the difficulty value from the clicked level button.
         GameObject selectedLevelButton = EventSystem.current.currentSelectedGameObject;
         LevelDifficulty.levelDifficulty = int.Parse(selectedLevelButton.transform.GetChild(0).gameObject.GetComponent<TMPro.TextMeshProUGUI>().text);
@@ -76,6 +82,8 @@ public class ButtonBehaviour : MonoBehaviour
     /// </summary>
     public void restartGameLevel()
     {
+        Time.timeScale = 1.0f;
+
         Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
     }
     /// <summary>

@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip[] playerSound;
     public HealthBarControl healthBarControl;
     public GameObject nozzel;
+
     public GameObject spawnManager;
     /// <summary>
     /// Represents the source that plays the audio sound.
@@ -81,16 +82,6 @@ public class PlayerController : MonoBehaviour
 
             // Destroy the goal object.
             Destroy(other.gameObject);
-
-            // reduce reward count
-            spawnManager.GetComponent<SpawnManager>().setRewardCount(spawnManager.GetComponent<SpawnManager>().getNumberOfRewards() - 1);
-
-            // Display Game Won Menu
-            if (spawnManager.GetComponent<SpawnManager>().getNumberOfRewards() <= 0)
-            {
-                gameManager.GameOver(true);
-
-            }
         }
     }
 
