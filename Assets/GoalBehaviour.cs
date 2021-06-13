@@ -16,15 +16,12 @@ public class GoalBehaviour : MonoBehaviour
 
     void OnDestroy()
     {
-        Debug.Log("I'm being destroyed");
         Pickup();
     }
 
     void Pickup()
     {
         Instantiate(pickupEffect, transform.position, transform.rotation);
-
-
         Destroy(gameObject);
     }
 }

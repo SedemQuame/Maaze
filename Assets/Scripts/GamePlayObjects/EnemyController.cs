@@ -21,6 +21,9 @@ public class EnemyController : MonoBehaviour
     private PlayerController player;
     private EnemyAI enemyAI;
 
+    public GameObject destroyEffect;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +51,8 @@ public class EnemyController : MonoBehaviour
             // update enemy health bar.
             float bulletDamage = collider.gameObject.GetComponent<BulletBehaviour>().bulletDamage;
             updateHealthBar(bulletDamage);
-            if(health < 1){
+            if (health < 1)
+            {
                 // play enemy destroy prefab.
                 // Destroy enemy gameObject
                 Destroy(transform.gameObject);
@@ -71,5 +75,16 @@ public class EnemyController : MonoBehaviour
                 gameManager.GameOver(gameWon);
             }
         }
+    }
+
+    void OnDestroy()
+    {
+        DestroyEffect();
+    }
+
+    void DestroyEffect()
+    {
+        Instantiate(destroyEffect, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }

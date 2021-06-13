@@ -396,6 +396,8 @@ MonoBehaviour:
   damageResistance: 0.4
   healthBarControl: {fileID: 8621662825837079802}
   health: 100
+  destroyEffect: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561,
+    type: 3}
 --- !u!114 &577422438273077196
 MonoBehaviour:
   m_ObjectHideFlags: 0
