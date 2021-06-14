@@ -82,9 +82,8 @@ public class EnemyController : MonoBehaviour
         DestroyEffect();
     }
 
-    void DestroyEffect()
+    public void DestroyEffect()
     {
         Instantiate(destroyEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
     }
 }

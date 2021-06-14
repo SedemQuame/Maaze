@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
         playerBody.AddForce(direction * speed, ForceMode.VelocityChange);
 
+
         playerOutOfBounds();
     }
 
@@ -78,8 +79,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Goal"))
         {
-            // play particle system.
-
             // Destroy the goal object.
             Destroy(other.gameObject);
         }
