@@ -29,6 +29,7 @@ public class EnemyAI : MonoBehaviour
     private bool isDestinationSet;
 
     private bool isGameOver;
+    private GameObject mazeLoader;
 
 
     void Start()
@@ -37,6 +38,8 @@ public class EnemyAI : MonoBehaviour
         currentState = ENEMY_AI_STATES.PATROL;
         player = GameObject.Find("Player").transform;
         isGameOver = GameObject.Find("Manager").GetComponent<GameManager>().isGameOver;
+
+        mazeLoader = GameObject.Find("Maze Loader Holder");
     }
 
     void Update()
@@ -67,12 +70,7 @@ public class EnemyAI : MonoBehaviour
             case ENEMY_AI_STATES.DEAD:
                 deadState();
                 break;
-
-            default:
-                patrolState();
-                break;
         }
-        // yield return null;
     }
 
     public void changeFSMState(ENEMY_AI_STATES value)
@@ -124,14 +122,13 @@ public class EnemyAI : MonoBehaviour
     {
         if (!isDestinationSet)
         {
-            GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
             loader = mazeLoader.GetComponent<MazeLoader>();
 
             destinationCell = "Floor " + Random.Range(0, loader.getRowAndColumnNumber()) + "," + Random.Range(0, loader.getRowAndColumnNumber());
             patrolDestination = randomPatrolDestination(destinationCell);
             navMeshAgent.SetDestination(patrolDestination);
 
-            if (checkIfAtDestination(player.transform.position))
+            if (checkIfAtDestination(player.transform.position, 2.5f))
             {
                 changeFSMState(ENEMY_AI_STATES.CHASE);
             }
@@ -148,14 +145,14 @@ public class EnemyAI : MonoBehaviour
 
             // if the magnitude of the distance between the player and the enemy
             // is within the attack range, then transition to the attack state.
-            if (checkIfAtDestination(patrolDestination, minimumAttackDistance) && spotPlayer(this.transform, player.transform))
+            if (checkIfAtDestination(patrolDestination, 1.5f) && spotPlayer(this.transform, player.transform))
             {
                 // transition to the attack state of the F.S.M
                 changeFSMState(ENEMY_AI_STATES.ATTACK);
             }
             // else if the magnitude of the distance between the player and the enemy
             // is x times greater than the attack range, then transition to the patrol state. 
-            else if (checkIfAtDestination(patrolDestination, (minimumAttackDistance + 5))) // replace magic number with variable name
+            else if (checkIfAtDestination(patrolDestination, 3.5f)) // replace magic number with variable name
             {
                 // transition to the patrol state of the F.S.M
                 changeFSMState(ENEMY_AI_STATES.PATROL);
