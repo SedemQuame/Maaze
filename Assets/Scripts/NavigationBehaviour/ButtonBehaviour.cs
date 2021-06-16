@@ -48,6 +48,31 @@ public class ButtonBehaviour : MonoBehaviour
         Time.timeScale = 1.0f;
 
         SceneManager.LoadScene("Maaze Levels Menu");
+    }    /// <summary>
+         /// Loads the previous scene if available level menu scene, and destroys the old scene.
+         /// </summary>
+    public void loadPreviousGamePlayLevelScene()
+    {
+        Time.timeScale = 1.0f;
+        if (LevelDifficulty.levelDifficulty == 1)
+        {
+            // do nothing
+        }
+        else
+        {
+            LevelDifficulty.levelDifficulty -= 1;
+            SceneManager.LoadScene("Maaze Game Play");
+
+        }
+    }
+    /// <summary>
+    /// Loads the next level menu scene, and destroys the old scene.
+    /// </summary>
+    public void loadNextGamePlayLevelcene()
+    {
+        Time.timeScale = 1.0f;
+        LevelDifficulty.levelDifficulty += 1;
+        SceneManager.LoadScene("Maaze Game Play");
     }
     /// <summary>
     /// Loads the settings scene, and destroys the old scene.
