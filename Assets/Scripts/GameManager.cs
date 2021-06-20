@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("Displays the gameover state(win or lose).")]
     public TMP_Text gameMessage;
+    [Tooltip("Displays the current game level.")]
+    public TMP_Text gameLevel;
     private bool isGamePaused;
     public bool isGameOver;
 
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = false;
         isGamePaused = false;
+        gameLevel.text = "Level: " + LevelDifficulty.levelDifficulty;
         gameOver.SetActive(false);
     }
 

@@ -29,7 +29,10 @@ public class EnemyController : MonoBehaviour
     {
         direction = patrolDirections[Random.Range(0, 4)];
         gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        if (GameObject.Find("Player") != null)
+        {
+            player = GameObject.Find("Player").GetComponent<PlayerController>();
+        }
         enemyAI = transform.GetComponent<EnemyAI>();
     }
 
@@ -53,7 +56,9 @@ public class EnemyController : MonoBehaviour
             updateHealthBar(bulletDamage);
             if (health < 1)
             {
-                // play enemy destroy prefab.
+                // instantiate player particle system.
+                DestroyEffect();
+
                 // Destroy enemy gameObject
                 Destroy(transform.gameObject);
             }
@@ -68,11 +73,16 @@ public class EnemyController : MonoBehaviour
             // if player health is 0, destory the player.
             if (player.health < 1)
             {
-                Destroy(collider.gameObject);
+                // Destroy(collider.gameObject);
+                gameManager.PauseGame();
 
                 // Show the gameOver UI.
                 bool gameWon = false;
                 gameManager.GameOver(gameWon);
+
+                // Destroy enemy gameObject
+                // Destroy(transform.gameObject);
+                transform.gameObject.SetActive(false);
             }
         }
     }
@@ -85,5 +95,10 @@ public class EnemyController : MonoBehaviour
     public void DestroyEffect()
     {
         Instantiate(destroyEffect, transform.position, transform.rotation);
+        // ParticleSystem destroyParticle = destroyEffect.GetComponent<ParticleSystem>();
+        // float totalDuration = destroyParticle.duration + destroyParticle.startLifetime;
+        // Destroy(destroyEffect, totalDuration);
+        DestroyImmediate(destroyEffect, true);
+
     }
 }

@@ -8,11 +8,11 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Tooltip("Forward speed of the player game object.")]
-    [Range(3, 12)]
-    public float speed;
+    // [Range(3, 12)]
+    [SerializeField]
+    private float speed;
 
     [Tooltip("Health value of the player")]
-    [Range(3, 15)]
     public float health = 100.0f;
     [Tooltip("The sound played when player collides with a given game object.")]
     public VariableJoystick variableJoystick;
@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
         isColliding = false;
         hasHitGround = false;
 
+        speed = 2.5f;
+
         source = GetComponent<AudioSource>();
 
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
@@ -60,18 +62,45 @@ public class PlayerController : MonoBehaviour
         healthBarControl.SetHealthBarValue(health * 0.02f);
     }
 
+    void Update()
+    {
+        // Check if we are running either in the Unity editor or in a standalone build. 
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+            keyboardPlayerMovement();
+        // Check if we are running on a mobile device 
+#elif UNITY_IOS || UNITY_ANDROID
+            touchPlayerMovement();
+#endif
+    }
+
     void FixedUpdate()
     {
+        playerOutOfBounds();
+    }
+
+    void keyboardPlayerMovement()
+    {
         // keyboard controls.
-        Vector3 movement = new Vector3(movementX, 0, movementY);
+        Vector3 movement = new Vector3(0, 0, 0);
+        if(movementX > 0){
+            movement = Vector3.right * Time.deltaTime;
+        }else if(movementX < 0){
+            movement = Vector3.left * Time.deltaTime;
+        }else if(movementY > 0){
+            movement = Vector3.forward * Time.deltaTime;
+        }else if(movementY < 0){
+            movement = Vector3.back * Time.deltaTime;
+        }
         playerBody.AddForce(movement * speed, ForceMode.VelocityChange);
 
-        // joystick controls.
-        Vector3 direction = Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
-        playerBody.AddForce(direction * speed, ForceMode.VelocityChange);
+        // switching from using forces to translating the object.
+        // Vector3.Slerp(transform.position, (movement), 0.05f);
+        // transform.position = transform.position + movement;
+    }
 
+    void touchPlayerMovement()
+    {
 
-        playerOutOfBounds();
     }
 
 

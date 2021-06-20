@@ -30,7 +30,7 @@ public class BulletBehaviour : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // play sound everytime we collide with
+        // destroy bullet when it collides with other game objects
         // 1. ground
         // 2. wall
         // set collision with ground to true
@@ -49,12 +49,10 @@ public class BulletBehaviour : MonoBehaviour
                 Debug.Log("Collided with the enemy");
                 // Play destory particle system for bullet.
                 Destroy(transform.gameObject);
-
-                // Destroy enemy game object or reduce health.
-                // Destroy(collision.gameObject);
                 break;
             case "NavMesh":
                 Debug.Log("Collided with the NavMesh");
+                Destroy(transform.gameObject);
                 break;
             default:
                 Debug.Log("Colliding with empty space.");

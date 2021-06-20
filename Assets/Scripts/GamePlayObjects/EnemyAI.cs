@@ -36,7 +36,10 @@ public class EnemyAI : MonoBehaviour
     {
         isDestinationSet = false;
         currentState = ENEMY_AI_STATES.PATROL;
-        player = GameObject.Find("Player").transform;
+        if (GameObject.Find("Player") != null)
+        {
+            player = GameObject.Find("Player").transform;
+        }
         isGameOver = GameObject.Find("Manager").GetComponent<GameManager>().isGameOver;
 
         mazeLoader = GameObject.Find("Maze Loader Holder");
