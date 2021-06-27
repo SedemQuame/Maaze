@@ -64,7 +64,7 @@ public class SpawnManager : MonoBehaviour
 
     void updateRewardCountText()
     {
-        rewardCountText.text = numberOfRewards.ToString();
+        rewardCountText.text = "Pickups: " + numberOfRewards.ToString();
     }
 
     void checkGameOverStatus()

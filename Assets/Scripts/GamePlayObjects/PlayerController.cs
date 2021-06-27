@@ -81,16 +81,7 @@ public class PlayerController : MonoBehaviour
     void keyboardPlayerMovement()
     {
         // keyboard controls.
-        Vector3 movement = new Vector3(0, 0, 0);
-        if(movementX > 0){
-            movement = Vector3.right * Time.deltaTime;
-        }else if(movementX < 0){
-            movement = Vector3.left * Time.deltaTime;
-        }else if(movementY > 0){
-            movement = Vector3.forward * Time.deltaTime;
-        }else if(movementY < 0){
-            movement = Vector3.back * Time.deltaTime;
-        }
+        Vector3 movement = new Vector3(movementX, 0, movementY);
         playerBody.AddForce(movement * speed, ForceMode.VelocityChange);
 
         // switching from using forces to translating the object.
