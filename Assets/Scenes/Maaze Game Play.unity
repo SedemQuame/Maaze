@@ -6652,6 +6652,8 @@ MonoBehaviour:
   - {fileID: 334535100609521996, guid: 789c7f53eabdd7d44a4aebf1f16ccce0, type: 3}
   - {fileID: 4553447304167223556, guid: 02239676fa9046c0aaf7b25be539c711, type: 3}
   - {fileID: 5550322204951661109, guid: 15f887dff93e118e89740a594179071a, type: 3}
+  healthDock: {fileID: 6809944706259094419, guid: 0a3972e964dcd2b47b2a3bc58d35d554,
+    type: 3}
   goalOffset: {x: 0, y: 2, z: 0}
   rewardCountText: {fileID: 1205192314}
 --- !u!1 &1987454967

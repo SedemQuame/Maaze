@@ -39,7 +39,6 @@ public class EnemyController : MonoBehaviour
     public void updateHealthBar(float damagePoints)
     {
         health -= damagePoints;
-        Debug.Log("Enemy health: " + health);
         healthBarControl.SetHealthBarValue(healthBarControl.GetHealthBarValue() - (0.01f * damagePoints));
     }
 
@@ -56,11 +55,12 @@ public class EnemyController : MonoBehaviour
             updateHealthBar(bulletDamage);
             if (health < 1)
             {
-/*                // instantiate player particle system.
-                DestroyEffect();*/
+                // instantiate player particle system.
+                DestroyEffect();
 
-                // Destroy enemy gameObject
-                Destroy(transform.gameObject);
+                // Hide the enemy gameObject
+                transform.gameObject.SetActive(false);
+                // Destroy(transform.gameObject);
             }
         }
 
@@ -98,7 +98,5 @@ public class EnemyController : MonoBehaviour
         // ParticleSystem destroyParticle = destroyEffect.GetComponent<ParticleSystem>();
         // float totalDuration = destroyParticle.duration + destroyParticle.startLifetime;
         // Destroy(destroyEffect, totalDuration);
-        DestroyImmediate(destroyEffect, true);
-
     }
 }

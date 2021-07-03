@@ -89,10 +89,10 @@ public class PlayerController : MonoBehaviour
         // transform.position = transform.position + movement;
     }
 
-    void touchPlayerMovement()
-    {
+    // void touchPlayerMovement()
+    // {
 
-    }
+    // }
 
 
     void OnTriggerEnter(Collider other)
@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
     public void OnRotate(InputValue value)
     {
         Vector2 rotationVector = value.Get<Vector2>();
-        Debug.Log("Player rotation: " + rotationVector);
+        // Debug.Log("Player rotation: " + rotationVector);
         //Always turn the turret toward the player 
         Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 15 * rotationVector.x, 0), 0.5f);
         transform.Rotate(new Vector3(0, 15 * rotationVector.x, 0));

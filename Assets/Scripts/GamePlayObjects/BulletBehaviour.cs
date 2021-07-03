@@ -38,24 +38,24 @@ public class BulletBehaviour : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Ground":
-                Debug.Log("Collided with the ground");
+                // Debug.Log("Collided with the ground");
                 Destroy(transform.gameObject);
                 break;
             case "Wall":
-                Debug.Log("Collided with the wall");
+                // Debug.Log("Collided with the wall");
                 Destroy(transform.gameObject);
                 break;
             case "Enemy":
-                Debug.Log("Collided with the enemy");
+                // Debug.Log("Collided with the enemy");
                 // Play destory particle system for bullet.
                 Destroy(transform.gameObject);
                 break;
             case "NavMesh":
-                Debug.Log("Collided with the NavMesh");
+                // Debug.Log("Collided with the NavMesh");
                 Destroy(transform.gameObject);
                 break;
             default:
-                Debug.Log("Colliding with empty space.");
+                // Debug.Log("Colliding with empty space.");
                 break;
         }
     }

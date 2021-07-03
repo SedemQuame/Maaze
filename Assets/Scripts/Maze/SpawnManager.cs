@@ -17,6 +17,7 @@ public class SpawnManager : MonoBehaviour
     public Material[] materials;
     public GameObject[] reward;
     public GameObject[] enemyArr;
+    public GameObject healthDock;
     public Vector3 goalOffset;
     private GameObject spawnManagerFloor;
     private GameManager gameManager;
@@ -43,7 +44,8 @@ public class SpawnManager : MonoBehaviour
 
         spawnRewardsByLevelDifficulty();
         updateRewardCountText();
-        spawnEnemiesByLevelDifficulty();
+        spawnEnemiesByLevelDifficulty(); //todo: refactor this to delay code using coroutines.
+        randomlySpawn(healthDock);
     }
 
     void FixedUpdate()
@@ -77,7 +79,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// Spawns a number of rewards according to the level difficulty.
     /// </summary>
@@ -85,7 +86,7 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < LevelDifficulty.levelDifficulty; i++)
         {
-            spawnReward();
+            randomlySpawn(reward[Random.Range(0, 3)]);
         }
         numberOfRewards = LevelDifficulty.levelDifficulty;
     }
@@ -93,11 +94,11 @@ public class SpawnManager : MonoBehaviour
     /// <summary>
     /// Spawns the reward game object, in the first created cell (genesis cell).
     /// </summary>
-    void spawnReward()
+    void randomlySpawn(GameObject gameObject)
     {
         // Make is such that reward can be spawned multiple times, and in various cells.
         string cell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
-        Instantiate(reward[Random.Range(0, 3)], new Vector3(GameObject.Find(cell).transform.position.x, -0.4f, GameObject.Find(cell).transform.position.z), transform.rotation);
+        Instantiate(gameObject, new Vector3(GameObject.Find(cell).transform.position.x, -0.4f, GameObject.Find(cell).transform.position.z), transform.rotation);
     }
 
     /// <summary>
@@ -153,7 +154,6 @@ public class SpawnManager : MonoBehaviour
         int blinkNumber = 10, i = 0;
         while (blinkNumber > i)
         {
-
             if (rend.sharedMaterial == materials[0])
             {
                 rend.sharedMaterial = materials[1];
@@ -166,6 +166,7 @@ public class SpawnManager : MonoBehaviour
         }
 
     }
+    
     /// <summary>
     /// Spawns of an Enemy gameObject in a given position.
     /// </summary>

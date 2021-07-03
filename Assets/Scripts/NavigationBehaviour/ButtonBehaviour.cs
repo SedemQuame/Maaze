@@ -55,7 +55,7 @@ public class ButtonBehaviour : MonoBehaviour
          /// </summary>
     public void loadPreviousGamePlayLevelScene()
     {
-        SceneManager.UnloadSceneAsync("Maaze Game Play");
+//        SceneManager.UnloadSceneAsync("Maaze Game Play");
         Time.timeScale = 1.0f;
         if (LevelDifficulty.levelDifficulty == 1)
         {
@@ -72,7 +72,7 @@ public class ButtonBehaviour : MonoBehaviour
     /// </summary>
     public void loadNextGamePlayLevelcene()
     {
-        SceneManager.UnloadSceneAsync("Maaze Game Play");
+//        SceneManager.UnloadSceneAsync("Maaze Game Play");
         Time.timeScale = 1.0f;
         LevelDifficulty.levelDifficulty += 1;
         SceneManager.LoadScene("Maaze Game Play");
