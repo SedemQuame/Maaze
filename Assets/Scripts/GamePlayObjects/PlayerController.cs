@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
-        Debug.Log("Player fired a projectile");
+        // Debug.Log("Player fired a projectile");
         // make sure that the player can rotate.
         // play shooting particle system
         Transform bulletProjectile = Instantiate(bulletPrefab.transform, nozzel.transform.position, nozzel.transform.rotation);
