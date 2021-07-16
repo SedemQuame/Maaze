@@ -6,7 +6,6 @@ using TMPro;
 /// <summary>
 /// The SpawnManager is responsible for spawning all guard or enemy game objects in the scene.
 /// </summary>
-
 [RequireComponent(typeof(GameObject))]
 [RequireComponent(typeof(Material))]
 [RequireComponent(typeof(Renderer))]
@@ -24,8 +23,7 @@ public class SpawnManager : MonoBehaviour
 
     private Renderer rend;
     private string firstCreatedCell;
-    private float spawnRate = 30.0f;
-    // private float blinkRate = 0.8f;
+    private float spawnRate = 20.0f;
     private MazeLoader loader;
     private int numberOfRewards;
     public TMP_Text rewardCountText;
@@ -33,6 +31,10 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(spawnStart());
+    }
+
+    IEnumerator spawnStart(){
         firstCreatedCell = "Floor " + 0 + "," + 0;
         goalOffset = new Vector3(0, -0.4f, 0);
         spawnRate /= LevelDifficulty.levelDifficulty;
@@ -44,8 +46,12 @@ public class SpawnManager : MonoBehaviour
 
         spawnRewardsByLevelDifficulty();
         updateRewardCountText();
+
+        yield return new WaitForSeconds(4); //wait 15 seconds before spawning enemies
+
         spawnEnemiesByLevelDifficulty(); //todo: refactor this to delay code using coroutines.
-        randomlySpawn(healthDock);
+        
+        // randomlySpawn(healthDock);
     }
 
     void FixedUpdate()
@@ -60,7 +66,6 @@ public class SpawnManager : MonoBehaviour
 
     public void reduceRewardCount()
     {
-        // set initial value for rewards left.
         numberOfRewards -= 1;
     }
 
@@ -113,17 +118,6 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine("SpawnEnemy");
     }
 
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     switch (collision.gameObject.tag)
-    //     {
-    //         case "Player":
-    //             // Debug.Log("Collided with the player");
-    //             reduceRewardCount();
-    //             break;
-    //     }
-    // }
-
     /// <summary>
     /// A coroutine for timing the spawning of Enemy gameObjects.
     /// </summary>
@@ -139,9 +133,8 @@ public class SpawnManager : MonoBehaviour
             rend = spawnManagerFloor.GetComponent<Renderer>();
             rend.enabled = true;
 
-            ToggleColor();
-
-            spawnEnemy(enemyArr[enemyType], spawnManagerFloor.transform.position + new Vector3(0, 2, 0), Quaternion.Euler(0.0f, 90.0f, 0.0f));
+            StartCoroutine(ToggleColor(spawnManagerCell, enemyType));
+            
             yield return new WaitForSeconds(spawnRate);
         }
     }
@@ -149,14 +142,17 @@ public class SpawnManager : MonoBehaviour
     /// <summary>
     /// A coroutine that changes the color of a cell's ground between two materials to indicated spawning of an Enemy gameObject.
     /// </summary>
-    void ToggleColor()
+    IEnumerator ToggleColor(string spawnManagerCell, int enemyType)
     {
+        // todo: reduce blink rate to milliseconds to make blinking faster and more realistic.
+        // todo: play bliking buzzer audio.
         int blinkNumber = 10, i = 0;
         while (blinkNumber > i)
         {
+            yield return new WaitForSeconds(1);
             if (rend.sharedMaterial == materials[0])
             {
-                rend.sharedMaterial = materials[1];
+                rend.sharedMaterial = materials[enemyType + 1];
             }
             else
             {
@@ -164,7 +160,11 @@ public class SpawnManager : MonoBehaviour
             }
             i++;
         }
+        rend.sharedMaterial = materials[0];
 
+        // todo: create a smoke prefab
+        // todo: add audio for enemy instantiation.
+        spawnEnemy(enemyArr[enemyType], spawnManagerFloor.transform.position + new Vector3(0, 2, 0), Quaternion.Euler(0.0f, 90.0f, 0.0f));
     }
     
     /// <summary>

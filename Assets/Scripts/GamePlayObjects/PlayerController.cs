@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     private GameObject lastFloor;
     private string lastCreatedCell;
     private float movementX, movementY;
-
     private bool isColliding;
     private bool hasHitGround;
 
@@ -83,17 +82,7 @@ public class PlayerController : MonoBehaviour
         // keyboard controls.
         Vector3 movement = new Vector3(movementX, 0, movementY);
         playerBody.AddForce(movement * speed, ForceMode.VelocityChange);
-
-        // switching from using forces to translating the object.
-        // Vector3.Slerp(transform.position, (movement), 0.05f);
-        // transform.position = transform.position + movement;
     }
-
-    // void touchPlayerMovement()
-    // {
-
-    // }
-
 
     void OnTriggerEnter(Collider other)
     {

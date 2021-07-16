@@ -30,6 +30,7 @@ public class HealthDockController : MonoBehaviour
     IEnumerator restoreHealth(Collider other){
         // increment the health value.
         yield return new WaitForSeconds(healthIncrementRate);
+        // if(other.gameObject != null){
         if(other.gameObject.tag == "Player" || other.gameObject.tag == "Nozzle"){
             // negate health point when passing to (-- => +).
             if(other.gameObject.tag == "Nozzle"){
@@ -38,6 +39,7 @@ public class HealthDockController : MonoBehaviour
                 other.gameObject.GetComponent<PlayerController>().updateHealthBar(-healthIncrementValue);
             }
         }
+        // }
         yield return null;
     }
 }

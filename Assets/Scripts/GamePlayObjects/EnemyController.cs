@@ -55,11 +55,12 @@ public class EnemyController : MonoBehaviour
             updateHealthBar(bulletDamage);
             if (health < 1)
             {
-                // instantiate player particle system.
-                DestroyEffect();
+                // instantiate death particle system.
+                DestroyEffect(this.gameObject);
 
                 // Hide the enemy gameObject
                 transform.gameObject.SetActive(false);
+
                 // Destroy(transform.gameObject);
             }
         }
@@ -73,28 +74,22 @@ public class EnemyController : MonoBehaviour
             // if player health is 0, destory the player.
             if (player.health < 1)
             {
-                // Destroy(collider.gameObject);
-                gameManager.PauseGame();
+                // instantiate death particle system.
+                DestroyEffect(collider.gameObject);
 
                 // Show the gameOver UI.
-                bool gameWon = false;
-                gameManager.GameOver(gameWon);
+                // bool gameWon = false;
+                // gameManager.GameOver(gameWon);
 
                 // Destroy enemy gameObject
-                // Destroy(transform.gameObject);
-                transform.gameObject.SetActive(false);
+                collider.gameObject.SetActive(false);
             }
         }
     }
 
-    void OnDestroy()
+    public void DestroyEffect(GameObject gameObject)
     {
-/*        DestroyEffect();
-*/    }
-
-    public void DestroyEffect()
-    {
-        Instantiate(destroyEffect, transform.position, transform.rotation);
+        Instantiate(destroyEffect, gameObject.transform.position, gameObject.transform.rotation);
         // ParticleSystem destroyParticle = destroyEffect.GetComponent<ParticleSystem>();
         // float totalDuration = destroyParticle.duration + destroyParticle.startLifetime;
         // Destroy(destroyEffect, totalDuration);
