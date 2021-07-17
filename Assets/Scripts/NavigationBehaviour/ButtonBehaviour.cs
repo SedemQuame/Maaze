@@ -103,13 +103,10 @@ public class ButtonBehaviour : MonoBehaviour
     public void loadGamePlayLevelNumber()
     {
         Time.timeScale = 1.0f;
-
         // Get the difficulty value from the clicked level button.
         GameObject selectedLevelButton = EventSystem.current.currentSelectedGameObject;
         LevelDifficulty.levelDifficulty = int.Parse(selectedLevelButton.transform.GetChild(0).gameObject.GetComponent<TMPro.TextMeshProUGUI>().text);
-
         // Load the game play scene
-        //StartCoroutine(levelLoader.GetComponent<LevelLoader>().ChangeSplashScreen(SceneManager.GetActiveScene().buildIndex + 1));
         SceneManager.LoadScene("Maaze Game Play");
     }
 

@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        keyboardPlayerMovement();
         // Check if we are running either in the Unity editor or in a standalone build. 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
             keyboardPlayerMovement();

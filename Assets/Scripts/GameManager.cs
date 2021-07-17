@@ -14,6 +14,12 @@ public class GameManager : MonoBehaviour
 {
     [Tooltip("Menu that shows when button is clicked.")]
     public GameObject gameMenu;
+    [Tooltip("Button for next level.")]
+    public GameObject nextLevel;
+    [Tooltip("Button for previous level.")]
+    public GameObject prevLevel;
+    [Tooltip("Hides menu overlay.")]
+    public GameObject closeDialog;
     [Tooltip("Displays the gameover text.")]
     public GameObject gameOver;
     [Tooltip("Displays the gameover state(win or lose).")]
@@ -32,6 +38,12 @@ public class GameManager : MonoBehaviour
         isGamePaused = false;
         gameLevel.text = "Level: " + LevelDifficulty.levelDifficulty;
         gameOver.SetActive(false);
+    }
+
+    void FixedUpdate(){
+        if(LevelDifficulty.levelDifficulty > 1){
+            prevLevel.GetComponent<Button>().interactable = true;
+        }
     }
 
     /// <summary>
@@ -59,14 +71,18 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         gameMenu.SetActive(true);
         gameOver.SetActive(true);
-
+        
+        // hide the close dialog cross
+        closeDialog.SetActive(false);
         if (gameWon)
         {
             gameMessage.text = "You Win!!";
+            nextLevel.GetComponent<Button>().interactable = true;
         }
         else
         {
             gameMessage.text = "You Lose!!";
+            nextLevel.GetComponent<Button>().interactable = false;
         }
     }
 }

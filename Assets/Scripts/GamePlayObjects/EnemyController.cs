@@ -78,8 +78,8 @@ public class EnemyController : MonoBehaviour
                 DestroyEffect(collider.gameObject);
 
                 // Show the gameOver UI.
-                // bool gameWon = false;
-                // gameManager.GameOver(gameWon);
+                bool gameWon = false;
+                gameManager.GameOver(gameWon);
 
                 // Destroy enemy gameObject
                 collider.gameObject.SetActive(false);

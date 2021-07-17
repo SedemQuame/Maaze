@@ -134,7 +134,6 @@ public class SpawnManager : MonoBehaviour
             rend.enabled = true;
 
             StartCoroutine(ToggleColor(spawnManagerCell, enemyType));
-            
             yield return new WaitForSeconds(spawnRate);
         }
     }
@@ -147,7 +146,7 @@ public class SpawnManager : MonoBehaviour
         // todo: reduce blink rate to milliseconds to make blinking faster and more realistic.
         // todo: play bliking buzzer audio.
         int blinkNumber = 10, i = 0;
-        while (blinkNumber > i)
+        while (blinkNumber >= i)
         {
             yield return new WaitForSeconds(1);
             if (rend.sharedMaterial == materials[0])
@@ -160,7 +159,6 @@ public class SpawnManager : MonoBehaviour
             }
             i++;
         }
-        rend.sharedMaterial = materials[0];
 
         // todo: create a smoke prefab
         // todo: add audio for enemy instantiation.
