@@ -16,6 +16,8 @@ TagManager:
   - Bullet
   - Nozzle
   - EnemyProjectile
+  - Locked Icon
+  - Unlocked Icon
   layers:
   - Default
   - TransparentFX

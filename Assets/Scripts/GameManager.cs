@@ -12,12 +12,10 @@ using TMPro;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-
     [Tooltip("Menu that shows when button is clicked.")]
     public GameObject gameMenu;
     [Tooltip("Displays the gameover text.")]
     public GameObject gameOver;
-
     [Tooltip("Displays the gameover state(win or lose).")]
     public TMP_Text gameMessage;
     [Tooltip("Displays the current game level.")]
@@ -65,12 +63,10 @@ public class GameManager : MonoBehaviour
         if (gameWon)
         {
             gameMessage.text = "You Win!!";
-            // gameMessage.color = Color.green;
         }
         else
         {
             gameMessage.text = "You Lose!!";
-            // gameMessage.color = Color.red;
         }
     }
 }
