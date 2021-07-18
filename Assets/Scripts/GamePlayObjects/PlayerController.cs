@@ -15,12 +15,12 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Health value of the player")]
     public float health = 100.0f;
     [Tooltip("The sound played when player collides with a given game object.")]
-    public VariableJoystick variableJoystick;
     public GameObject bulletPrefab;
     public AudioClip[] playerSound;
     public HealthBarControl healthBarControl;
     public GameObject nozzel;
-
+    [Tooltip("Variable joy stick used to control player movement.")]
+    public VariableJoystick variableJoystick;
     public GameObject spawnManager;
     /// <summary>
     /// Represents the source that plays the audio sound.
@@ -63,18 +63,21 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        keyboardPlayerMovement();
+
+    }
+
+    void FixedUpdate()
+    {
+        // keyboardPlayerMovement();
+        // touchPlayerMovement();
         // Check if we are running either in the Unity editor or in a standalone build. 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
             keyboardPlayerMovement();
         // Check if we are running on a mobile device 
 #elif UNITY_IOS || UNITY_ANDROID
             touchPlayerMovement();
+            // add touch movement for mobile phone screens.
 #endif
-    }
-
-    void FixedUpdate()
-    {
         playerOutOfBounds();
     }
 
@@ -82,6 +85,12 @@ public class PlayerController : MonoBehaviour
     {
         // keyboard controls.
         Vector3 movement = new Vector3(movementX, 0, movementY);
+        playerBody.AddForce(movement * speed, ForceMode.VelocityChange);
+    }
+
+    void touchPlayerMovement(){
+        // Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
+        Vector3 movement = new Vector3(variableJoystick.Horizontal, 0, variableJoystick.Vertical);
         playerBody.AddForce(movement * speed, ForceMode.VelocityChange);
     }
 
