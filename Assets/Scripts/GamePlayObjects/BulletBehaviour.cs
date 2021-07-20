@@ -6,7 +6,6 @@ public class BulletBehaviour : MonoBehaviour
 {
     public float bulletSpeed;
     public float bulletDamage;
-    // private Rigidbody rigidbody;
     private Vector3 shootDir;
     private float playerRotationAxis;
 
@@ -14,12 +13,6 @@ public class BulletBehaviour : MonoBehaviour
     {
         this.shootDir = shootDir;
         this.shootDir.y = 0;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -33,8 +26,8 @@ public class BulletBehaviour : MonoBehaviour
         // destroy bullet when it collides with other game objects
         // 1. ground
         // 2. wall
-        // set collision with ground to true
         // 3. enemy
+        // set collision with ground to true
         switch (collision.gameObject.tag)
         {
             case "Ground":

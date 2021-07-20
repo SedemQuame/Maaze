@@ -166,7 +166,7 @@ public class SpawnManager : MonoBehaviour
     }
     
     /// <summary>
-    /// Spawns of an Enemy gameObject in a given position.
+    /// Spawn an Enemy gameObject in a given position.
     /// </summary>
     void spawnEnemy(GameObject enemy, Vector3 position, Quaternion rotation)
     {

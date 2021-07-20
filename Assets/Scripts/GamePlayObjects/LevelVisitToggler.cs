@@ -26,7 +26,7 @@ public class LevelVisitToggler : MonoBehaviour
             // get the name of the button.
             int buttonLevel = int.Parse(button.name);
 
-            if (buttonLevel <= LevelDifficulty.levelDifficulty){
+            if (buttonLevel <= LevelDifficulty.maxLevelReached){
                 // make button interactive
                 button.GetComponent<Button>().interactable = true;
                 // and

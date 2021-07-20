@@ -68,6 +68,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GameOver(bool gameWon)
     {
+        // delay code by some seconds.
+        StartCoroutine(showMenu(gameWon));
+    }
+
+    IEnumerator showMenu(bool gameWon){
+
+        yield return new WaitForSeconds(Random.Range(1, 3));
+
         isGameOver = true;
         gameMenu.SetActive(true);
         gameOver.SetActive(true);

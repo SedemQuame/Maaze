@@ -16,16 +16,18 @@ public class PlayerController : MonoBehaviour
     public float health = 100.0f;
     [Tooltip("The sound played when player collides with a given game object.")]
     public GameObject bulletPrefab;
-    public AudioClip[] playerSound;
+    public AudioClip playerShootingSound;
+    public AudioClip playerMovingSound;
     public HealthBarControl healthBarControl;
     public GameObject nozzel;
     [Tooltip("Variable joy stick used to control player movement.")]
-    public VariableJoystick variableJoystick;
+    // public VariableJoystick variableJoystick;
+    public GameObject variableJoystick;
     public GameObject spawnManager;
     /// <summary>
     /// Represents the source that plays the audio sound.
     /// </summary>
-    private AudioSource source;
+    public AudioClip shootingSound;
     private Rigidbody playerBody;
     private GameManager gameManager;
     private GameObject lastFloor;
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private float movementX, movementY;
     private bool isColliding;
     private bool hasHitGround;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +43,9 @@ public class PlayerController : MonoBehaviour
         isColliding = false;
         hasHitGround = false;
 
-        speed = 2.5f;
+        speed = 0.8f;
 
-        source = GetComponent<AudioSource>();
+        audioSource = this.GetComponent<AudioSource>();
 
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
         MazeLoader loader = mazeLoader.GetComponent<MazeLoader>();
@@ -50,7 +53,7 @@ public class PlayerController : MonoBehaviour
         lastCreatedCell = "Floor " + (loader.getRowAndColumnNumber() - 1) + "," + (loader.getRowAndColumnNumber() - 1);
         lastFloor = GameObject.Find(lastCreatedCell);
 
-        playerBody = GetComponent<Rigidbody>();
+        playerBody = this.GetComponent<Rigidbody>();
 
         Vector3 playerJumpOffset = new Vector3(0, 10, 0);
         transform.position = lastFloor.transform.position + playerJumpOffset;
@@ -59,11 +62,6 @@ public class PlayerController : MonoBehaviour
 
         // set health bar
         healthBarControl.SetHealthBarValue(health * 0.02f);
-    }
-
-    void Update()
-    {
-
     }
 
     void FixedUpdate()
@@ -83,14 +81,19 @@ public class PlayerController : MonoBehaviour
 
     void keyboardPlayerMovement()
     {
-        // keyboard controls.
+        // play player's movement audio clip.
+        // audioSource.PlayOneShot(playerMovingSound);
+
+        // todo: instantiate player movement smoke particle system.
+
         Vector3 movement = new Vector3(movementX, 0, movementY);
         playerBody.AddForce(movement * speed, ForceMode.VelocityChange);
     }
 
     void touchPlayerMovement(){
-        // Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
-        Vector3 movement = new Vector3(variableJoystick.Horizontal, 0, variableJoystick.Vertical);
+        variableJoystick.SetActive(true);
+        VariableJoystick joystick = variableJoystick.GetComponent<VariableJoystick>();
+        Vector3 movement = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
         playerBody.AddForce(movement * speed, ForceMode.VelocityChange);
     }
 
@@ -98,8 +101,9 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Goal"))
         {
-            // Destroy the goal object.
-            Destroy(other.gameObject);
+            // pickup the goal object.
+            GoalBehaviour goalBehaviour = other.gameObject.GetComponent<GoalBehaviour>();
+            goalBehaviour.Pickup();
         }
     }
 
@@ -108,8 +112,8 @@ public class PlayerController : MonoBehaviour
         // play sound everytime we collide with
         // 1. ground
         // 2. wall
-        // set collision with ground to true
         // 3. enemy
+        // set collision with ground to true
         switch (collision.gameObject.tag)
         {
             case "Ground":
@@ -141,19 +145,22 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
-        // Debug.Log("Player fired a projectile");
-        // make sure that the player can rotate.
-        // play shooting particle system
+        // play player's shooting audio clip.
+        // audioSource.PlayOneShot(playerShootingSound);
+
+        // todo: instantiate shooting particle system.
+
+        // instantiate bullet prefab and move towards pointed direction.
         Transform bulletProjectile = Instantiate(bulletPrefab.transform, nozzel.transform.position, nozzel.transform.rotation);
         Vector3 shootDir = (nozzel.transform.position - transform.position).normalized;
         bulletProjectile.GetComponent<BulletBehaviour>().Setup(shootDir);
+
+        // todo: shake camera slightly
     }
 
     public void OnRotate(InputValue value)
     {
         Vector2 rotationVector = value.Get<Vector2>();
-        // Debug.Log("Player rotation: " + rotationVector);
-        //Always turn the turret toward the player 
         Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 15 * rotationVector.x, 0), 0.5f);
         transform.Rotate(new Vector3(0, 15 * rotationVector.x, 0));
     }
