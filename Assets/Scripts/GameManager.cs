@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public GameObject closeDialog;
     [Tooltip("Displays the gameover text.")]
     public GameObject gameOver;
+    [Tooltip("Displays the component used for touch surfaces")]
+    public GameObject fixedTouchControlPanel;
     [Tooltip("Displays the gameover state(win or lose).")]
     public TMP_Text gameMessage;
     [Tooltip("Displays the current game level.")]
@@ -38,6 +40,11 @@ public class GameManager : MonoBehaviour
         isGamePaused = false;
         gameLevel.text = "Level: " + LevelDifficulty.levelDifficulty;
         gameOver.SetActive(false);
+
+        // make code run for only mobile devices.
+        #if UNITY_IOS || UNITY_ANDROID
+            fixedTouchControlPanel.SetActive(true);
+        #endif
     }
 
     void FixedUpdate(){
@@ -79,6 +86,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         gameMenu.SetActive(true);
         gameOver.SetActive(true);
+        fixedTouchControlPanel.SetActive(false);
         
         // hide the close dialog cross
         closeDialog.SetActive(false);

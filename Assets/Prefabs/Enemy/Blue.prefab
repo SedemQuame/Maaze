@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2245256574760114803}
   - component: {fileID: 6218069756892443873}
   - component: {fileID: 3344908575417602244}
-  - component: {fileID: 8867186849797303445}
+  - component: {fileID: 1374083668651135817}
   m_Layer: 7
   m_Name: Blue
   m_TagString: Enemy
@@ -139,8 +139,8 @@ MonoBehaviour:
   health: 100
   destroyEffect: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561,
     type: 3}
-  audioSource: {fileID: 0}
-  audioClips: []
+  beatPlayerSound: {fileID: 0}
+  dyingSound: {fileID: 8300000, guid: f27071f98a5efbd4786437ac5f506889, type: 3}
 --- !u!114 &6218069756892443873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!82 &8867186849797303445
+--- !u!82 &1374083668651135817
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -69,13 +69,13 @@ public class PlayerController : MonoBehaviour
         // keyboardPlayerMovement();
         // touchPlayerMovement();
         // Check if we are running either in the Unity editor or in a standalone build. 
-#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+        #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
             keyboardPlayerMovement();
         // Check if we are running on a mobile device 
-#elif UNITY_IOS || UNITY_ANDROID
+        #elif UNITY_IOS || UNITY_ANDROID
             touchPlayerMovement();
             // add touch movement for mobile phone screens.
-#endif
+        #endif
         playerOutOfBounds();
     }
 

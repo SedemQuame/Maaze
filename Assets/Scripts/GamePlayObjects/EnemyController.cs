@@ -20,8 +20,11 @@ public class EnemyController : MonoBehaviour
     private AudioSource audioSource;
     private PlayerController player;
     private EnemyAI enemyAI;
+    private float volUp = 1.0f;
+    private float volDown = 0.6f;
     public GameObject destroyEffect;
     public AudioClip beatPlayerSound;
+    public AudioClip dyingSound;
 
 
     // Start is called before the first frame update
@@ -45,6 +48,7 @@ public class EnemyController : MonoBehaviour
 
     void OnCollisionEnter(Collision collider)
     {
+        float vol = Random.Range(volDown, volUp);
         // // set collision boolean to true, and move in new direction.
         if (collider.gameObject.CompareTag("Bullet"))
         {
@@ -58,19 +62,16 @@ public class EnemyController : MonoBehaviour
             // update enemy health bar.
             updateHealthBar(bulletDamage);
 
-
             if (health < 1)
             {
-
                 // instantiate death particle system.
                 DestroyEffect(this.gameObject);
 
                 // play sound for enemy dying, and soul leaving body.
+                audioSource.PlayOneShot(dyingSound, vol);
 
-                // Hide the enemy gameObject
-                transform.gameObject.SetActive(false);
-
-                // Destroy(transform.gameObject);
+                // destroy enemy game object
+                StartCoroutine(destroyEnemyGameObject());
             }
         }
 
@@ -78,8 +79,7 @@ public class EnemyController : MonoBehaviour
         if (collider.gameObject.CompareTag("Player"))
         {
             // play sound for inflicting damage
-            audioSource.PlayOneShot(beatPlayerSound);
-
+            // audioSource.PlayOneShot(beatPlayerSound);
             
             // reduce player health by number of damage points.
             player.updateHealthBar(damagePoints);
@@ -90,12 +90,11 @@ public class EnemyController : MonoBehaviour
                 // instantiate death particle system.
                 DestroyEffect(collider.gameObject);
 
-                // Show the gameOver UI.
-                bool gameWon = false;
-                gameManager.GameOver(gameWon);
+                // play sound for enemy dying, and soul leaving body.
+                audioSource.PlayOneShot(dyingSound, vol);
 
-                // Destroy enemy gameObject
-                collider.gameObject.SetActive(false);
+                // destroy player collider gameObject
+                StartCoroutine(destroyPlayerGameObject(collider.gameObject));
             }
         }
     }
@@ -104,4 +103,27 @@ public class EnemyController : MonoBehaviour
     {
         Instantiate(destroyEffect, gameObject.transform.position, gameObject.transform.rotation);
     }
+    IEnumerator destroyEnemyGameObject(){
+        yield return new WaitForSeconds(1.0f);
+        // Hide the enemy gameObject
+        transform.gameObject.SetActive(false);
+        // Destroy(this.gameObject);
+    }
+
+    IEnumerator destroyPlayerGameObject(GameObject playerGameObject){        
+        yield return new WaitForSeconds(1.0f);
+
+        // Hide the enemy gameObject
+        playerGameObject.SetActive(false);
+
+        yield return new WaitForSeconds(1.0f);
+
+        // Show the gameOver UI.
+        bool gameWon = false;
+        gameManager.GameOver(gameWon);
+    }
 }
+
+
+
+    
