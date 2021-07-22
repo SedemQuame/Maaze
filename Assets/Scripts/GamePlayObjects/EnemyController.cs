@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
     private float volDown = 0.6f;
     public GameObject destroyEffect;
     public AudioClip beatPlayerSound;
+    public AudioClip hurtSound;
     public AudioClip dyingSound;
 
 
@@ -49,10 +50,11 @@ public class EnemyController : MonoBehaviour
     void OnCollisionEnter(Collision collider)
     {
         float vol = Random.Range(volDown, volUp);
-        // // set collision boolean to true, and move in new direction.
+        // set collision boolean to true, and move in new direction.
         if (collider.gameObject.CompareTag("Bullet"))
         {
             // play sound for receiving damage
+            audioSource.PlayOneShot(hurtSound, vol);
 
             // get gameObject
             // find the damage points from bullet
@@ -78,24 +80,8 @@ public class EnemyController : MonoBehaviour
         // if collided with the player, kill him.
         if (collider.gameObject.CompareTag("Player"))
         {
-            // play sound for inflicting damage
-            // audioSource.PlayOneShot(beatPlayerSound);
-            
-            // reduce player health by number of damage points.
-            player.updateHealthBar(damagePoints);
-
-            // if player health is 0, destory the player.
-            if (player.health < 1)
-            {
-                // instantiate death particle system.
-                DestroyEffect(collider.gameObject);
-
-                // play sound for enemy dying, and soul leaving body.
-                audioSource.PlayOneShot(dyingSound, vol);
-
-                // destroy player collider gameObject
-                StartCoroutine(destroyPlayerGameObject(collider.gameObject));
-            }
+            // play sound for receiving damage
+            // audioSource.PlayOneShot(beatPlayerSound, vol);
         }
     }
 
@@ -103,24 +89,12 @@ public class EnemyController : MonoBehaviour
     {
         Instantiate(destroyEffect, gameObject.transform.position, gameObject.transform.rotation);
     }
+    
     IEnumerator destroyEnemyGameObject(){
         yield return new WaitForSeconds(1.0f);
         // Hide the enemy gameObject
         transform.gameObject.SetActive(false);
         // Destroy(this.gameObject);
-    }
-
-    IEnumerator destroyPlayerGameObject(GameObject playerGameObject){        
-        yield return new WaitForSeconds(1.0f);
-
-        // Hide the enemy gameObject
-        playerGameObject.SetActive(false);
-
-        yield return new WaitForSeconds(1.0f);
-
-        // Show the gameOver UI.
-        bool gameWon = false;
-        gameManager.GameOver(gameWon);
     }
 }
 

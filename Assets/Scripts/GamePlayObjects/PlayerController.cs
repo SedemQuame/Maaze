@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Variable joy stick used to control player movement.")]
     // public VariableJoystick variableJoystick;
     public GameObject variableJoystick;
-    public GameObject spawnManager;
     /// <summary>
     /// Represents the source that plays the audio sound.
     /// </summary>
@@ -35,7 +34,11 @@ public class PlayerController : MonoBehaviour
     private float movementX, movementY;
     private bool isColliding;
     private bool hasHitGround;
+    private float volUp = 1.0f;
+    private float volDown = 0.6f;
     private AudioSource audioSource;
+    public AudioClip hurtSound;
+    public AudioClip dyingSound;
 
     // Start is called before the first frame update
     void Start()
@@ -107,14 +110,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collider)
     {
         // play sound everytime we collide with
         // 1. ground
         // 2. wall
         // 3. enemy
         // set collision with ground to true
-        switch (collision.gameObject.tag)
+        float vol = Random.Range(volDown, volUp);
+        switch (collider.gameObject.tag)
         {
             case "Ground":
                 // Debug.Log("Collided with the ground");
@@ -124,6 +128,25 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Enemy":
                 // Debug.Log("Collided with the enemy");
+                // play sound for receiving damage
+                audioSource.PlayOneShot(hurtSound, vol);
+                
+                // reduce player health by number of damage points.
+                this.updateHealthBar(collider.gameObject.GetComponent<EnemyController>().damagePoints);
+
+                // if player health is 0, destory the player.
+                if (this.health < 1)
+                {
+                    // instantiate death particle system.
+                    collider.gameObject.GetComponent<EnemyController>().DestroyEffect(collider.gameObject);
+
+                    // play sound for enemy dying, and soul leaving body.
+                    audioSource.PlayOneShot(dyingSound, vol);
+
+                    // destroy player collider gameObject
+                    StartCoroutine(destroyPlayerGameObject(collider.gameObject));
+                }
+
                 break;
             case "NavMesh":
                 // Debug.Log("Collided with the NavMesh");
@@ -146,9 +169,10 @@ public class PlayerController : MonoBehaviour
     public void OnFire()
     {
         // play player's shooting audio clip.
-        // audioSource.PlayOneShot(playerShootingSound);
+        audioSource.PlayOneShot(playerShootingSound);
 
-        // todo: instantiate shooting particle system.
+        // todo: instantiate shooting particle system at the position bullet 
+        // spawned
 
         // instantiate bullet prefab and move towards pointed direction.
         Transform bulletProjectile = Instantiate(bulletPrefab.transform, nozzel.transform.position, nozzel.transform.rotation);
@@ -184,5 +208,18 @@ public class PlayerController : MonoBehaviour
         if (hasHitGround && isColliding)
             // Display Game Won Menu
             gameManager.GameOver(false);
+    }
+
+    IEnumerator destroyPlayerGameObject(GameObject playerGameObject){        
+        yield return new WaitForSeconds(1.0f);
+
+        // Hide the enemy gameObject
+        playerGameObject.SetActive(false);
+
+        yield return new WaitForSeconds(1.0f);
+
+        // Show the gameOver UI.
+        bool gameWon = false;
+        gameManager.GameOver(gameWon);
     }
 }

@@ -131,7 +131,7 @@ public class EnemyAI : MonoBehaviour
             patrolDestination = randomPatrolDestination(destinationCell);
             navMeshAgent.SetDestination(patrolDestination);
 
-            if (checkIfAtDestination(player.transform.position, 2.5f))
+            if (player.transform != null && checkIfAtDestination(player.transform.position, 2.5f))
             {
                 changeFSMState(ENEMY_AI_STATES.CHASE);
             }
