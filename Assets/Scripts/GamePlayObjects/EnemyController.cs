@@ -81,7 +81,7 @@ public class EnemyController : MonoBehaviour
         if (collider.gameObject.CompareTag("Player"))
         {
             // play sound for receiving damage
-            // audioSource.PlayOneShot(beatPlayerSound, vol);
+            audioSource.PlayOneShot(beatPlayerSound, vol);
         }
     }
 
@@ -89,7 +89,7 @@ public class EnemyController : MonoBehaviour
     {
         Instantiate(destroyEffect, gameObject.transform.position, gameObject.transform.rotation);
     }
-    
+
     IEnumerator destroyEnemyGameObject(){
         yield return new WaitForSeconds(1.0f);
         // Hide the enemy gameObject

@@ -475,7 +475,7 @@ MonoBehaviour:
   health: 100
   destroyEffect: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561,
     type: 3}
-  beatPlayerSound: {fileID: 0}
+  beatPlayerSound: {fileID: 8300000, guid: d6a2343e9cf89114d883d5cc62702679, type: 3}
   hurtSound: {fileID: 8300000, guid: 7ba544f5437e50b469e47a85c6b77732, type: 3}
   dyingSound: {fileID: 8300000, guid: f27071f98a5efbd4786437ac5f506889, type: 3}
 --- !u!114 &577422438273077196
