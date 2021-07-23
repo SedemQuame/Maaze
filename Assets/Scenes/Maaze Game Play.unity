@@ -973,7 +973,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346931515}
-  m_LocalRotation: {x: 0.5895415, y: 0.000000009468185, z: -0.000000006910517, w: 0.8077382}
+  m_LocalRotation: {x: 0.58954155, y: -0.000000025867552, z: 0.000000018879877, w: 0.8077381}
   m_LocalPosition: {x: 303.19507, y: -220, z: 447.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5400,7 +5400,6 @@ MonoBehaviour:
   healthBarControl: {fileID: 507693752}
   nozzel: {fileID: 427594244}
   variableJoystick: {fileID: 714719644}
-  spawnManager: {fileID: 0}
   shootingSound: {fileID: 8300000, guid: 7af5c0d03ebe9cf47af710974aef9653, type: 3}
   hurtSound: {fileID: 8300000, guid: 6945905cc44c9a245ab90bc7600ec64c, type: 3}
   dyingSound: {fileID: 8300000, guid: f27071f98a5efbd4786437ac5f506889, type: 3}
@@ -6671,7 +6670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1838587495
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7339,7 +7338,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973230732}
-  m_LocalRotation: {x: 0.5895415, y: 0.000000009468185, z: -0.000000006910517, w: 0.8077382}
+  m_LocalRotation: {x: 0.58954155, y: -0.000000025867552, z: 0.000000018879877, w: 0.8077381}
   m_LocalPosition: {x: 1, y: 30.542587, z: -9.777374}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
