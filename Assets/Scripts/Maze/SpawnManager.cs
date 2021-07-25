@@ -17,6 +17,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] reward;
     public GameObject[] enemyArr;
     public GameObject healthDock;
+    public GameObject player;
     public Vector3 goalOffset;
     private GameObject spawnManagerFloor;
     private GameManager gameManager;
@@ -51,7 +52,7 @@ public class SpawnManager : MonoBehaviour
 
         spawnEnemiesByLevelDifficulty(); //todo: refactor this to delay code using coroutines.
         
-        // randomlySpawn(healthDock);
+        randomlySpawn(healthDock);
     }
 
     void FixedUpdate()
@@ -76,11 +77,9 @@ public class SpawnManager : MonoBehaviour
 
     void checkGameOverStatus()
     {
-
         if (numberOfRewards < 1)
         {
-            // game over player won.
-            gameManager.GameOver(true);
+           StartCoroutine(showGameMenu());
         }
     }
 
@@ -171,5 +170,19 @@ public class SpawnManager : MonoBehaviour
     void spawnEnemy(GameObject enemy, Vector3 position, Quaternion rotation)
     {
         Instantiate(enemy, position, rotation);
+    }
+
+    IEnumerator showGameMenu(){
+        yield return new WaitForSeconds(1.0f);
+
+        // Show the gameOver UI.
+        bool gameWon = true;
+
+        // game over player won.
+        gameManager.GameOver(gameWon);
+
+        yield return new WaitForSeconds(1.0f);
+        // hide the player
+        player.SetActive(false);
     }
 }

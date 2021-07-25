@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(AudioClip))]
@@ -30,6 +29,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerBody;
     private GameManager gameManager;
     private GameObject lastFloor;
+    [Tooltip("Displays the component used for touch surfaces")]
+    public GameObject touchControlPanel;
     private string lastCreatedCell;
     private float movementX, movementY;
     private bool isColliding;
@@ -69,15 +70,14 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // keyboardPlayerMovement();
-        // touchPlayerMovement();
         // Check if we are running either in the Unity editor or in a standalone build. 
-        #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+        #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEBGL
             keyboardPlayerMovement();
+            touchControlPanel.SetActive(false);
         // Check if we are running on a mobile device 
         #elif UNITY_IOS || UNITY_ANDROID
             touchPlayerMovement();
-            // add touch movement for mobile phone screens.
+            touchControlPanel.SetActive(true);
         #endif
         playerOutOfBounds();
     }
@@ -143,8 +143,8 @@ public class PlayerController : MonoBehaviour
                     // play sound for enemy dying, and soul leaving body.
                     audioSource.PlayOneShot(dyingSound, vol);
 
-                    // destroy player collider gameObject
-                    StartCoroutine(destroyPlayerGameObject(collider.gameObject));
+                    // destroy player gameObject
+                    StartCoroutine(destroyPlayerGameObject(this.gameObject));
                 }
 
                 break;
@@ -185,9 +185,26 @@ public class PlayerController : MonoBehaviour
     public void OnRotate(InputValue value)
     {
         Vector2 rotationVector = value.Get<Vector2>();
-        Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 15 * rotationVector.x, 0), 0.5f);
-        transform.Rotate(new Vector3(0, 15 * rotationVector.x, 0));
+        Debug.Log("Rotation Vector: " + rotationVector.x);
+        Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 15 * -rotationVector.x, 0), 0.5f);
+        transform.Rotate(new Vector3(0, 15 * -rotationVector.x, 0));
     }
+ 
+ #if UNITY_IOS || UNITY_ANDROID
+    public void OnRotateLeft()
+    {
+        float rotationVectorX = 1.0f;
+        Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 15 * rotationVectorX, 0), 0.5f);
+        transform.Rotate(new Vector3(0, 15 * rotationVectorX, 0));
+    }
+
+    public void OnRotateRight()
+    {
+        float rotationVectorX = -1.0f;
+        Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 15 * rotationVectorX, 0), 0.5f);
+        transform.Rotate(new Vector3(0, 15 * rotationVectorX, 0));
+    }
+#endif
 
     public void updateHealthBar(float damagePoints)
     {
@@ -212,14 +229,13 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator destroyPlayerGameObject(GameObject playerGameObject){        
         yield return new WaitForSeconds(1.0f);
-
-        // Hide the enemy gameObject
-        playerGameObject.SetActive(false);
-
-        yield return new WaitForSeconds(1.0f);
-
+    
         // Show the gameOver UI.
         bool gameWon = false;
         gameManager.GameOver(gameWon);
+
+        yield return new WaitForSeconds(1.0f);
+        // Hide the enemy gameObject
+        playerGameObject.SetActive(false);
     }
 }

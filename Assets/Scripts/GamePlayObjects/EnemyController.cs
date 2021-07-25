@@ -15,7 +15,6 @@ public class EnemyController : MonoBehaviour
     public float health = 100.0f;
     private Vector3 direction;
     private Vector3[] patrolDirections = { Vector3.right, Vector3.left, Vector3.forward, Vector3.back };
-    // private bool collidedWithWall = false;
     private GameManager gameManager;
     private AudioSource audioSource;
     private PlayerController player;
@@ -26,6 +25,8 @@ public class EnemyController : MonoBehaviour
     public AudioClip beatPlayerSound;
     public AudioClip hurtSound;
     public AudioClip dyingSound;
+    private bool soundPlayed = false; //used to implement a cool-off time after a sound has been played.
+    private bool prefabEffectInstantiated = false;
 
 
     // Start is called before the first frame update
@@ -53,8 +54,14 @@ public class EnemyController : MonoBehaviour
         // set collision boolean to true, and move in new direction.
         if (collider.gameObject.CompareTag("Bullet"))
         {
-            // play sound for receiving damage
-            audioSource.PlayOneShot(hurtSound, vol);
+            if(!soundPlayed){
+                // play sound for receiving damage
+                audioSource.PlayOneShot(hurtSound, vol);
+                soundPlayed = true;
+
+                // start cool-off counter to soundPlayed variable.
+                StartCoroutine(coolOffCounter(1.0f, soundPlayed));
+            }
 
             // get gameObject
             // find the damage points from bullet
@@ -69,8 +76,14 @@ public class EnemyController : MonoBehaviour
                 // instantiate death particle system.
                 DestroyEffect(this.gameObject);
 
-                // play sound for enemy dying, and soul leaving body.
-                audioSource.PlayOneShot(dyingSound, vol);
+                if(!soundPlayed){
+                    // play sound for enemy dying, and soul leaving body.
+                    audioSource.PlayOneShot(dyingSound, vol);
+                    soundPlayed = true;
+
+                    // start cool-off counter to soundPlayed variable.
+                    StartCoroutine(coolOffCounter(0.8f, soundPlayed));
+                }
 
                 // destroy enemy game object
                 StartCoroutine(destroyEnemyGameObject());
@@ -87,14 +100,26 @@ public class EnemyController : MonoBehaviour
 
     public void DestroyEffect(GameObject gameObject)
     {
-        Instantiate(destroyEffect, gameObject.transform.position, gameObject.transform.rotation);
+        if (!prefabEffectInstantiated)
+        {
+            Instantiate(destroyEffect, gameObject.transform.position, gameObject.transform.rotation);
+            prefabEffectInstantiated = true;    
+
+            // start cool-off counter to soundPlayed variable.
+            StartCoroutine(coolOffCounter(2f, prefabEffectInstantiated));
+        }
     }
 
     IEnumerator destroyEnemyGameObject(){
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         // Hide the enemy gameObject
         transform.gameObject.SetActive(false);
         // Destroy(this.gameObject);
+    }
+
+    IEnumerator coolOffCounter(float coolOffSeconds, bool eventFlag){
+        yield return new WaitForSeconds(coolOffSeconds);
+        eventFlag = false;
     }
 }
 

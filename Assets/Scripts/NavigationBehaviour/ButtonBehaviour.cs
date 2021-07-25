@@ -78,7 +78,9 @@ public class ButtonBehaviour : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         LevelDifficulty.levelDifficulty += 1;
-        LevelDifficulty.maxLevelReached = LevelDifficulty.levelDifficulty;
+        if(LevelDifficulty.levelDifficulty > LevelDifficulty.maxLevelReached){
+            LevelDifficulty.maxLevelReached = LevelDifficulty.levelDifficulty;
+        }
         SceneManager.LoadScene("Maaze Game Play");
     }
 
