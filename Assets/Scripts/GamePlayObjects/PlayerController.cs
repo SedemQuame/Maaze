@@ -40,12 +40,16 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip hurtSound;
     public AudioClip dyingSound;
+    private bool isFiring, isRotatingLeft, isRotatingRight;
+    private float rotationAngle;
 
     // Start is called before the first frame update
     void Start()
     {
         isColliding = false;
         hasHitGround = false;
+
+        rotationAngle = 7.5f;
 
         speed = 0.8f;
 
@@ -78,6 +82,21 @@ public class PlayerController : MonoBehaviour
         #elif UNITY_IOS || UNITY_ANDROID
             touchPlayerMovement();
             touchControlPanel.SetActive(true);
+
+            if (isFiring)
+            {
+                OnFire();
+            }
+v  
+            if (isRotatingLeft)
+            {
+                OnRotateLeft();
+            }
+
+            if (isRotatingRight)
+            {
+                OnRotateRight();
+            }
         #endif
         playerOutOfBounds();
     }
@@ -190,20 +209,44 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(new Vector3(0, 15 * -rotationVector.x, 0));
     }
  
- #if UNITY_IOS || UNITY_ANDROID
+ #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
     public void OnRotateLeft()
     {
         float rotationVectorX = 1.0f;
-        Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 15 * rotationVectorX, 0), 0.5f);
-        transform.Rotate(new Vector3(0, 15 * rotationVectorX, 0));
+        Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, rotationAngle * rotationVectorX, 0), 0.5f);
+        transform.Rotate(new Vector3(0, rotationAngle * rotationVectorX, 0));
     }
 
     public void OnRotateRight()
     {
         float rotationVectorX = -1.0f;
-        Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 15 * rotationVectorX, 0), 0.5f);
-        transform.Rotate(new Vector3(0, 15 * rotationVectorX, 0));
+        Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, rotationAngle * rotationVectorX, 0), 0.5f);
+        transform.Rotate(new Vector3(0, rotationAngle * rotationVectorX, 0));
     }
+
+    public void rotateLeftPointerDown(){
+        isRotatingLeft = true;
+    }
+
+    public void rotateLeftPointerUp(){
+        isRotatingLeft = false;
+    }
+
+    public void rotateRightPointerDown(){
+        isRotatingRight = true;
+    }
+
+    public void rotateRightPointerUp(){
+        isRotatingRight = false;
+    }
+
+    public void firePointerDown(){
+        isFiring = true;
+    }
+
+    public void firePointerUp(){
+        isFiring = false;
+    }        
 #endif
 
     public void updateHealthBar(float damagePoints)
@@ -222,9 +265,10 @@ public class PlayerController : MonoBehaviour
             gameManager.GameOver(false);
         }
 
-        if (hasHitGround && isColliding)
+        if (hasHitGround && isColliding){
             // Display Game Won Menu
             gameManager.GameOver(false);
+        }
     }
 
     IEnumerator destroyPlayerGameObject(GameObject playerGameObject){        
