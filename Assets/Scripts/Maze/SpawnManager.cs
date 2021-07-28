@@ -17,7 +17,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] reward;
     public GameObject[] enemyArr;
     public GameObject healthDock;
-    public GameObject player;
+    public GameObject portal;
     public Vector3 goalOffset;
     private GameObject spawnManagerFloor;
     private GameManager gameManager;
@@ -27,6 +27,7 @@ public class SpawnManager : MonoBehaviour
     private float spawnRate = 20.0f;
     private MazeLoader loader;
     private int numberOfRewards;
+    private bool spawnedPortal;
     public TMP_Text rewardCountText;
 
     // Start is called before the first frame update
@@ -42,17 +43,17 @@ public class SpawnManager : MonoBehaviour
 
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
         loader = mazeLoader.GetComponent<MazeLoader>();
-
         gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
-
         spawnRewardsByLevelDifficulty();
         updateRewardCountText();
 
         yield return new WaitForSeconds(4); //wait 15 seconds before spawning enemies
-
-        spawnEnemiesByLevelDifficulty(); //todo: refactor this to delay code using coroutines.
-        
-        randomlySpawn(healthDock);
+        if(LevelDifficulty.levelDifficulty > 3){
+            spawnEnemiesByLevelDifficulty(); //todo: refactor this to delay code using coroutines.
+            if(LevelDifficulty.levelDifficulty > 5){
+                randomlySpawn(healthDock, -0.9f);
+            }
+        }
     }
 
     void FixedUpdate()
@@ -78,8 +79,13 @@ public class SpawnManager : MonoBehaviour
     void checkGameOverStatus()
     {
         if (numberOfRewards < 1)
-        {
-           StartCoroutine(showGameMenu());
+        {   
+            if(!spawnedPortal){
+                // show portal.
+                randomlySpawn(portal, -0.9f);
+            }
+            spawnedPortal = true;
+            // StartCoroutine(showGameMenu());
         }
     }
 
@@ -90,7 +96,7 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < LevelDifficulty.levelDifficulty; i++)
         {
-            randomlySpawn(reward[Random.Range(0, 3)]);
+            randomlySpawn(reward[Random.Range(0, 3)], -0.4f);
         }
         numberOfRewards = LevelDifficulty.levelDifficulty;
     }
@@ -98,11 +104,11 @@ public class SpawnManager : MonoBehaviour
     /// <summary>
     /// Spawns the reward game object, in the first created cell (genesis cell).
     /// </summary>
-    void randomlySpawn(GameObject gameObject)
+    void randomlySpawn(GameObject gameObject, float ySpawnPoint)
     {
         // Make is such that reward can be spawned multiple times, and in various cells.
         string cell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
-        Instantiate(gameObject, new Vector3(GameObject.Find(cell).transform.position.x, -0.4f, GameObject.Find(cell).transform.position.z), transform.rotation);
+        Instantiate(gameObject, new Vector3(GameObject.Find(cell).transform.position.x, ySpawnPoint, GameObject.Find(cell).transform.position.z), transform.rotation);
     }
 
     /// <summary>
@@ -172,17 +178,4 @@ public class SpawnManager : MonoBehaviour
         Instantiate(enemy, position, rotation);
     }
 
-    IEnumerator showGameMenu(){
-        yield return new WaitForSeconds(1.0f);
-
-        // Show the gameOver UI.
-        bool gameWon = true;
-
-        // game over player won.
-        gameManager.GameOver(gameWon);
-
-        yield return new WaitForSeconds(1.0f);
-        // hide the player
-        player.SetActive(false);
-    }
 }

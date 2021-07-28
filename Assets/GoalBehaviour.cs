@@ -9,11 +9,9 @@ public class GoalBehaviour : MonoBehaviour
 {
     public GameObject pickupEffect;
     public AudioClip pickUpSoundFx;
-    // public AudioSource audioData {  get { return GetComponent<AudioSource>(); } }
     public AudioSource audioData;
 
     void Start(){
-        // audioData = GetComponent<AudioSource>();
         audioData.enabled = true;
     }
 

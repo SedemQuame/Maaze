@@ -48,11 +48,8 @@ public class PlayerController : MonoBehaviour
     {
         isColliding = false;
         hasHitGround = false;
-
         rotationAngle = 7.5f;
-
         speed = 0.8f;
-
         audioSource = this.GetComponent<AudioSource>();
 
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
@@ -87,7 +84,7 @@ public class PlayerController : MonoBehaviour
             {
                 OnFire();
             }
-v  
+
             if (isRotatingLeft)
             {
                 OnRotateLeft();
@@ -146,7 +143,6 @@ v
                 // Debug.Log("Collided with the wall");
                 break;
             case "Enemy":
-                // Debug.Log("Collided with the enemy");
                 // play sound for receiving damage
                 audioSource.PlayOneShot(hurtSound, vol);
                 
@@ -165,7 +161,6 @@ v
                     // destroy player gameObject
                     StartCoroutine(destroyPlayerGameObject(this.gameObject));
                 }
-
                 break;
             case "NavMesh":
                 // Debug.Log("Collided with the NavMesh");

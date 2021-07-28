@@ -9,6 +9,4 @@ public static class LevelDifficulty
     [Range(1, 50)]
     public static int levelDifficulty = 1;
     public static int maxLevelReached = 1;
-    
-    
 }

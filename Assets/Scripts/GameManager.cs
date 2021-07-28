@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
         isGamePaused = !isGamePaused;
     }
 
-
     /// <summary>
     /// Displays Main Menu after a game has been won or lost.
     /// </summary>
@@ -96,4 +95,6 @@ public class GameManager : MonoBehaviour
             nextLevel.GetComponent<Button>().interactable = false;
         }
     }
+
+
 }
