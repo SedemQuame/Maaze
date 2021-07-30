@@ -1,0 +1,1076 @@
+{
+  "levels": [
+    {
+      "worldInfo": {
+        "text": "Learn movement and rotation",
+        "images": ["<image, of cube in motion>"]
+      },
+      "instructions": {
+        "common": [],
+        "mobile": [
+          {
+            "text": "Use the joystick to move in the direction you want.",
+            "images": ["<image of the joystick>"]
+          }
+        ],
+        "laptop": [
+          {
+            "text": "Use the keyboard to move in the direction you want.",
+            "images": ["<image of the keyboard>"]
+          }
+        ]
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Low level collectibles.",
+        "images": []
+      },
+      "instructions": {
+        "common": [
+          {
+            "text": "Collect all the collectibles to get points.",
+            "images": [
+              "<image of the coins, with point number>",
+              "<image of the cones, with point number>",
+              "<image of the volleyball, with point number>"
+            ]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Learn shooting",
+        "images": ["<image of a gun>"]
+      },
+      "instructions": {
+        "common": [],
+        "mobile": [
+          {
+            "text": "Shoot 5 times, by tapping the fire button.",
+            "images": ["<image of the fire button>"]
+          }
+        ],
+        "laptop": [
+          {
+            "text": "Shoot 5 times, by left clicking.",
+            "images": ["<image of the mouse being, with left button clicked>"]
+          }
+        ]
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Chicken dinner, with the enemy",
+        "images": ["<image_of_chicken>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "Kill all the enemies.",
+            "images": ["<image of a grave stone>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Healing Pad",
+        "images": ["<image of a healing pad from the top>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "Stand on the healing pad, to heal damages.\n PS: You still have to defend against enemies while healing",
+            "images": ["<image of a healing pad from the top>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Dinner with the, KingPin",
+        "images": ["<image of red enemy>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "Kill the kingpin",
+            "images": ["<image of a red enemy>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Rumble rumble",
+        "images": ["<image of a cup>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "Kill all enemies and collect all collectibles to proceed to the next level",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 1RC",
+        "images": ["<image of expansion>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 2RC",
+        "images": []
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 3RC",
+        "images": []
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 4RC",
+        "images": []
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 5RC",
+        "images": []
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 6RC",
+        "images": []
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 7RC",
+        "images": []
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 8RC",
+        "images": []
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Pick up all collectibles, before the countdown timer reaches 0.",
+        "images": ["<image of the countdown timer>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": "If timer runs down, you'll lose all progress and will have to restart from the previous checkpoint."
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Pick up all collectibles, before the countdown timer reaches 0.",
+        "images": ["<image of the countdown timer>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": "If timer runs down, you'll lose all progress and will have to restart from the previous checkpoint."
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Pick up all collectibles, before the countdown timer reaches 0.",
+        "images": ["<image of the countdown timer>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": "If timer runs down, you'll lose all progress and will have to restart from the previous checkpoint."
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Pick up all collectibles, before the countdown timer reaches 0.",
+        "images": ["<image of the countdown timer>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": "If timer runs down, you'll lose all progress and will have to restart from the previous checkpoint."
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Kill all low level enemies, before the countdown timer reaches 0.",
+        "images": ["<image of the countdown timer>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": "If timer runs down, you'll lose all progress and will have to restart from the previous checkpoint."
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Kill all low level enemies, before the countdown timer reaches 0.",
+        "images": ["<image of the countdown timer>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": "If timer runs down, you'll lose all progress and will have to restart from the previous checkpoint."
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Kill all low level enemies, before the countdown timer reaches 0.",
+        "images": ["<image of the countdown timer>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": "If timer runs down, you'll lose all progress and will have to restart from the previous checkpoint."
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Kill all low level enemies and pickup all collectibles, before the countdown timer reaches 0.",
+        "images": ["<image of the countdown timer>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": "If timer runs down, you'll lose all progress and will have to restart from the previous checkpoint."
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
+        "images": []
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Colllect all collectibles?",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
+        "images": []
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Colllect all collectibles?",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
+        "images": []
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Colllect all collectibles?",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
+        "images": []
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Colllect all collectibles?",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
+        "images": []
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Colllect all collectibles?",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
+        "images": []
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Colllect all collectibles?",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Navigate to the portal.",
+        "images": ["<image_of_a_torch_light"]
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
+            "images": ["<image of the torch light>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Navigate to the portal.",
+        "images": ["<image_of_a_torch_light"]
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
+            "images": ["<image of the torch light>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Navigate to the portal.",
+        "images": ["<image_of_a_torch_light"]
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
+            "images": ["<image of the torch light>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Navigate to the portal.",
+        "images": ["<image_of_a_torch_light"]
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
+            "images": ["<image of the torch light>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Navigate to the portal.",
+        "images": ["<image_of_a_torch_light"]
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
+            "images": ["<image of the torch light>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Navigate to the portal.",
+        "images": ["<image_of_a_torch_light"]
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
+            "images": ["<image of the torch light>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Navigate to the portal.",
+        "images": ["<image_of_a_torch_light"]
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
+            "images": ["<image of the torch light>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Navigate to the portal.",
+        "images": ["<image_of_a_torch_light"]
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
+            "images": ["<image of the torch light>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Navigate to the portal.",
+        "images": ["<image_of_a_torch_light"]
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
+            "images": ["<image of the torch light>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Navigate to the portal.",
+        "images": ["<image_of_a_torch_light"]
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
+            "images": ["<image of the torch light>"]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 9RC",
+        "images": ["<image of expansion>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 10RC",
+        "images": ["<image of expansion>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 11RC",
+        "images": ["<image of expansion>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 12RC",
+        "images": ["<image of expansion>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 13RC",
+        "images": ["<image of expansion>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 14RC",
+        "images": ["<image of expansion>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "World expansion by 15RC",
+        "images": ["<image of expansion>"]
+      },
+      "instruction": {
+        "common": [
+          {
+            "text": "The row and column for the world will increase by unit.",
+            "images": []
+          },
+          {
+            "text": "Collect all collectibles",
+            "images": []
+          },
+          {
+            "text": "Kill all enemies",
+            "images": []
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Survive",
+        "images": []
+      },
+      "instruction": {
+        "commmon": [
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "mobile": [
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "laptop": [
+          {
+            "text": "",
+            "images": []
+          },
+          {
+            "text": "",
+            "images": []
+          }
+        ]
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Survive",
+        "images": []
+      },
+      "instruction": {
+        "mobile": [
+          {
+            "text": "",
+            "images": []
+          },
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "laptop": [
+          {
+            "text": "",
+            "images": []
+          },
+          {
+            "text": "",
+            "images": []
+          }
+        ]
+      },
+      "specialRule": {
+        "text": ""
+      }
+    }
+  ]
+}

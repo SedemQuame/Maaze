@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text gameLevel;
     private bool isGamePaused;
     public bool isGameOver;
+    public GameObject objectManager;
+    private bool isObjectManagerDisplayed;
 
     /// <summary>
     /// Ensures that the game is not paused. Hides the gameOver canvas to false.
@@ -40,11 +42,18 @@ public class GameManager : MonoBehaviour
         isGamePaused = false;
         gameLevel.text = "Level: " + LevelDifficulty.levelDifficulty;
         gameOver.SetActive(false);
+        isObjectManagerDisplayed = false;
     }
 
     void FixedUpdate(){
         if(LevelDifficulty.levelDifficulty > 1){
             prevLevel.GetComponent<Button>().interactable = true;
+        }
+
+        if (!isObjectManagerDisplayed)
+        {
+            StartCoroutine(displayObjectiveManager());  
+            isObjectManagerDisplayed = true;
         }
     }
 
@@ -96,5 +105,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator displayObjectiveManager(){
+        yield return new WaitForSeconds(6);
+        
+        objectManager.SetActive(true);
 
+        // display the objective manager after X amount of time.
+        objectManager.GetComponent<ObjectiveManager>().populateObjectiveMenu();
+    }
 }

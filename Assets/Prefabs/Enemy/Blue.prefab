@@ -133,8 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  damagePoints: 2
-  damageResistance: 0.3
+  damagePoints: 4.5
+  damageResistance: 0.5
   healthBarControl: {fileID: 3021391377469708247}
   health: 100
   destroyEffect: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561,

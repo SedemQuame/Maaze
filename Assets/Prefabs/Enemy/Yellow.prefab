@@ -468,9 +468,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844da4b0181216e5598d1830cc57888b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  damagePoints: 2
-  damageResistance: 0.4
+  speed: 3
+  damagePoints: 3.5
+  damageResistance: 0.3
   healthBarControl: {fileID: 8621662825837079802}
   health: 100
   destroyEffect: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561,
