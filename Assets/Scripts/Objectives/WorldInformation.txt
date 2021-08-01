@@ -2,21 +2,21 @@
   "levels": [
     {
       "worldInfo": {
-        "text": "Learn movement and rotation",
-        "images": ["<image, of cube in motion>"]
+        "text": "Movement and rotation tutorial.",
+        "images": ["<image, of the player cube>"]
       },
       "instructions": {
         "common": [],
         "mobile": [
           {
-            "text": "Use the joystick to move in the direction you want.",
-            "images": ["<image of the joystick>"]
+            "text": "1)Move using the joystick in the direction.\n2)Rotate using RL & RR buttons.\n3)Find portal location.\n4)Stand in the center of the portal to escape.",
+            "images": ["<image of the joystick>", "<image of the RL & RR buttons>", "<image of the portal>"]
           }
         ],
         "laptop": [
           {
-            "text": "Use the keyboard to move in the direction you want.",
-            "images": ["<image of the keyboard>"]
+            "text": "1)Move using [WASD] on the keyboard.\n2)Rotate using [IJKL] on the keyboard.\n3)Find portal location, and escape.",
+            "images": ["<image of WASD keys>", , "<image of the IJKL keys>", "<image of the portal>"]
           }
         ]
       },
@@ -27,12 +27,12 @@
     {
       "worldInfo": {
         "text": "Low level collectibles.",
-        "images": []
+        "images": ["<image of the coin collectible>"]
       },
       "instructions": {
         "common": [
           {
-            "text": "Collect all the collectibles to get points.",
+            "text": "Collect all low collectibles in this level.",
             "images": [
               "<image of the coins, with point number>",
               "<image of the cones, with point number>",
@@ -50,19 +50,19 @@
     {
       "worldInfo": {
         "text": "Learn shooting",
-        "images": ["<image of a gun>"]
+        "images": ["<image of the shooting nozzel>"]
       },
       "instructions": {
         "common": [],
         "mobile": [
           {
-            "text": "Shoot 5 times, by tapping the fire button.",
-            "images": ["<image of the fire button>"]
+            "text": "1)Tap fire button, to shoot.\n2)Find portal location, and escape.",
+            "images": ["<image of the fire button>", "<image of the portal>"]
           }
         ],
         "laptop": [
           {
-            "text": "Shoot 5 times, by left clicking.",
+            "text": "1)Left click, to shoot.\n2)Escape.",
             "images": ["<image of the mouse being, with left button clicked>"]
           }
         ]
@@ -73,14 +73,14 @@
     },
     {
       "worldInfo": {
-        "text": "Chicken dinner, with the enemy",
-        "images": ["<image_of_chicken>"]
+        "text": "Meet the  with low level enemy",
+        "images": ["<image_of_green_enemy>"]
       },
       "instruction": {
         "common": [
           {
-            "text": "Kill all the enemies.",
-            "images": ["<image of a grave stone>"]
+            "text": "1)Kill the low level enemies.\n2)Escape.",
+            "images": ["<image_of_green_enemy>", "<image_of_yellow_enemy>", "<image_of_blue_enemy>"]
           }
         ],
         "mobile": [],
@@ -98,8 +98,8 @@
       "instruction": {
         "common": [
           {
-            "text": "Stand on the healing pad, to heal damages.\n PS: You still have to defend against enemies while healing",
-            "images": ["<image of a healing pad from the top>"]
+            "text": "1)Kill the low level enemies.\n2)Stand on the healing pad.\nPS:You still have to defend against enemies while healing\n3)Escape.",
+            "images": ["<image_of_green_enemy>", "<image_of_yellow_enemy>", "<image_of_blue_enemy>", "<image of a healing pad from the top>"]
           }
         ],
         "mobile": [],
@@ -117,7 +117,7 @@
       "instruction": {
         "common": [
           {
-            "text": "Kill the kingpin",
+            "text": "1)Kill the kingpin.\n2)Escape",
             "images": ["<image of a red enemy>"]
           }
         ],
@@ -136,8 +136,8 @@
       "instruction": {
         "common": [
           {
-            "text": "Kill all enemies and collect all collectibles to proceed to the next level",
-            "images": []
+            "text": "1)Kill all enemies.\n2)Escape",
+            "images": ["<image_of_a_tomb_stone>"]
           }
         ],
         "mobile": [],
@@ -149,21 +149,13 @@
     },
     {
       "worldInfo": {
-        "text": "World expansion by 1RC",
+        "text": "Congratulations, on completing the tutorial!\nThe world is has expanded by 1RC.\nMaaze now has a nXn layout.",
         "images": ["<image of expansion>"]
       },
       "instruction": {
         "common": [
           {
-            "text": "The row and column for the world will increase by unit.",
-            "images": []
-          },
-          {
-            "text": "Collect all collectibles",
-            "images": []
-          },
-          {
-            "text": "Kill all enemies",
+            "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the item <item_name>.\n4)Escape.",
             "images": []
           }
         ],
@@ -176,21 +168,13 @@
     },
     {
       "worldInfo": {
-        "text": "World expansion by 2RC",
+        "text": "The world has expanded by 2RC.\nMaaze now has a (n+1)x(n+1) layout.",
         "images": []
       },
       "instruction": {
         "common": [
           {
-            "text": "The row and column for the world will increase by unit.",
-            "images": []
-          },
-          {
-            "text": "Collect all collectibles",
-            "images": []
-          },
-          {
-            "text": "Kill all enemies",
+            "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the item <item_name>.\n4)Escape.",
             "images": []
           }
         ],
@@ -203,21 +187,13 @@
     },
     {
       "worldInfo": {
-        "text": "World expansion by 3RC",
+        "text": "The world has expanded by 3RC.\nMaaze now has a (n+2)x(n+2) layout.",
         "images": []
       },
       "instruction": {
         "common": [
           {
-            "text": "The row and column for the world will increase by unit.",
-            "images": []
-          },
-          {
-            "text": "Collect all collectibles",
-            "images": []
-          },
-          {
-            "text": "Kill all enemies",
+            "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the item <item_name>.\n4)Escape.",
             "images": []
           }
         ],
@@ -230,21 +206,13 @@
     },
     {
       "worldInfo": {
-        "text": "World expansion by 4RC",
+        "text": "The world has expanded by 4RC.\nMaaze now has a (n+3)x(n+3) layout.",
         "images": []
       },
       "instruction": {
         "common": [
           {
-            "text": "The row and column for the world will increase by unit.",
-            "images": []
-          },
-          {
-            "text": "Collect all collectibles",
-            "images": []
-          },
-          {
-            "text": "Kill all enemies",
+            "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the list of items [<item_name>, <item_name>].\n4)Escape.",
             "images": []
           }
         ],
@@ -257,21 +225,13 @@
     },
     {
       "worldInfo": {
-        "text": "World expansion by 5RC",
+        "text": "The world has expanded by 5RC.\nMaaze now has a (n+4)x(n+4) layout.",
         "images": []
       },
       "instruction": {
         "common": [
           {
-            "text": "The row and column for the world will increase by unit.",
-            "images": []
-          },
-          {
-            "text": "Collect all collectibles",
-            "images": []
-          },
-          {
-            "text": "Kill all enemies",
+            "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the list of items [<item_name>, <item_name>].\n4)Escape.",
             "images": []
           }
         ],
@@ -284,21 +244,13 @@
     },
     {
       "worldInfo": {
-        "text": "World expansion by 6RC",
+        "text": "The world has expanded by 6RC.\nMaaze now has a (n+5)x(n+5) layout.",
         "images": []
       },
       "instruction": {
         "common": [
           {
-            "text": "The row and column for the world will increase by unit.",
-            "images": []
-          },
-          {
-            "text": "Collect all collectibles",
-            "images": []
-          },
-          {
-            "text": "Kill all enemies",
+            "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the list of items [<item_name>, <item_name>].\n4)Escape.",
             "images": []
           }
         ],
@@ -311,21 +263,13 @@
     },
     {
       "worldInfo": {
-        "text": "World expansion by 7RC",
+        "text": "The world has expanded by 7RC.\nMaaze now has a (n+6)x(n+6) layout.",
         "images": []
       },
       "instruction": {
         "common": [
           {
-            "text": "The row and column for the world will increase by unit.",
-            "images": []
-          },
-          {
-            "text": "Collect all collectibles",
-            "images": []
-          },
-          {
-            "text": "Kill all enemies",
+            "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the list of items [<item_name>, <item_name>].\n4)Escape.",
             "images": []
           }
         ],
@@ -338,21 +282,13 @@
     },
     {
       "worldInfo": {
-        "text": "World expansion by 8RC",
+        "text": "The world has expanded by 8RC.\nMaaze now has a (n+7)x(n+7) layout.",
         "images": []
       },
       "instruction": {
         "common": [
           {
-            "text": "The row and column for the world will increase by unit.",
-            "images": []
-          },
-          {
-            "text": "Collect all collectibles",
-            "images": []
-          },
-          {
-            "text": "Kill all enemies",
+            "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the list of items [<item_name>, <item_name>].\n4)Escape.",
             "images": []
           }
         ],

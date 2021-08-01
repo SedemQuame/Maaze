@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator displayObjectiveManager(){
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(1.5f);
         
         objectManager.SetActive(true);
 
