@@ -108,9 +108,9 @@ public class GameManager : MonoBehaviour
     IEnumerator displayObjectiveManager(){
         yield return new WaitForSeconds(1.5f);
         
-        objectManager.SetActive(true);
+        // objectManager.SetActive(true);
 
-        // display the objective manager after X amount of time.
-        objectManager.GetComponent<ObjectiveManager>().populateObjectiveMenu();
+        // // display the objective manager after X amount of time.
+        // objectManager.GetComponent<ObjectiveManager>().populateObjectiveMenu();
     }
 }

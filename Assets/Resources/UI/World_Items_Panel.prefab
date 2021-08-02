@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3259599359680581100}
   - component: {fileID: 8062243104774968617}
   m_Layer: 5
-  m_Name: World Items Panel
+  m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,7 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2912372191509985336}
   m_Layer: 5
-  m_Name: World Items
+  m_Name: World_Items_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

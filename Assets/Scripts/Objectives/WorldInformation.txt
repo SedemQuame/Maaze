@@ -10,13 +10,21 @@
         "mobile": [
           {
             "text": "1)Move using the joystick in the direction.\n2)Rotate using RL & RR buttons.\n3)Find portal location.\n4)Stand in the center of the portal to escape.",
-            "images": ["<image of the joystick>", "<image of the RL & RR buttons>", "<image of the portal>"]
+            "images": [
+              "Images/joystick.PNG",
+              "Images/mobile_rotate.PNG",
+              "Images/portal.PNG"
+            ]
           }
         ],
         "laptop": [
           {
             "text": "1)Move using [WASD] on the keyboard.\n2)Rotate using [IJKL] on the keyboard.\n3)Find portal location, and escape.",
-            "images": ["<image of WASD keys>", , "<image of the IJKL keys>", "<image of the portal>"]
+            "images": [
+              "Images/joystick.PNG",
+              "Images/joystick.PNG",
+              "<Images/portal.PNG>"
+            ]
           }
         ]
       },
@@ -57,7 +65,7 @@
         "mobile": [
           {
             "text": "1)Tap fire button, to shoot.\n2)Find portal location, and escape.",
-            "images": ["<image of the fire button>", "<image of the portal>"]
+            "images": ["<image of the fire button>", "<Images/portal.PNG>"]
           }
         ],
         "laptop": [
@@ -80,7 +88,11 @@
         "common": [
           {
             "text": "1)Kill the low level enemies.\n2)Escape.",
-            "images": ["<image_of_green_enemy>", "<image_of_yellow_enemy>", "<image_of_blue_enemy>"]
+            "images": [
+              "<image_of_green_enemy>",
+              "<image_of_yellow_enemy>",
+              "<image_of_blue_enemy>"
+            ]
           }
         ],
         "mobile": [],
@@ -99,7 +111,12 @@
         "common": [
           {
             "text": "1)Kill the low level enemies.\n2)Stand on the healing pad.\nPS:You still have to defend against enemies while healing\n3)Escape.",
-            "images": ["<image_of_green_enemy>", "<image_of_yellow_enemy>", "<image_of_blue_enemy>", "<image of a healing pad from the top>"]
+            "images": [
+              "<image_of_green_enemy>",
+              "<image_of_yellow_enemy>",
+              "<image_of_blue_enemy>",
+              "<image of a healing pad from the top>"
+            ]
           }
         ],
         "mobile": [],

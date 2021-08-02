@@ -20,11 +20,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject portal;
     public Vector3 goalOffset;
     private GameObject spawnManagerFloor;
-    private GameManager gameManager;
-
-    private Renderer rend;
     private string firstCreatedCell;
-    private float spawnRate = 20.0f;
+    private float spawnRate;
     private MazeLoader loader;
     private int numberOfRewards;
     private bool spawnedPortal;
@@ -39,17 +36,29 @@ public class SpawnManager : MonoBehaviour
     IEnumerator spawnStart(){
         firstCreatedCell = "Floor " + 0 + "," + 0;
         goalOffset = new Vector3(0, -0.4f, 0);
-        spawnRate /= LevelDifficulty.levelDifficulty;
+        
+        float initialSpawnRate = 30.0f;
+        //calculate spawnRate using the Exponential Delay Function.
+        if(LevelDifficulty.levelDifficulty < 12){
+            spawnRate = initialSpawnRate*(Mathf.Pow((1 - 0.08f), LevelDifficulty.levelDifficulty));
+        }else{
+            spawnRate = 10.0f;
+        }
 
         GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
         loader = mazeLoader.GetComponent<MazeLoader>();
-        gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
+
         spawnRewardsByLevelDifficulty();
         updateRewardCountText();
 
-        yield return new WaitForSeconds(4); //wait 15 seconds before spawning enemies
+        //wait X amount of seconds before spawning enemies
+        yield return new WaitForSeconds(4);
+
         if(LevelDifficulty.levelDifficulty > 3){
-            spawnEnemiesByLevelDifficulty(); //todo: refactor this to delay code using coroutines.
+             //todo: refactor this to delay code using coroutines.
+            spawnEnemiesByLevelDifficulty();
+
+            // only spawn health dock, if level difficulty is greater at level 6.
             if(LevelDifficulty.levelDifficulty > 5){
                 randomlySpawn(healthDock, -0.9f);
             }
@@ -117,10 +126,10 @@ public class SpawnManager : MonoBehaviour
     /// </summary>
     void spawnEnemiesByLevelDifficulty()
     {
-        // todo, find a smarter way of spawning enemies such that the enemies are not all spawned at once?
-        // tood, update the spawn manager to spawn a number of enemies at a given rate, every X amount of time.
-        if (LevelDifficulty.levelDifficulty == 1) return;
-        StartCoroutine("SpawnEnemy");
+        // if player has not reached a certain level, don't spawn any enemy.
+        if (LevelDifficulty.levelDifficulty <= 4) return;
+        
+        StartCoroutine(SpawnEnemy());
     }
 
     /// <summary>
@@ -128,6 +137,7 @@ public class SpawnManager : MonoBehaviour
     /// </summary>
     IEnumerator SpawnEnemy()
     {
+        // todo: spawn a given numner of enemies.   
         for (int i = 0; i < LevelDifficulty.levelDifficulty + 2; i++)
         {
             int enemyType = Random.Range(0, enemyArr.Length);
@@ -135,10 +145,14 @@ public class SpawnManager : MonoBehaviour
             string spawnManagerCell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
             spawnManagerFloor = GameObject.Find(spawnManagerCell);
 
-            rend = spawnManagerFloor.GetComponent<Renderer>();
+            // get the renderer for the floor to spawn the enemy on.
+            Renderer rend = spawnManagerFloor.GetComponent<Renderer>();
             rend.enabled = true;
 
-            StartCoroutine(ToggleColor(spawnManagerCell, enemyType));
+            // toggle color for floor.
+            StartCoroutine(ToggleColor(spawnManagerCell, enemyType, rend));
+
+            // delay when next enemy is spawned.
             yield return new WaitForSeconds(spawnRate);
         }
     }
@@ -146,11 +160,10 @@ public class SpawnManager : MonoBehaviour
     /// <summary>
     /// A coroutine that changes the color of a cell's ground between two materials to indicated spawning of an Enemy gameObject.
     /// </summary>
-    IEnumerator ToggleColor(string spawnManagerCell, int enemyType)
+    IEnumerator ToggleColor(string spawnManagerCell, int enemyType, Renderer rend)
     {
-        // todo: reduce blink rate to milliseconds to make blinking faster and more realistic.
         // todo: play bliking buzzer audio.
-        int blinkNumber = 10, i = 0;
+        int blinkNumber = 9, i = 0;
         while (blinkNumber >= i)
         {
             yield return new WaitForSeconds(1);
@@ -160,10 +173,12 @@ public class SpawnManager : MonoBehaviour
             }
             else
             {
+                // change back to ground material
                 rend.sharedMaterial = materials[0];
             }
             i++;
         }
+        rend.sharedMaterial = materials[0];
 
         // todo: create a smoke prefab
         // todo: add audio for enemy instantiation.
@@ -177,5 +192,4 @@ public class SpawnManager : MonoBehaviour
     {
         Instantiate(enemy, position, rotation);
     }
-
 }

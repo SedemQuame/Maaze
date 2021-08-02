@@ -1121,7 +1121,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346931515}
-  m_LocalRotation: {x: 0.58954155, y: 0.000000025867564, z: -0.000000018879886, w: 0.8077381}
+  m_LocalRotation: {x: 0.5895415, y: -0.000000009468177, z: 0.000000006910513, w: 0.8077382}
   m_LocalPosition: {x: 303.19507, y: -220, z: 447.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1158,7 +1158,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.0225564, y: 1}
+    m_SensorSize: {x: 0.4864865, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1892,7 +1892,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &656731647
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1992,6 +1992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectiveManagerBody: {fileID: 406314700}
   jsonReader: {fileID: 1697620477}
+  rawImage: {fileID: 0}
 --- !u!1 &683499988
 GameObject:
   m_ObjectHideFlags: 0
@@ -4467,7 +4468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1160578172
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9060,7 +9061,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973230732}
-  m_LocalRotation: {x: 0.58954155, y: 0.000000025867564, z: -0.000000018879886, w: 0.8077381}
+  m_LocalRotation: {x: 0.5895415, y: -0.000000009468177, z: 0.000000006910513, w: 0.8077382}
   m_LocalPosition: {x: 1, y: 30.542587, z: -9.777374}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

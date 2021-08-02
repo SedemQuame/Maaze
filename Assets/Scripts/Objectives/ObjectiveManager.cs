@@ -11,6 +11,7 @@ public class ObjectiveManager : MonoBehaviour
     // public TMP_Text instructionText;
     public GameObject objectiveManagerBody;
     public GameObject jsonReader;
+    public RawImage rawImage;
     private JSONReader reader;
     private LevelList levelList;
     private Levels level;
@@ -19,14 +20,22 @@ public class ObjectiveManager : MonoBehaviour
     private SpecialRule specialRule;
     private GameObject infoBoxPrefabSmall;
     private GameObject infoBoxPrefabMedium;
+    private GameObject worldItemsPanel;
+    private GameObject itemBox;
 
     public void populateObjectiveMenu(){
+        // Loading resource prefabs
         infoBoxPrefabSmall = Resources.Load("UI/InfoBox_Small") as GameObject;
         infoBoxPrefabMedium = Resources.Load("UI/InfoBox_Medium") as GameObject;
+        worldItemsPanel = Resources.Load("UI/World_Items_Panel") as GameObject;
+        itemBox = Resources.Load("UI/ItemBox") as GameObject;        
 
+        // loading json data.
         reader = jsonReader.GetComponent<JSONReader>();
         levelList = reader.levelList;
-        level = levelList.levels[(LevelDifficulty.levelDifficulty - 1)];
+        Debug.Log(levelList.levels);
+        level = levelList.levels[(LevelDifficulty.levelDifficulty-1)];
+
 
         // ====================================================
         // World Info Box
@@ -53,8 +62,39 @@ public class ObjectiveManager : MonoBehaviour
             #endif
         }
 
+        // instructions
         instructionInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Instructions";
         instructionInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = instructionOutput; 
+
+        // world items
+        GameObject worldPanel = Instantiate(worldItemsPanel);
+        worldPanel.transform.SetParent(objectiveManagerBody.transform, false);
+
+        string [] imageArr = null;
+        #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEBGL
+            if (level.instructions.common.Length > 0)
+            {
+                imageArr = level.instructions.common[0].images;
+            }else{
+                imageArr = level.instructions.laptop[0].images;
+            }
+         #elif UNITY_IOS || UNITY_ANDROID
+            imageArr = level.instructions.mobile[0].images;
+        #endif
+
+        
+
+        foreach (string image in imageArr)
+        {
+            GameObject itemBoxGameObject = Instantiate(itemBox);
+            // append item 
+            itemBoxGameObject.transform.SetParent(worldPanel.transform.GetChild(1).transform, false);
+
+            // set image and text
+            Sprite sprite = Resources.Load<Sprite>(image);
+            itemBoxGameObject.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
+            Debug.Log(itemBoxGameObject.transform.GetChild(0).name);
+        }
 
         // Special Rule Info Box
         if(level.specialRule.text != ""){
