@@ -11,9 +11,9 @@
           {
             "text": "1)Move using the joystick in the direction.\n2)Rotate using RL & RR buttons.\n3)Find portal location.\n4)Stand in the center of the portal to escape.",
             "images": [
-              "Images/joystick.PNG",
-              "Images/mobile_rotate.PNG",
-              "Images/portal.PNG"
+              "Assets/Resources/Images/joystick.PNG",
+              "Assets/Resources/Images/mobile_rotate.PNG",
+              "Assets/Resources/Images/portal.PNG"
             ]
           }
         ],
@@ -21,9 +21,9 @@
           {
             "text": "1)Move using [WASD] on the keyboard.\n2)Rotate using [IJKL] on the keyboard.\n3)Find portal location, and escape.",
             "images": [
-              "Images/joystick.PNG",
-              "Images/joystick.PNG",
-              "<Images/portal.PNG>"
+              "Assets/Resources/Images/joystick.PNG",
+              "Assets/Resources/Images/mobile_rotate.PNG",
+              "Assets/Resources/Images/portal.PNG"
             ]
           }
         ]
@@ -110,7 +110,7 @@
       "instruction": {
         "common": [
           {
-            "text": "1)Kill the low level enemies.\n2)Stand on the healing pad.\nPS:You still have to defend against enemies while healing\n3)Escape.",
+            "text": "1)Kill the low level enemies.\n2)Stand on the healing pad.\n3)Escape.\nPS:You still have to defend against enemies while healing",
             "images": [
               "<image_of_green_enemy>",
               "<image_of_yellow_enemy>",

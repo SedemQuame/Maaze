@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -33,9 +34,7 @@ public class ObjectiveManager : MonoBehaviour
         // loading json data.
         reader = jsonReader.GetComponent<JSONReader>();
         levelList = reader.levelList;
-        Debug.Log(levelList.levels);
         level = levelList.levels[(LevelDifficulty.levelDifficulty-1)];
-
 
         // ====================================================
         // World Info Box
@@ -48,52 +47,52 @@ public class ObjectiveManager : MonoBehaviour
         // Instruction Info Box
         GameObject instructionInfoBox = Instantiate(infoBoxPrefabMedium);
         instructionInfoBox.transform.SetParent(objectiveManagerBody.transform, false);
+
+        // World items Info Box
+        GameObject worldPanel = Instantiate(worldItemsPanel);
+        worldPanel.transform.SetParent(objectiveManagerBody.transform, false);
         
         string instructionOutput = "";
-        if(level.instructions.common.Length > 0){
+        var imageArr = new List<string>{};
+        if((level.instructions.common != null) && (level.instructions.common.Length > 0)){
             instructionOutput = level.instructions.common[0].text;
+            imageArr = (level.instructions.common[0].images).ToList();
         }else{
                 // Check if we are running on a pc, web or unity editor
              #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEBGL
-                instructionOutput = level.instructions.laptop[0].text;
+                if((level.instructions.laptop != null) && (level.instructions.laptop.Length > 0)){
+                    instructionOutput = level.instructions.laptop[0].text;
+                    imageArr = (level.instructions.laptop[0].images).ToList();
+                }
                 // Check if we are running on a mobile device 
             #elif UNITY_IOS || UNITY_ANDROID
-                instructionOutput = level.instructions.mobile[0].text;
+                if((level.instructions.mobile != null) && (level.instructions.mobile.Length > 0)){             
+                    instructionOutput = level.instructions.mobile[0].text;
+                    imageArr = (level.instructions.mobile[0].images).ToList();
+                }
             #endif
         }
 
         // instructions
         instructionInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Instructions";
-        instructionInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = instructionOutput; 
+        instructionInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = instructionOutput;       
 
-        // world items
-        GameObject worldPanel = Instantiate(worldItemsPanel);
-        worldPanel.transform.SetParent(objectiveManagerBody.transform, false);
-
-        string [] imageArr = null;
-        #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEBGL
-            if (level.instructions.common.Length > 0)
-            {
-                imageArr = level.instructions.common[0].images;
-            }else{
-                imageArr = level.instructions.laptop[0].images;
-            }
-         #elif UNITY_IOS || UNITY_ANDROID
-            imageArr = level.instructions.mobile[0].images;
-        #endif
-
-        
-
+        if(imageArr.Count() > 0)
         foreach (string image in imageArr)
         {
             GameObject itemBoxGameObject = Instantiate(itemBox);
+
             // append item 
             itemBoxGameObject.transform.SetParent(worldPanel.transform.GetChild(1).transform, false);
 
-            // set image and text
-            Sprite sprite = Resources.Load<Sprite>(image);
-            itemBoxGameObject.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
-            Debug.Log(itemBoxGameObject.transform.GetChild(0).name);
+            // set item image
+            RawImage itemImage = itemBoxGameObject.transform.GetChild(0).GetComponent<RawImage>();
+            itemImage.texture = createTextureUsingFileName(image);
+
+            // set item name
+            Text itemPanel = itemBoxGameObject.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+            string itemName = (((image.ToString()).Split('/')[3].Split('.')[0]).Replace("_", " "));
+            itemPanel.text = itemName;
         }
 
         // Special Rule Info Box
@@ -104,5 +103,12 @@ public class ObjectiveManager : MonoBehaviour
             specialRuleInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text =  level.specialRule.text; 
         }
         
+    }
+
+    private Texture2D createTextureUsingFileName(string image){
+        var rawData = System.IO.File.ReadAllBytes(image);
+        Texture2D imageTexture = new Texture2D(2, 2);
+        imageTexture.LoadImage(rawData);
+        return imageTexture;
     }
 }
