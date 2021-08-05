@@ -9,7 +9,7 @@
         "common": [],
         "mobile": [
           {
-            "text": "1)Move using the joystick in the direction.\n2)Rotate using RL & RR buttons.\n3)Find portal location.\n4)Stand in the center of the portal to escape.",
+            "text": "1)Move using the joystick in the direction.\n\n2)Rotate using RL & RR buttons.\n\n3)Find portal location.\n\n4)Stand in the center of the portal to escape.",
             "images": [
               "Assets/Resources/Images/joystick.PNG",
               "Assets/Resources/Images/mobile_rotate.PNG",
@@ -19,7 +19,7 @@
         ],
         "laptop": [
           {
-            "text": "1)Move using [WASD] on the keyboard.\n2)Rotate using [IJKL] on the keyboard.\n3)Find portal location, and escape.",
+            "text": "1)Move using [WASD] on the keyboard.\n\n2)Rotate using [IJKL] on the keyboard.\n\n3)Find portal location, and escape.",
             "images": [
               "Assets/Resources/Images/joystick.PNG",
               "Assets/Resources/Images/mobile_rotate.PNG",

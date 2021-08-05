@@ -8,8 +8,6 @@ using TMPro;
 [RequireComponent(typeof(TMP_Text))]
 public class ObjectiveManager : MonoBehaviour
 {
-    // public TMP_Text worldInfoText;
-    // public TMP_Text instructionText;
     public GameObject objectiveManagerBody;
     public GameObject jsonReader;
     public RawImage rawImage;
@@ -40,6 +38,7 @@ public class ObjectiveManager : MonoBehaviour
         // World Info Box
         GameObject worldInfoBox = Instantiate(infoBoxPrefabSmall);
         worldInfoBox.transform.SetParent(objectiveManagerBody.transform, false);
+
         // set the text and image.
         worldInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "World Information";
         worldInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = level.worldInfo.text; 

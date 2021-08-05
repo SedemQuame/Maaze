@@ -28,9 +28,10 @@ public class GameManager : MonoBehaviour
     public TMP_Text gameMessage;
     [Tooltip("Displays the current game level.")]
     public TMP_Text gameLevel;
-    private bool isGamePaused;
     public bool isGameOver;
     public GameObject objectManager;
+    public GameObject worldInformationBox;
+    private bool isGamePaused;
     private bool isObjectManagerDisplayed;
 
     /// <summary>
@@ -108,9 +109,18 @@ public class GameManager : MonoBehaviour
     IEnumerator displayObjectiveManager(){
         yield return new WaitForSeconds(1.5f);
         
+        // show world info box and hide after 15seconds.
+        worldInformationBox.SetActive(true);
+        StartCoroutine(hideWorldInfoBox());
+
         objectManager.SetActive(true);
 
         // display the objective manager after X amount of time.
         objectManager.GetComponent<ObjectiveManager>().populateObjectiveMenu();
+    }
+
+    IEnumerator hideWorldInfoBox(){
+        yield return new WaitForSeconds(10.0f);
+        worldInformationBox.SetActive(false);
     }
 }
