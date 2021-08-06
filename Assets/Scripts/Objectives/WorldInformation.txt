@@ -3,7 +3,7 @@
     {
       "worldInfo": {
         "text": "Movement and rotation tutorial.",
-        "images": ["<image, of the player cube>"]
+        "images": ["Assets/Resources/Images/player.PNG"]
       },
       "instructions": {
         "common": [],
@@ -35,16 +35,16 @@
     {
       "worldInfo": {
         "text": "Low level collectibles.",
-        "images": ["<image of the coin collectible>"]
+        "images": ["Assets/Resources/Images/coin.PNG"]
       },
       "instructions": {
         "common": [
           {
             "text": "Collect all low collectibles in this level.",
             "images": [
-              "<image of the coins, with point number>",
-              "<image of the cones, with point number>",
-              "<image of the volleyball, with point number>"
+              "Assets/Resources/Images/coin.PNG",
+              "Assets/Resources/Images/cone.PNG",
+              "Assets/Resources/Images/ball.PNG"
             ]
           }
         ],
@@ -65,13 +65,13 @@
         "mobile": [
           {
             "text": "1)Tap fire button, to shoot.\n2)Find portal location, and escape.",
-            "images": ["<image of the fire button>", "<Images/portal.PNG>"]
+            "images": ["Assets/Resources/Images/fire.PNG", "Assets/Resources/Images/portal.PNG"]
           }
         ],
         "laptop": [
           {
             "text": "1)Left click, to shoot.\n2)Escape.",
-            "images": ["<image of the mouse being, with left button clicked>"]
+            "images": ["Assets/Resources/Images/left_click.PNG"]
           }
         ]
       },
@@ -82,16 +82,16 @@
     {
       "worldInfo": {
         "text": "Meet the  with low level enemy",
-        "images": ["<image_of_green_enemy>"]
+        "images": ["Assets/Resources/Images/green.PNG"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill the low level enemies.\n2)Escape.",
             "images": [
-              "<image_of_green_enemy>",
-              "<image_of_yellow_enemy>",
-              "<image_of_blue_enemy>"
+              "Assets/Resources/Images/green.PNG",
+              "Assets/Resources/Images/yellow.PNG",
+              "Assets/Resources/Images/blue.PNG"
             ]
           }
         ],
@@ -105,17 +105,17 @@
     {
       "worldInfo": {
         "text": "Healing Pad",
-        "images": ["<image of a healing pad from the top>"]
+        "images": ["Assets/Resources/Images/healing_pad.PNG"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill the low level enemies.\n2)Stand on the healing pad.\n3)Escape.\nPS:You still have to defend against enemies while healing",
             "images": [
-              "<image_of_green_enemy>",
-              "<image_of_yellow_enemy>",
-              "<image_of_blue_enemy>",
-              "<image of a healing pad from the top>"
+              "Assets/Resources/Images/green.PNG",
+              "Assets/Resources/Images/yellow.PNG",
+              "Assets/Resources/Images/blue.PNG",
+              "Assets/Resources/Images/healing_pad.PNG"
             ]
           }
         ],
@@ -129,13 +129,13 @@
     {
       "worldInfo": {
         "text": "Dinner with the, KingPin",
-        "images": ["<image of red enemy>"]
+        "images": ["Assets/Resources/Images/red.PNG"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill the kingpin.\n2)Escape",
-            "images": ["<image of a red enemy>"]
+            "images": ["Assets/Resources/Images/red.PNG"]
           }
         ],
         "mobile": [],
@@ -148,13 +148,13 @@
     {
       "worldInfo": {
         "text": "Rumble rumble",
-        "images": ["<image of a cup>"]
+        "images": ["Assets/Resources/Images/trophy.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill all enemies.\n2)Escape",
-            "images": ["<image_of_a_tomb_stone>"]
+            "images": ["Assets/Resources/Images/tombstone.png"]
           }
         ],
         "mobile": [],
@@ -167,13 +167,13 @@
     {
       "worldInfo": {
         "text": "Congratulations, on completing the tutorial!\nThe world is has expanded by 1RC.\nMaaze now has a nXn layout.",
-        "images": ["<image of expansion>"]
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the item <item_name>.\n4)Escape.",
-            "images": []
+            "images": ["Assets/Resources/Images/expansion.png"]
           }
         ],
         "mobile": [],
@@ -186,9 +186,9 @@
     {
       "worldInfo": {
         "text": "The world has expanded by 2RC.\nMaaze now has a (n+1)x(n+1) layout.",
-        "images": []
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the item <item_name>.\n4)Escape.",
@@ -205,9 +205,9 @@
     {
       "worldInfo": {
         "text": "The world has expanded by 3RC.\nMaaze now has a (n+2)x(n+2) layout.",
-        "images": []
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the item <item_name>.\n4)Escape.",
@@ -224,9 +224,9 @@
     {
       "worldInfo": {
         "text": "The world has expanded by 4RC.\nMaaze now has a (n+3)x(n+3) layout.",
-        "images": []
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the list of items [<item_name>, <item_name>].\n4)Escape.",
@@ -243,9 +243,9 @@
     {
       "worldInfo": {
         "text": "The world has expanded by 5RC.\nMaaze now has a (n+4)x(n+4) layout.",
-        "images": []
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the list of items [<item_name>, <item_name>].\n4)Escape.",
@@ -262,9 +262,9 @@
     {
       "worldInfo": {
         "text": "The world has expanded by 6RC.\nMaaze now has a (n+5)x(n+5) layout.",
-        "images": []
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the list of items [<item_name>, <item_name>].\n4)Escape.",
@@ -281,9 +281,9 @@
     {
       "worldInfo": {
         "text": "The world has expanded by 7RC.\nMaaze now has a (n+6)x(n+6) layout.",
-        "images": []
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the list of items [<item_name>, <item_name>].\n4)Escape.",
@@ -300,9 +300,9 @@
     {
       "worldInfo": {
         "text": "The world has expanded by 8RC.\nMaaze now has a (n+7)x(n+7) layout.",
-        "images": []
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "1)Kill all enemies.\n2)Collect all collectibles.\n3)Find the list of items [<item_name>, <item_name>].\n4)Escape.",
@@ -319,9 +319,9 @@
     {
       "worldInfo": {
         "text": "Pick up all collectibles, before the countdown timer reaches 0.",
-        "images": ["<image of the countdown timer>"]
+        "images": ["Assets/Resources/Images/countdown.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "",
@@ -338,9 +338,9 @@
     {
       "worldInfo": {
         "text": "Pick up all collectibles, before the countdown timer reaches 0.",
-        "images": ["<image of the countdown timer>"]
+        "images": ["Assets/Resources/Images/countdown.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "",
@@ -357,9 +357,9 @@
     {
       "worldInfo": {
         "text": "Pick up all collectibles, before the countdown timer reaches 0.",
-        "images": ["<image of the countdown timer>"]
+        "images": ["Assets/Resources/Images/countdown.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "",
@@ -376,9 +376,9 @@
     {
       "worldInfo": {
         "text": "Pick up all collectibles, before the countdown timer reaches 0.",
-        "images": ["<image of the countdown timer>"]
+        "images": ["Assets/Resources/Images/countdown.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "",
@@ -395,9 +395,9 @@
     {
       "worldInfo": {
         "text": "Kill all low level enemies, before the countdown timer reaches 0.",
-        "images": ["<image of the countdown timer>"]
+        "images": ["Assets/Resources/Images/countdown.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "",
@@ -414,9 +414,9 @@
     {
       "worldInfo": {
         "text": "Kill all low level enemies, before the countdown timer reaches 0.",
-        "images": ["<image of the countdown timer>"]
+        "images": ["Assets/Resources/Images/countdown.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "",
@@ -433,9 +433,9 @@
     {
       "worldInfo": {
         "text": "Kill all low level enemies, before the countdown timer reaches 0.",
-        "images": ["<image of the countdown timer>"]
+        "images": ["Assets/Resources/Images/countdown.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "",
@@ -452,9 +452,9 @@
     {
       "worldInfo": {
         "text": "Kill all low level enemies and pickup all collectibles, before the countdown timer reaches 0.",
-        "images": ["<image of the countdown timer>"]
+        "images": ["Assets/Resources/Images/countdown.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "",
@@ -473,7 +473,7 @@
         "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
         "images": []
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Colllect all collectibles?",
@@ -492,7 +492,7 @@
         "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
         "images": []
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Colllect all collectibles?",
@@ -511,7 +511,7 @@
         "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
         "images": []
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Colllect all collectibles?",
@@ -530,7 +530,7 @@
         "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
         "images": []
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Colllect all collectibles?",
@@ -549,7 +549,7 @@
         "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
         "images": []
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Colllect all collectibles?",
@@ -568,7 +568,7 @@
         "text": "Some collectibles can now teleport, colllect all teleporting collectibles.",
         "images": []
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Colllect all collectibles?",
@@ -585,13 +585,13 @@
     {
       "worldInfo": {
         "text": "Navigate to the portal.",
-        "images": ["<image_of_a_torch_light"]
+        "images": ["Assets/Resources/Images/torch.png"]
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
-            "images": ["<image of the torch light>"]
+            "images": ["Assets/Resources/Images/torch.png"]
           }
         ],
         "mobile": [],
@@ -604,13 +604,13 @@
     {
       "worldInfo": {
         "text": "Navigate to the portal.",
-        "images": ["<image_of_a_torch_light"]
+        "images": ["Assets/Resources/Images/torch.png"]
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
-            "images": ["<image of the torch light>"]
+            "images": ["Assets/Resources/Images/torch.png"]
           }
         ],
         "mobile": [],
@@ -623,13 +623,13 @@
     {
       "worldInfo": {
         "text": "Navigate to the portal.",
-        "images": ["<image_of_a_torch_light"]
+        "images": ["Assets/Resources/Images/torch.png"]
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
-            "images": ["<image of the torch light>"]
+            "images": ["Assets/Resources/Images/torch.png"]
           }
         ],
         "mobile": [],
@@ -642,13 +642,13 @@
     {
       "worldInfo": {
         "text": "Navigate to the portal.",
-        "images": ["<image_of_a_torch_light"]
+        "images": ["Assets/Resources/Images/torch.png"]
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
-            "images": ["<image of the torch light>"]
+            "images": ["Assets/Resources/Images/torch.png"]
           }
         ],
         "mobile": [],
@@ -661,13 +661,13 @@
     {
       "worldInfo": {
         "text": "Navigate to the portal.",
-        "images": ["<image_of_a_torch_light"]
+        "images": ["Assets/Resources/Images/torch.png"]
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
-            "images": ["<image of the torch light>"]
+            "images": ["Assets/Resources/Images/torch.png"]
           }
         ],
         "mobile": [],
@@ -680,13 +680,13 @@
     {
       "worldInfo": {
         "text": "Navigate to the portal.",
-        "images": ["<image_of_a_torch_light"]
+        "images": ["Assets/Resources/Images/torch.png"]
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
-            "images": ["<image of the torch light>"]
+            "images": ["Assets/Resources/Images/torch.png"]
           }
         ],
         "mobile": [],
@@ -699,13 +699,13 @@
     {
       "worldInfo": {
         "text": "Navigate to the portal.",
-        "images": ["<image_of_a_torch_light"]
+        "images": ["Assets/Resources/Images/torch.png"]
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
-            "images": ["<image of the torch light>"]
+            "images": ["Assets/Resources/Images/torch.png"]
           }
         ],
         "mobile": [],
@@ -718,13 +718,13 @@
     {
       "worldInfo": {
         "text": "Navigate to the portal.",
-        "images": ["<image_of_a_torch_light"]
+        "images": ["Assets/Resources/Images/torch.png"]
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
-            "images": ["<image of the torch light>"]
+            "images": ["Assets/Resources/Images/torch.png"]
           }
         ],
         "mobile": [],
@@ -737,13 +737,13 @@
     {
       "worldInfo": {
         "text": "Navigate to the portal.",
-        "images": ["<image_of_a_torch_light"]
+        "images": ["Assets/Resources/Images/torch.png"]
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
-            "images": ["<image of the torch light>"]
+            "images": ["Assets/Resources/Images/torch.png"]
           }
         ],
         "mobile": [],
@@ -756,13 +756,13 @@
     {
       "worldInfo": {
         "text": "Navigate to the portal.",
-        "images": ["<image_of_a_torch_light"]
+        "images": ["Assets/Resources/Images/torch.png"]
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "Use the torch light from the previous round to navigate to the portal with only a torch light as the source of light",
-            "images": ["<image of the torch light>"]
+            "images": ["Assets/Resources/Images/torch.png"]
           }
         ],
         "mobile": [],
@@ -775,9 +775,9 @@
     {
       "worldInfo": {
         "text": "World expansion by 9RC",
-        "images": ["<image of expansion>"]
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "The row and column for the world will increase by unit.",
@@ -802,9 +802,9 @@
     {
       "worldInfo": {
         "text": "World expansion by 10RC",
-        "images": ["<image of expansion>"]
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "The row and column for the world will increase by unit.",
@@ -829,9 +829,9 @@
     {
       "worldInfo": {
         "text": "World expansion by 11RC",
-        "images": ["<image of expansion>"]
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "The row and column for the world will increase by unit.",
@@ -856,9 +856,9 @@
     {
       "worldInfo": {
         "text": "World expansion by 12RC",
-        "images": ["<image of expansion>"]
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "The row and column for the world will increase by unit.",
@@ -883,9 +883,9 @@
     {
       "worldInfo": {
         "text": "World expansion by 13RC",
-        "images": ["<image of expansion>"]
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "The row and column for the world will increase by unit.",
@@ -910,9 +910,9 @@
     {
       "worldInfo": {
         "text": "World expansion by 14RC",
-        "images": ["<image of expansion>"]
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "The row and column for the world will increase by unit.",
@@ -937,9 +937,9 @@
     {
       "worldInfo": {
         "text": "World expansion by 15RC",
-        "images": ["<image of expansion>"]
+        "images": ["Assets/Resources/Images/expansion.png"]
       },
-      "instruction": {
+      "instructions": {
         "common": [
           {
             "text": "The row and column for the world will increase by unit.",
@@ -966,7 +966,7 @@
         "text": "Survive",
         "images": []
       },
-      "instruction": {
+      "instructions": {
         "commmon": [
           {
             "text": "",
@@ -999,7 +999,7 @@
         "text": "Survive",
         "images": []
       },
-      "instruction": {
+      "instructions": {
         "mobile": [
           {
             "text": "",

@@ -33,7 +33,7 @@ public class ObjectiveManager : MonoBehaviour
         reader = jsonReader.GetComponent<JSONReader>();
         levelList = reader.levelList;
         level = levelList.levels[(LevelDifficulty.levelDifficulty-1)];
-
+        
         // ====================================================
         // World Info Box
         GameObject worldInfoBox = Instantiate(infoBoxPrefabSmall);
