@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
     IEnumerator displayObjectiveManager(){
         yield return new WaitForSeconds(1.5f);
         
-        // show world info box and hide after 15seconds.
+        // show world info box and hide after 10seconds.
         worldInformationBox.SetActive(true);
         StartCoroutine(hideWorldInfoBox());
 

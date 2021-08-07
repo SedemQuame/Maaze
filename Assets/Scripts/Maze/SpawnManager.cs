@@ -25,12 +25,18 @@ public class SpawnManager : MonoBehaviour
     private MazeLoader loader;
     private int numberOfRewards;
     private bool spawnedPortal;
+    private bool isPortalSpawned;
+    private string eventMessage;
     public TMP_Text rewardCountText;
+    public GameObject objectManager;
+    public GameObject worldInformationBox;
+    private bool eventBoxedDisplayed = false;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(spawnStart());
+        isPortalSpawned = false;
     }
 
     IEnumerator spawnStart(){
@@ -73,6 +79,21 @@ public class SpawnManager : MonoBehaviour
             updateRewardCountText();
         }
         checkGameOverStatus();
+
+        if (isPortalSpawned && !eventBoxedDisplayed)
+        {
+            // show world info box and hide after 10seconds.
+            worldInformationBox.SetActive(true);
+            worldInformationBox.transform.GetComponent<RectTransform>().sizeDelta = new Vector3(800,500,0);
+            StartCoroutine(hideWorldInfoBox());
+
+            objectManager.SetActive(true);
+
+            // display the objective manager after X amount of time.
+            objectManager.GetComponent<ObjectiveManager>().displayEventMessage(eventMessage);
+
+            eventBoxedDisplayed = true;
+        }
     }
 
     public void reduceRewardCount()
@@ -94,7 +115,7 @@ public class SpawnManager : MonoBehaviour
                 randomlySpawn(portal, -0.9f);
             }
             spawnedPortal = true;
-            // StartCoroutine(showGameMenu());
+
         }
     }
 
@@ -118,6 +139,15 @@ public class SpawnManager : MonoBehaviour
         // Make is such that reward can be spawned multiple times, and in various cells.
         string cell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
         Instantiate(gameObject, new Vector3(GameObject.Find(cell).transform.position.x, ySpawnPoint, GameObject.Find(cell).transform.position.z), transform.rotation);
+        if(gameObject.CompareTag("Portal")){
+            eventMessage = "Portal spawned in cell location: (" + cell.Split(' ')[1] + ").";
+            isPortalSpawned = true;
+        }
+    }
+
+    IEnumerator hideWorldInfoBox(){
+        yield return new WaitForSeconds(6.0f);
+        worldInformationBox.SetActive(false);
     }
 
     /// <summary>

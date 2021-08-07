@@ -104,6 +104,27 @@
     },
     {
       "worldInfo": {
+        "text": "Chicken dinner, with the enemy",
+        "images": ["./Assets/Resources/Images/chicken.png"]
+      },
+      "instructions": {
+        "common": [
+          {
+            "text": "1)Kill the low level enemies.",
+            "images": [
+              "./Assets/Resources/Images/chicken.png"
+            ]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
         "text": "Healing Pad",
         "images": ["./Assets/Resources/Images/healing_pad.PNG"]
       },

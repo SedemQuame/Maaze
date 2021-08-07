@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -90,8 +91,9 @@ public class ObjectiveManager : MonoBehaviour
 
             // set item name
             Text itemPanel = itemBoxGameObject.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-            string itemName = (((image.ToString()).Split('/')[3].Split('.')[0]).Replace("_", " "));
-            itemPanel.text = itemName;
+            string itemName = (((image.ToString()).Split('/')[4].Split('.')[0]).Replace("_", " "));
+            TextInfo myTI = new CultureInfo("en-US",false).TextInfo;
+            itemPanel.text = myTI.ToTitleCase(itemName);
         }
 
         // Special Rule Info Box
@@ -109,5 +111,23 @@ public class ObjectiveManager : MonoBehaviour
         Texture2D imageTexture = new Texture2D(2, 2);
         imageTexture.LoadImage(rawData);
         return imageTexture;
+    }
+
+    public void displayEventMessage(string eventMessage){
+        // clear all children in objectiveManagerBody.
+        foreach (Transform child in objectiveManagerBody.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        // Loading resource prefabs
+        infoBoxPrefabMedium = Resources.Load("UI/InfoBox_Medium") as GameObject;
+
+        // Instruction Info Box
+        GameObject instructionInfoBox = Instantiate(infoBoxPrefabMedium);
+        instructionInfoBox.transform.SetParent(objectiveManagerBody.transform, false);
+
+        // instructions
+        instructionInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "New World Event";
+        instructionInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = eventMessage;  
     }
 }

@@ -18,6 +18,7 @@ TagManager:
   - EnemyProjectile
   - Locked Icon
   - Unlocked Icon
+  - Portal
   layers:
   - Default
   - TransparentFX
