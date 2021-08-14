@@ -12,25 +12,17 @@ using TMPro;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    [Tooltip("Menu that shows when button is clicked.")]
-    public GameObject gameMenu;
-    [Tooltip("Button for next level.")]
-    public GameObject nextLevel;
-    [Tooltip("Button for previous level.")]
-    public GameObject prevLevel;
-    [Tooltip("Hides menu overlay.")]
-    public GameObject closeDialog;
-    [Tooltip("Displays the gameover text.")]
-    public GameObject gameOver;
+    [Tooltip("Displays the overlayPanel text.")]
+    public GameObject overlayPanel;
     [Tooltip("Displays the component used for touch surfaces")]
     public GameObject touchControlPanel;
-    [Tooltip("Displays the gameover state(win or lose).")]
-    public TMP_Text gameMessage;
     [Tooltip("Displays the current game level.")]
     public TMP_Text gameLevel;
     public bool isGameOver;
     public GameObject objectManager;
     public GameObject worldInformationBox;
+    public GameObject gameWonPanel;
+    public GameObject gameLostPanel;
     private bool isGamePaused;
     private bool isObjectManagerDisplayed;
 
@@ -42,15 +34,11 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         isGamePaused = false;
         gameLevel.text = "Level: " + LevelDifficulty.levelDifficulty;
-        gameOver.SetActive(false);
+        overlayPanel.SetActive(false);
         isObjectManagerDisplayed = false;
     }
 
     void FixedUpdate(){
-        if(LevelDifficulty.levelDifficulty > 1){
-            prevLevel.GetComponent<Button>().interactable = true;
-        }
-
         if (!isObjectManagerDisplayed)
         {
             StartCoroutine(displayObjectiveManager());  
@@ -79,30 +67,27 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GameOver(bool gameWon)
     {
-        // delay code by some seconds.
         StartCoroutine(showMenu(gameWon));
     }
 
     IEnumerator showMenu(bool gameWon){
-
-        yield return new WaitForSeconds(Random.Range(1, 3));
-
+        yield return new WaitForSeconds(2.0f);
         isGameOver = true;
-        gameMenu.SetActive(true);
-        gameOver.SetActive(true);
+        overlayPanel.SetActive(true);
+
+        // hide overlayPanel and touchControlPanel.
         touchControlPanel.SetActive(false);
-        
-        // hide the close dialog cross
-        closeDialog.SetActive(false);
+        worldInformationBox.SetActive(false);
+
         if (gameWon)
         {
-            gameMessage.text = "You Win!!";
-            nextLevel.GetComponent<Button>().interactable = true;
+            // show game won panel
+            gameWonPanel.SetActive(true);
         }
         else
         {
-            gameMessage.text = "You Lose!!";
-            nextLevel.GetComponent<Button>().interactable = false;
+            // show game lost panel
+            gameLostPanel.SetActive(true);
         }
     }
 

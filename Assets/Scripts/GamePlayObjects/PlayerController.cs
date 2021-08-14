@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     public HealthBarControl healthBarControl;
     public GameObject nozzel;
     [Tooltip("Variable joy stick used to control player movement.")]
-    // public VariableJoystick variableJoystick;
     public GameObject variableJoystick;
     /// <summary>
     /// Represents the source that plays the audio sound.
@@ -74,16 +73,16 @@ public class PlayerController : MonoBehaviour
         // Check if we are running either in the Unity editor or in a standalone build. 
         #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEBGL
             keyboardPlayerMovement();
-            touchControlPanel.SetActive(false);
+            touchControlPanel.SetActive(true);
         // Check if we are running on a mobile device 
         #elif UNITY_IOS || UNITY_ANDROID
             touchPlayerMovement();
             touchControlPanel.SetActive(true);
 
-            if (isFiring)
-            {
-                OnFire();
-            }
+            // if (isFiring)
+            // {
+            //     shootAmunition();
+            // }
 
             if (isRotatingLeft)
             {
@@ -113,6 +112,7 @@ public class PlayerController : MonoBehaviour
         variableJoystick.SetActive(true);
         VariableJoystick joystick = variableJoystick.GetComponent<VariableJoystick>();
         Vector3 movement = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+        Debug.Log(movement);
         playerBody.AddForce(movement * speed, ForceMode.VelocityChange);
     }
 
@@ -180,11 +180,27 @@ public class PlayerController : MonoBehaviour
         movementY = movementVector.y;
     }
 
+#if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEBGL
     public void OnFire()
     {
+        // shootAmunition();
+                // play player's shooting audio clip.
+        audioSource.PlayOneShot(playerShootingSound);
+        // todo: instantiate shooting particle system at the position bullet 
+        // spawned
+
+        // instantiate bullet prefab and move towards pointed direction.
+        Transform bulletProjectile = Instantiate(bulletPrefab.transform, nozzel.transform.position, nozzel.transform.rotation);
+        Vector3 shootDir = (nozzel.transform.position - transform.position).normalized;
+        bulletProjectile.GetComponent<BulletBehaviour>().Setup(shootDir);
+
+        // todo: shake camera slightly
+    }
+#endif
+
+    public void shootAmunition(){
         // play player's shooting audio clip.
         audioSource.PlayOneShot(playerShootingSound);
-
         // todo: instantiate shooting particle system at the position bullet 
         // spawned
 
@@ -267,7 +283,7 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator destroyPlayerGameObject(GameObject playerGameObject){        
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
     
         // Show the gameOver UI.
         bool gameWon = false;

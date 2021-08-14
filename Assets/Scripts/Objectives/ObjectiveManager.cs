@@ -91,7 +91,7 @@ public class ObjectiveManager : MonoBehaviour
 
             // set item name
             Text itemPanel = itemBoxGameObject.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-            string itemName = (((image.ToString()).Split('/')[4].Split('.')[0]).Replace("_", " "));
+            string itemName = (((image.ToString()).Split('/')[1].Split('.')[0]).Replace("_", " "));
             TextInfo myTI = new CultureInfo("en-US",false).TextInfo;
             itemPanel.text = myTI.ToTitleCase(itemName);
         }
@@ -107,9 +107,7 @@ public class ObjectiveManager : MonoBehaviour
     }
 
     private Texture2D createTextureUsingFileName(string image){
-        var rawData = System.IO.File.ReadAllBytes(image);
-        Texture2D imageTexture = new Texture2D(2, 2);
-        imageTexture.LoadImage(rawData);
+        Texture2D imageTexture = Resources.Load(image.Split('.')[0]) as Texture2D;
         return imageTexture;
     }
 
