@@ -7,12 +7,15 @@ using UnityEngine;
 /// </summary>
 public class GoalBehaviour : MonoBehaviour
 {
+    private GameObject pointText;
     public GameObject pickupEffect;
-    public AudioClip pickUpSoundFx;
+    public float collectiblePoints;
+    public AudioClip pickUpSoundFx; 
     public AudioSource audioData;
 
     void Start(){
         audioData.enabled = true;
+        pointText = GameObject.Find("pointText");
     }
 
     void Update()
@@ -26,6 +29,9 @@ public class GoalBehaviour : MonoBehaviour
         PlayPickUpSound();
         Instantiate(pickupEffect, transform.position, transform.rotation);
         StartCoroutine(DestroyGoalObject());
+
+        // update points system
+        PointsSystem.updatePointSystem(collectiblePoints, pointText);
     }
 
     IEnumerator DestroyGoalObject(){

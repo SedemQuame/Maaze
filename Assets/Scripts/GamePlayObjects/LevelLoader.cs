@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-    private Scene scene;
-    private int waitTime;
-    private int nextSceneIndex;
+    // ===============PUBLIC VARIABLES===============
     public Animator transition;
+    
+    // ===============PRIVATE VARIABLES===============
+    private Scene scene;
+    private int waitTime,  nextSceneIndex;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         scene = SceneManager.GetActiveScene();

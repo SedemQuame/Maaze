@@ -34,29 +34,6 @@
     },
     {
       "worldInfo": {
-        "text": "Low level collectibles.",
-        "images": ["Images/coin.PNG"]
-      },
-      "instructions": {
-        "common": [
-          {
-            "text": "Collect all low collectibles in this level.",
-            "images": [
-              "Images/coin.PNG",
-              "Images/cone.PNG",
-              "Images/ball.PNG"
-            ]
-          }
-        ],
-        "mobile": [],
-        "laptop": []
-      },
-      "specialRule": {
-        "text": ""
-      }
-    },
-    {
-      "worldInfo": {
         "text": "Learn shooting",
         "images": ["<image of the shooting nozzel>"]
       },
@@ -74,6 +51,29 @@
             "images": ["Images/left_click.PNG"]
           }
         ]
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
+        "text": "Low level collectibles.",
+        "images": ["Images/coin.PNG"]
+      },
+      "instructions": {
+        "common": [
+          {
+            "text": "Collect all low collectibles in this level.",
+            "images": [
+              "Images/coin.PNG",
+              "Images/cone.PNG",
+              "Images/ball.PNG"
+            ]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
       },
       "specialRule": {
         "text": ""

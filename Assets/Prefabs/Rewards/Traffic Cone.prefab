@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupEffect: {fileID: 4748730675913877244, guid: 9c074aa299cf88f4a9ce34d50a5bbff3,
     type: 3}
+  collectiblePoints: 200
   pickUpSoundFx: {fileID: 8300000, guid: 421ccfce10f4e1f479ac01ebb9a36b90, type: 3}
   audioData: {fileID: 505720160556125008}
 --- !u!82 &505720160556125008

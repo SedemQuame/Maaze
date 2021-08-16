@@ -9,32 +9,35 @@ using TMPro;
 [RequireComponent(typeof(TMP_Text))]
 public class ObjectiveManager : MonoBehaviour
 {
-    public GameObject objectiveManagerBody;
-    public GameObject jsonReader;
+    // ===============PUBLIC VARIABLES===============
+    public GameObject objectiveManagerBody, jsonReader;
     public RawImage rawImage;
+    // ===============PRIVATE VARIABLES===============
     private JSONReader reader;
     private LevelList levelList;
     private Levels level;
     private WorldInfo worldInfo;
     private Instructions instructions;
     private SpecialRule specialRule;
-    private GameObject infoBoxPrefabSmall;
-    private GameObject infoBoxPrefabMedium;
-    private GameObject worldItemsPanel;
-    private GameObject itemBox;
+    private GameObject infoBoxPrefabSmall, infoBoxPrefabMedium, worldItemsPanel, itemBox;
 
-    public void populateObjectiveMenu(){
-        // Loading resource prefabs
+    void loadUIGameObjectResources(){
         infoBoxPrefabSmall = Resources.Load("UI/InfoBox_Small") as GameObject;
         infoBoxPrefabMedium = Resources.Load("UI/InfoBox_Medium") as GameObject;
         worldItemsPanel = Resources.Load("UI/World_Items_Panel") as GameObject;
-        itemBox = Resources.Load("UI/ItemBox") as GameObject;        
+        itemBox = Resources.Load("UI/ItemBox") as GameObject; 
+    }
 
-        // loading json data.
+    void loadJsonDataForLevel(){
         reader = jsonReader.GetComponent<JSONReader>();
         levelList = reader.levelList;
         level = levelList.levels[(LevelDifficulty.levelDifficulty-1)];
-        
+    }
+
+    public void populateObjectiveMenu(){   
+        loadUIGameObjectResources();
+        loadJsonDataForLevel();
+
         // ====================================================
         // World Info Box
         GameObject worldInfoBox = Instantiate(infoBoxPrefabSmall);
@@ -111,21 +114,18 @@ public class ObjectiveManager : MonoBehaviour
         return imageTexture;
     }
 
-    public void displayEventMessage(string eventMessage){
-        // clear all children in objectiveManagerBody.
-        foreach (Transform child in objectiveManagerBody.transform) {
-            GameObject.Destroy(child.gameObject);
+    GameObject selectPrefabUsingTextSize(string text){
+        int numberOfNewlines = text.Split('/').Length - 1;
+        if (numberOfNewlines <= 1)
+        {
+            return infoBoxPrefabSmall;
         }
 
-        // Loading resource prefabs
-        infoBoxPrefabMedium = Resources.Load("UI/InfoBox_Medium") as GameObject;
+        if (numberOfNewlines >= 2)
+        {
+            return infoBoxPrefabMedium;
+        }
 
-        // Instruction Info Box
-        GameObject instructionInfoBox = Instantiate(infoBoxPrefabMedium);
-        instructionInfoBox.transform.SetParent(objectiveManagerBody.transform, false);
-
-        // instructions
-        instructionInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "New World Event";
-        instructionInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = eventMessage;  
+        return null;
     }
 }

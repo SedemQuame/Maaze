@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 /// <summary>
@@ -12,93 +12,82 @@ using TMPro;
 
 public class SpawnManager : MonoBehaviour
 {
-
+// ===============PUBLIC VARIABLES===============
     public Material[] materials;
     public GameObject[] reward;
     public GameObject[] enemyArr;
-    public GameObject healthDock;
-    public GameObject portal;
-    public Vector3 goalOffset;
-    private GameObject spawnManagerFloor;
-    private string firstCreatedCell;
-    private float spawnRate;
-    private MazeLoader loader;
-    private int numberOfRewards;
-    private bool spawnedPortal;
-    private bool isPortalSpawned;
-    private string eventMessage;
+    public GameObject healthDock, portal;
+    public GameObject eventManager, objectiveStatusIndicator;
     public TMP_Text rewardCountText;
-    public GameObject objectManager;
-    public GameObject worldInformationBox;
-    private bool eventBoxedDisplayed = false;
+// ===============PRIVATE VARIABLES===============
+    private GameObject infoBoxPrefabSmall;
+    private GameObject spawnManagerFloor, eventManagerBody;
+    private MazeLoader loader;
+    private float spawnRate, initialSpawnRate = 30.0f;
+    private int numberOfRewards;
+    private string eventMessage;
+    private bool spawnedPortal, isPortalSpawned, eventBoxedDisplayed = false;
 
-    // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(spawnStart());
+        loader = GameObject.Find("Maze Loader Holder").GetComponent<MazeLoader>();
         isPortalSpawned = false;
-    }
-
-    IEnumerator spawnStart(){
-        firstCreatedCell = "Floor " + 0 + "," + 0;
-        goalOffset = new Vector3(0, -0.4f, 0);
-        
-        float initialSpawnRate = 30.0f;
-        //calculate spawnRate using the Exponential Delay Function.
-        if(LevelDifficulty.levelDifficulty < 12){
-            spawnRate = initialSpawnRate*(Mathf.Pow((1 - 0.08f), LevelDifficulty.levelDifficulty));
-        }else{
-            spawnRate = 10.0f;
+        if(LevelDifficulty.levelDifficulty > 2){ // do not spawn collectibles till level 3.
+            StartCoroutine(spawnStart());   
+            objectiveStatusIndicator.SetActive(true);
         }
-
-        GameObject mazeLoader = GameObject.Find("Maze Loader Holder");
-        loader = mazeLoader.GetComponent<MazeLoader>();
-
-        spawnRewardsByLevelDifficulty();
-        updateRewardCountText();
-
-        //wait X amount of seconds before spawning enemies
-        yield return new WaitForSeconds(4);
-
-        if(LevelDifficulty.levelDifficulty > 3){
-             //todo: refactor this to delay code using coroutines.
-            spawnEnemiesByLevelDifficulty();
-
-            // only spawn health dock, if level difficulty is greater at level 6.
-            if(LevelDifficulty.levelDifficulty > 5){
-                randomlySpawn(healthDock, -0.9f);
-            }
-        }
+        eventManagerBody = eventManager.transform.GetChild(0).gameObject;
     }
 
     void FixedUpdate()
     {
-        if (numberOfRewards > GameObject.FindGameObjectsWithTag("Goal").Length)
-        {
-            reduceRewardCount();
-            updateRewardCountText();
+        if(LevelDifficulty.levelDifficulty == 1){
+            spawnPortal();
+        }else{
+            if (numberOfRewards > GameObject.FindGameObjectsWithTag("Goal").Length)
+            {
+                reduceRewardCount();
+                updateRewardCountText();
+            }
+            checkGameOverStatus();
         }
-        checkGameOverStatus();
+        showDisplayPanel();
+    }
 
+    void showDisplayPanel(){
         if (isPortalSpawned && !eventBoxedDisplayed)
-        {
-            // show world info box and hide after 10seconds.
-            worldInformationBox.SetActive(true);
-            worldInformationBox.transform.GetComponent<RectTransform>().sizeDelta = new Vector3(800,500,0);
+        {            
+            // show info box
+            eventManager.SetActive(true);
             StartCoroutine(hideWorldInfoBox());
 
-            objectManager.SetActive(true);
-
             // display the objective manager after X amount of time.
-            objectManager.GetComponent<ObjectiveManager>().displayEventMessage(eventMessage);
-
+            displayEventMessage(eventMessage);
             eventBoxedDisplayed = true;
         }
     }
 
-    public void reduceRewardCount()
+     public void displayEventMessage(string eventMessage){       
+        // clear all children in eventManagerBody.
+        foreach (Transform child in eventManagerBody.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        // Loading resource prefabs
+        infoBoxPrefabSmall = Resources.Load("UI/InfoBox_Small") as GameObject;
+
+        // Instruction Info Box
+        GameObject instructionInfoBox = Instantiate(infoBoxPrefabSmall);
+        instructionInfoBox.transform.SetParent(eventManagerBody.transform, false);
+
+        // instructions
+        instructionInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "New Event";
+        instructionInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = eventMessage;  
+    }
+
+    void reduceRewardCount()
     {
-        numberOfRewards -= 1;
+        numberOfRewards--;
     }
 
     void updateRewardCountText()
@@ -106,16 +95,18 @@ public class SpawnManager : MonoBehaviour
         rewardCountText.text = "Pickups: " + numberOfRewards.ToString();
     }
 
+    void spawnPortal(){
+        if(!spawnedPortal){
+            randomlySpawn(portal, -0.9f);
+        }
+        spawnedPortal = true;
+    }
+
     void checkGameOverStatus()
     {
         if (numberOfRewards < 1)
         {   
-            if(!spawnedPortal){
-                // show portal.
-                randomlySpawn(portal, -0.9f);
-            }
-            spawnedPortal = true;
-
+            spawnPortal();
         }
     }
 
@@ -132,24 +123,19 @@ public class SpawnManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawns the reward game object, in the first created cell (genesis cell).
+    /// Spawns the reward game object, in a random cell.
     /// </summary>
     void randomlySpawn(GameObject gameObject, float ySpawnPoint)
     {
-        // Make is such that reward can be spawned multiple times, and in various cells.
         string cell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
-        Instantiate(gameObject, new Vector3(GameObject.Find(cell).transform.position.x, ySpawnPoint, GameObject.Find(cell).transform.position.z), transform.rotation);
-        if(gameObject.CompareTag("Portal")){
-            eventMessage = "Portal spawned in cell location: (" + cell.Split(' ')[1] + ").";
+        Vector3 floorPosition = GameObject.Find(cell).transform.position;
+        Instantiate(gameObject, new Vector3(floorPosition.x, ySpawnPoint, floorPosition.z), transform.rotation);
+        if(gameObject.CompareTag("Portal") && LevelDifficulty.levelDifficulty > 1){
+            eventMessage = "Portal spawned at cell location: (" + cell.Split(' ')[1] + ").";
             isPortalSpawned = true;
         }
     }
-
-    IEnumerator hideWorldInfoBox(){
-        yield return new WaitForSeconds(6.0f);
-        worldInformationBox.SetActive(false);
-    }
-
+    
     /// <summary>
     /// Spawns the Enemy game objects, in a randomized patterns.
     /// Creates a blinking cell to alert the Player that an Enemy is about to be spawned in a particular cell.
@@ -158,8 +144,42 @@ public class SpawnManager : MonoBehaviour
     {
         // if player has not reached a certain level, don't spawn any enemy.
         if (LevelDifficulty.levelDifficulty <= 4) return;
-        
         StartCoroutine(SpawnEnemy());
+    }
+
+    /// <summary>
+    /// Spawn an Enemy gameObject in a given position.
+    /// </summary>
+    void spawnEnemy(GameObject enemy, Vector3 position, Quaternion rotation)
+    {
+        Instantiate(enemy, position, rotation);
+    }
+
+    IEnumerator hideWorldInfoBox(){
+        yield return new WaitForSeconds(6.0f);
+        eventManager.SetActive(false);
+    }
+
+    IEnumerator spawnStart(){
+        //calculate spawnRate using Exponential Decay.
+        if(LevelDifficulty.levelDifficulty < 12){
+            spawnRate = initialSpawnRate*(Mathf.Pow((1 - 0.08f), LevelDifficulty.levelDifficulty));
+        }else{
+            spawnRate = 10.0f;
+        }
+        spawnRewardsByLevelDifficulty();
+        updateRewardCountText();
+
+        //wait X amount of seconds before spawning enemies
+        yield return new WaitForSeconds(4);
+
+        if(LevelDifficulty.levelDifficulty > 3){
+            spawnEnemiesByLevelDifficulty();
+            //spawn health dock, if level difficulty > 6.
+            if(LevelDifficulty.levelDifficulty > 5){
+                randomlySpawn(healthDock, -0.9f);
+            }
+        }
     }
 
     /// <summary>
@@ -167,11 +187,8 @@ public class SpawnManager : MonoBehaviour
     /// </summary>
     IEnumerator SpawnEnemy()
     {
-        // todo: spawn a given numner of enemies.   
         for (int i = 0; i < LevelDifficulty.levelDifficulty + 2; i++)
         {
-            int enemyType = Random.Range(0, enemyArr.Length);
-
             string spawnManagerCell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
             spawnManagerFloor = GameObject.Find(spawnManagerCell);
 
@@ -180,7 +197,7 @@ public class SpawnManager : MonoBehaviour
             rend.enabled = true;
 
             // toggle color for floor.
-            StartCoroutine(ToggleColor(spawnManagerCell, enemyType, rend));
+            StartCoroutine(ToggleColor(spawnManagerCell, Random.Range(0, enemyArr.Length), rend));
 
             // delay when next enemy is spawned.
             yield return new WaitForSeconds(spawnRate);
@@ -213,13 +230,5 @@ public class SpawnManager : MonoBehaviour
         // todo: create a smoke prefab
         // todo: add audio for enemy instantiation.
         spawnEnemy(enemyArr[enemyType], spawnManagerFloor.transform.position + new Vector3(0, 2, 0), Quaternion.Euler(0.0f, 90.0f, 0.0f));
-    }
-    
-    /// <summary>
-    /// Spawn an Enemy gameObject in a given position.
-    /// </summary>
-    void spawnEnemy(GameObject enemy, Vector3 position, Quaternion rotation)
-    {
-        Instantiate(enemy, position, rotation);
     }
 }

@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class PortalController : MonoBehaviour
 {
+    // ===============PUBLIC VARIABLES===============
     public GameObject player;
+    // ===============PRIVATE VARIABLES===============
     private GameManager gameManager;
 
     void Start(){
@@ -19,11 +21,9 @@ public class PortalController : MonoBehaviour
 
     IEnumerator showGameMenu(){
         yield return new WaitForSeconds(1.0f);
-        // Show the gameOver UI.
-        bool gameWon = true;
-        
+
         // game over player won.
-        gameManager.GameOver(gameWon);
+        gameManager.GameOver(true);
 
         yield return new WaitForSeconds(1.0f);
         // hide the player

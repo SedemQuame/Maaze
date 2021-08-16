@@ -20,9 +20,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text gameLevel;
     public bool isGameOver;
     public GameObject objectManager;
-    public GameObject worldInformationBox;
-    public GameObject gameWonPanel;
-    public GameObject gameLostPanel;
+    public GameObject worldInformationBox, gameWonPanel, gameLostPanel;
     private bool isGamePaused;
     private bool isObjectManagerDisplayed;
 

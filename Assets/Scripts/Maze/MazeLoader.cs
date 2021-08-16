@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
@@ -10,19 +8,20 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshSurface))]
 public class MazeLoader : MonoBehaviour
 {
+    // ===============PUBLIC VARIABLES===============
+    public float size;
     [Tooltip("The wall game object prefab.")]
     public GameObject wall;
     [Tooltip("The ground object prefab.")]
     public GameObject ground;
     [Tooltip("Script reference to the NavMeshSurface.")]
     public NavMeshSurface surface;
-    private int mazeRows;
-    private int mazeColumns;
-    private int levelNumber = 0;
 
-    public float size;
+    // ===============PRIVATE VARIABLES===============
+    [SerializeField]
+    private int mazeRows, mazeColumns, levelNumber = 0;
     private MazeCell[,] mazeCells;
-    // Use this for initialization
+
     void Start()
     {   
         if (LevelDifficulty.levelDifficulty == 0)
@@ -31,7 +30,7 @@ public class MazeLoader : MonoBehaviour
         }
         else
         {
-            setRowAndColumnNumber(LevelDifficulty.levelDifficulty + 3);
+            setRowAndColumnNumber(LevelDifficulty.levelDifficulty + 1);
         }
 
         InitializeMaze();
@@ -42,7 +41,7 @@ public class MazeLoader : MonoBehaviour
         surface.BuildNavMesh();
     }
 
-    private void InitializeMaze()
+    void InitializeMaze()
     {
         mazeCells = new MazeCell[mazeRows, mazeColumns];
 

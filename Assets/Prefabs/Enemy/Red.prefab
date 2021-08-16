@@ -419,9 +419,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   damagePoints: 6
+  health: 100
+  killPoints: 50
   damageResistance: 0.6
   healthBarControl: {fileID: 401348376164440011}
-  health: 100
   destroyEffect: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561,
     type: 3}
   beatPlayerSound: {fileID: 8300000, guid: d6a2343e9cf89114d883d5cc62702679, type: 3}
