@@ -12,17 +12,13 @@ using TMPro;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    // ===============PUBLIC VARIABLES===============
+    public bool isGameOver, isGamePaused, isObjectManagerDisplayed;
     [Tooltip("Displays the overlayPanel text.")]
-    public GameObject overlayPanel;
-    [Tooltip("Displays the component used for touch surfaces")]
-    public GameObject touchControlPanel;
+    public GameObject overlayPanel, touchControlPanel, objectManager, worldInformationBox, gameWonPanel, gameLostPanel;
+    public GameObject pointText;
     [Tooltip("Displays the current game level.")]
     public TMP_Text gameLevel;
-    public bool isGameOver;
-    public GameObject objectManager;
-    public GameObject worldInformationBox, gameWonPanel, gameLostPanel;
-    private bool isGamePaused;
-    private bool isObjectManagerDisplayed;
 
     /// <summary>
     /// Ensures that the game is not paused. Hides the gameOver canvas to false.
@@ -34,6 +30,7 @@ public class GameManager : MonoBehaviour
         gameLevel.text = "Level: " + LevelDifficulty.levelDifficulty;
         overlayPanel.SetActive(false);
         isObjectManagerDisplayed = false;
+        pointText.GetComponent<TextMeshProUGUI>().text = ("00" + PointsSystem.points);
     }
 
     void FixedUpdate(){

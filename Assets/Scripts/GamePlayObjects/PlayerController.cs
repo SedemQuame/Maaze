@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Health value of the player")]
     public float health = 100.0f;
     public GameObject bulletPrefab, nozzel, variableJoystick, touchControlPanel;
-
     [Tooltip("Sounds played when actions occurs.")]
     public AudioClip playerShootingSound, playerMovingSound, shootingSound, hurtSound, dyingSound;
     public HealthBarControl healthBarControl;

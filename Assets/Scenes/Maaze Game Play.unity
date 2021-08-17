@@ -2738,14 +2738,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30cef91519879f5ba3e8997ca1cab27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGameOver: 0
+  isGamePaused: 0
+  isObjectManagerDisplayed: 0
   overlayPanel: {fileID: 1424016787}
   touchControlPanel: {fileID: 1838587494}
-  gameLevel: {fileID: 1195390365}
-  isGameOver: 0
   objectManager: {fileID: 656731646}
   worldInformationBox: {fileID: 1160578171}
   gameWonPanel: {fileID: 1203218987}
   gameLostPanel: {fileID: 862669039}
+  pointText: {fileID: 2015160973}
+  gameLevel: {fileID: 1195390365}
 --- !u!1 &560138427
 GameObject:
   m_ObjectHideFlags: 0
