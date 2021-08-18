@@ -4,7 +4,7 @@ using UnityEngine;
 public class PortalController : MonoBehaviour
 {
     // ===============PUBLIC VARIABLES===============
-    public GameObject player;
+    public GameObject player, teleportingFx;
     // ===============PRIVATE VARIABLES===============
     private GameManager gameManager;
 
@@ -21,12 +21,12 @@ public class PortalController : MonoBehaviour
 
     IEnumerator showGameMenu(){
         yield return new WaitForSeconds(1.0f);
-
-        // game over player won.
-        gameManager.GameOver(true);
+    
+        Instantiate(teleportingFx, transform.position, transform.rotation);
+        yield return new WaitForSeconds(0.2f);
+        player.SetActive(false);
 
         yield return new WaitForSeconds(1.0f);
-        // hide the player
-        player.SetActive(false);
+        gameManager.GameOver(true);
     }
 }

@@ -43436,6 +43436,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  teleportingFx: {fileID: 4005891930179858742, guid: 78f008bd9cb9cb248b3c626a5dda69f9,
+    type: 3}
 --- !u!1 &8664747620173209943
 GameObject:
   m_ObjectHideFlags: 0

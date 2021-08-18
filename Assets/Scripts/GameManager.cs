@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public bool isGameOver, isGamePaused, isObjectManagerDisplayed;
     [Tooltip("Displays the overlayPanel text.")]
     public GameObject overlayPanel, touchControlPanel, objectManager, worldInformationBox, gameWonPanel, gameLostPanel;
-    public GameObject pointText;
+    public GameObject pointText, w_score_text, l_score_text;
     [Tooltip("Displays the current game level.")]
     public TMP_Text gameLevel;
 
@@ -69,19 +69,16 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         isGameOver = true;
         overlayPanel.SetActive(true);
-
-        // hide overlayPanel and touchControlPanel.
         touchControlPanel.SetActive(false);
         worldInformationBox.SetActive(false);
-
         if (gameWon)
         {
-            // show game won panel
+            w_score_text.GetComponent<TextMeshProUGUI>().text = "00" + PointsSystem.points;
             gameWonPanel.SetActive(true);
         }
         else
         {
-            // show game lost panel
+            l_score_text.GetComponent<TextMeshProUGUI>().text = "00" + PointsSystem.points;
             gameLostPanel.SetActive(true);
         }
     }
