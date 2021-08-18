@@ -15,13 +15,14 @@ public class PortalController : MonoBehaviour
 
     void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "Player"){
-            StartCoroutine(showGameMenu());
+            StartCoroutine(gameEndSequence());
         }
     }
 
-    IEnumerator showGameMenu(){
+    IEnumerator gameEndSequence(){
         yield return new WaitForSeconds(1.0f);
-    
+
+        // instantiate teleport particle Fx
         Instantiate(teleportingFx, transform.position, transform.rotation);
         yield return new WaitForSeconds(0.2f);
         player.SetActive(false);

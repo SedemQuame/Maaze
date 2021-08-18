@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float health = 100.0f;
     public GameObject bulletPrefab, nozzel, variableJoystick, touchControlPanel;
     [Tooltip("Sounds played when actions occurs.")]
-    public AudioClip playerShootingSound, playerMovingSound, shootingSound, hurtSound, dyingSound;
+    public AudioClip playerShootingSound, playerMovingSound, shootingSound, hurtSound, dyingSound, landInMaze;
     public HealthBarControl healthBarControl;
 
     // ===============PRIVATE VARIABLES===============
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         isColliding = false;
         hasHitGround = false;
-        rotationAngle = 7.5f;
+        rotationAngle = 5.0f;
         playerSpeed = 0.8f;
         audioSource = this.GetComponent<AudioSource>();
         playerBody = this.GetComponent<Rigidbody>();
@@ -108,38 +108,26 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision collider)
     {
-        /* todo: play sound everytime we collide with
-        // 1. ground
-        // 2. wall
-        // 3. enemy
-        */
-
         vol = Random.Range(volDown, volUp);
         switch (collider.gameObject.tag)
         {
-            case "Ground":
-                // todo: play sound for colliding with "ground"
-                break;
-            case "Wall":
-                // todo: play sound for colliding with "wall"
-                break;
             case "Enemy":
                 audioSource.PlayOneShot(hurtSound, vol);
-                // reduce player health by enemy damage points.
-                this.updateHealthBar(collider.gameObject.GetComponent<EnemyController>().damagePoints);
+                this.updateHealthBar(collider.gameObject.GetComponent<EnemyController>().damagePoints);// reduce player health by enemy damage points.
+
                 if (this.health < 1)
                 {
-                    // instantiate dying particle system
+                    // dying sequence
                     collider.gameObject.GetComponent<EnemyController>().DestroyEffect(collider.gameObject);
-                    // play dying sound
                     audioSource.PlayOneShot(dyingSound, vol);
-                    // destroy player gameObject
                     StartCoroutine(destroyPlayerGameObject(this.gameObject));
                 }
                 break;
-            case "NavMesh":
-                // todo: play sound for colliding with "ground"
-                hasHitGround = true;
+            case "Ground":
+                if(!hasHitGround){
+                    audioSource.PlayOneShot(landInMaze, 1);
+                    hasHitGround = true;
+                }
                 break;
             default:
                 isColliding = false;
