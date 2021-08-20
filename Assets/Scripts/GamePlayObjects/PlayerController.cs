@@ -46,14 +46,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        touchPlayerMovement();
         #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEBGL //running either in Unity editor, standalone build or webgl. 
             keyboardPlayerMovement();
             touchControlPanel.SetActive(false);
-        
         #elif UNITY_IOS || UNITY_ANDROID //running on a mobile device 
-            touchPlayerMovement();
             touchControlPanel.SetActive(true);
-
             if (isFiring)
             {
                 shootAmunition();
@@ -69,7 +67,6 @@ public class PlayerController : MonoBehaviour
                 OnRotateRight();
             }
         #endif
-
         playerOutOfBounds();
     }
 
@@ -89,12 +86,13 @@ public class PlayerController : MonoBehaviour
     }
 
     void touchPlayerMovement(){
-        variableJoystick.SetActive(true);
         VariableJoystick joystick = variableJoystick.GetComponent<VariableJoystick>();
         Vector3 movement = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+        playerBody.AddForce(movement * playerSpeed, ForceMode.VelocityChange);
 
         // todo: rotate to the direction of movement the move forward.
-        playerBody.AddForce(movement * playerSpeed, ForceMode.VelocityChange);
+        // todo: instantiate player movement smoke particle system & play movement sound.
+        // audioSource.PlayOneShot(playerMovingSound);
     }
 
     void OnTriggerEnter(Collider other)
@@ -111,10 +109,13 @@ public class PlayerController : MonoBehaviour
         vol = Random.Range(volDown, volUp);
         switch (collider.gameObject.tag)
         {
+            case "NavMesh":
+                break;
+            case "Wall":
+                break;
             case "Enemy":
                 audioSource.PlayOneShot(hurtSound, vol);
                 this.updateHealthBar(collider.gameObject.GetComponent<EnemyController>().damagePoints);// reduce player health by enemy damage points.
-
                 if (this.health < 1)
                 {
                     // dying sequence
@@ -149,7 +150,7 @@ public class PlayerController : MonoBehaviour
     }
 #endif
 
-    void shootAmunition(){
+    public void shootAmunition(){
         audioSource.PlayOneShot(playerShootingSound);
         shootBullet();
         // todo: instantiate shooting particle system at the position bullet 
@@ -169,41 +170,41 @@ public class PlayerController : MonoBehaviour
     }
  
  #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
-    void OnRotateLeft()
+    public void OnRotateLeft()
     {
         float rotationVectorX = 1.0f;
         Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, rotationAngle * rotationVectorX, 0), 0.5f);
         transform.Rotate(new Vector3(0, rotationAngle * rotationVectorX, 0));
     }
 
-    void OnRotateRight()
+    public void OnRotateRight()
     {
         float rotationVectorX = -1.0f;
         Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, rotationAngle * rotationVectorX, 0), 0.5f);
         transform.Rotate(new Vector3(0, rotationAngle * rotationVectorX, 0));
     }
 
-    void rotateLeftPointerDown(){
+    public void rotateLeftPointerDown(){
         isRotatingLeft = true;
     }
 
-    void rotateLeftPointerUp(){
+    public void rotateLeftPointerUp(){
         isRotatingLeft = false;
     }
 
-    void rotateRightPointerDown(){
+    public void rotateRightPointerDown(){
         isRotatingRight = true;
     }
 
-    void rotateRightPointerUp(){
+    public void rotateRightPointerUp(){
         isRotatingRight = false;
     }
 
-    void firePointerDown(){
+    public void firePointerDown(){
         isFiring = true;
     }
 
-    void firePointerUp(){
+    public void firePointerUp(){
         isFiring = false;
     }        
 #endif
@@ -216,15 +217,13 @@ public class PlayerController : MonoBehaviour
 
     void playerOutOfBounds()
     {
-        // check if the player is bounds.
-
         // If player is falling.
         if (transform.position.y < -5)
         {
             gameManager.GameOver(false);
         }
 
-        if (hasHitGround && isColliding){
+        if (hasHitGround && isColliding) {
             // Display Game Won Menu
             gameManager.GameOver(false);
         }
