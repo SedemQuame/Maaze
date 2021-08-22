@@ -64,10 +64,8 @@ public class ProceduralNumberGenerator
 
     public static int GetNextNumber()
     {
-        // randomly choose the keys.
         int choosenKeyIndex = Random.Range(0, keys.Length);
         string currentNum = keys[choosenKeyIndex].Substring(currentPosition++ % keys[choosenKeyIndex].Length, 1);
-        Debug.Log("choosen key: " + keys[choosenKeyIndex]);
         return int.Parse(currentNum);
     }
 }
