@@ -80,10 +80,20 @@ public class PlayerController : MonoBehaviour
     void keyboardPlayerMovement()
     {
         Vector3 movement = new Vector3(movementX, 0, movementY);
+        // rotate player body in put direction.
+        // add force to the player body to move in the given direction.
+
+
         playerBody.AddForce(movement * playerSpeed, ForceMode.VelocityChange);
+
         // todo: instantiate player movement smoke particle system & play movement sound.
         // audioSource.PlayOneShot(playerMovingSound);
     }
+
+    // void rotateBodyInInputDirection(Vector3 movement){
+    //     if(movement.X < 0)//  move in the left direction.
+    //     if(movement.X > 0)// move in the right direction.
+    // }
 
     void touchPlayerMovement(){
         VariableJoystick joystick = variableJoystick.GetComponent<VariableJoystick>();

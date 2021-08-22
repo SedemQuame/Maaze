@@ -1509,7 +1509,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3301587, y: 1}
+    m_SensorSize: {x: 1.0751323, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10512,7 +10512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab61366a2adfab2797f102563fabc6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1612376246}
 --- !u!20 &1973230736
 Camera:
   m_ObjectHideFlags: 0
