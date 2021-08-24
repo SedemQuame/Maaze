@@ -6,29 +6,38 @@ using UnityEngine.UI;
 // make the button interactive
 public class LevelVisitToggler : MonoBehaviour
 {
-    private GameObject[] lockedLevels;
+    public Sprite clearedLevel, presentLevel;
+    private GameObject[] gameLevels;
 
     // Start is called before the first frame update
     void Start()
     {
-        lockedLevels = GameObject.FindGameObjectsWithTag("Locked Icon");
+        gameLevels = GameObject.FindGameObjectsWithTag("Level Number");
     }
 
     void FixedUpdate(){
-        foreach (GameObject lockedLevel in lockedLevels)
+        foreach (GameObject lockedLevel in gameLevels)
         {
-            // get lockedLevel's parent panel element.
-            var button = (lockedLevel.transform.parent).parent;
-
             // get the name of the button.
-            int buttonLevel = int.Parse(button.name);
+            int buttonLevel = int.Parse(lockedLevel.transform.name);
 
             if (buttonLevel <= LevelDifficulty.maxLevelReached){
                 // make button interactable
-                button.GetComponent<Button>().interactable = true;
-                // disable the level button
-                lockedLevel.SetActive(false);
+                lockedLevel.GetComponent<Button>().interactable = true;
+                
+                // get locked icon
+                lockedLevel.transform.GetChild(1).gameObject.SetActive(false);
+
+                // change source image for GetComponent Image
+                if (buttonLevel == LevelDifficulty.maxLevelReached)
+                {
+                    lockedLevel.GetComponent<Image>().sprite = presentLevel;
+                }else
+                {                    
+                    lockedLevel.GetComponent<Image>().sprite = clearedLevel;
+                }
             }
+
         }
     }
 

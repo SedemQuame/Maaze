@@ -19,6 +19,7 @@ TagManager:
   - Locked Icon
   - Unlocked Icon
   - Portal
+  - Level Number
   layers:
   - Default
   - TransparentFX
