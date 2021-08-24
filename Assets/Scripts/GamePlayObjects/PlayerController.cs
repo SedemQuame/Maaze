@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(AudioClip))]
@@ -54,6 +55,10 @@ public class PlayerController : MonoBehaviour
             touchControlPanel.SetActive(true);
             if (isFiring)
             {
+                if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
                 shootAmunition();
             }
 
@@ -156,6 +161,10 @@ public class PlayerController : MonoBehaviour
 #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEBGL //running either in Unity editor, standalone build or webgl. 
     public void OnFire()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
         shootAmunition();
     }
 #endif

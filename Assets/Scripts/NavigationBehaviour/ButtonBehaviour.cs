@@ -80,6 +80,7 @@ public class ButtonBehaviour : MonoBehaviour
         LevelDifficulty.levelDifficulty += 1;
         if(LevelDifficulty.levelDifficulty > LevelDifficulty.maxLevelReached){
             LevelDifficulty.maxLevelReached = LevelDifficulty.levelDifficulty;
+            PlayerPrefs.SetInt("maxLevelReached", LevelDifficulty.maxLevelReached);
         }
         SceneManager.LoadScene("Maaze Game Play");
     }
@@ -109,6 +110,12 @@ public class ButtonBehaviour : MonoBehaviour
         // Get the difficulty value from the clicked level button.
         GameObject selectedLevelButton = EventSystem.current.currentSelectedGameObject;
         LevelDifficulty.levelDifficulty = int.Parse(selectedLevelButton.transform.GetChild(0).gameObject.GetComponent<TMPro.TextMeshProUGUI>().text);
+
+        if(LevelDifficulty.levelDifficulty >= LevelDifficulty.maxLevelReached){
+            LevelDifficulty.maxLevelReached = LevelDifficulty.levelDifficulty;
+            PlayerPrefs.SetInt("maxLevelReached", LevelDifficulty.maxLevelReached);
+        }
+
         // Load the game play scene
         SceneManager.LoadScene("Maaze Game Play");
     }
