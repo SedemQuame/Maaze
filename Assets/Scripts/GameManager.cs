@@ -13,9 +13,9 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     // ===============PUBLIC VARIABLES===============
-    public bool isGameOver, isGamePaused, isObjectManagerDisplayed;
+    public bool isGameOver, isGamePaused, isObjectManagerDisplayed, isPanelActive;
     [Tooltip("Displays the overlayPanel text.")]
-    public GameObject overlayPanel, touchControlPanel, objectManager, worldInformationBox, gameWonPanel, gameLostPanel;
+    public GameObject overlayPanel, touchControlPanel, objectManager, worldInformationBox, gameWonPanel, gameLostPanel, gameControls;
     public GameObject pointText, w_score_text, l_score_text;
     [Tooltip("Displays the current game level.")]
     public TMP_Text gameLevel;
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         isGameOver = false;
+        isPanelActive = false;
         isGamePaused = false;
         gameLevel.text = "Level: " + LevelDifficulty.levelDifficulty;
         overlayPanel.SetActive(false);
@@ -55,6 +56,19 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0.0f;
         }
         isGamePaused = !isGamePaused;
+    }
+
+    /// <summary>
+    /// Settings show panel
+    /// </summary>
+    public void ShowOtherButtons(){
+        if (isPanelActive)
+        {
+            gameControls.SetActive(false);
+        }else{
+            gameControls.SetActive(true);
+        }
+        isPanelActive = !isPanelActive;
     }
 
     /// <summary>

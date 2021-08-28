@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     // ===============PUBLIC VARIABLES===============
     [Tooltip("Health value of the player")]
     public float health = 100.0f;
-    public GameObject bulletPrefab, nozzel, variableJoystick, touchControlPanel;
+    public GameObject bulletPrefab, nozzel, touchControlPanel;
+    public VariableJoystick variableJoystick;
     [Tooltip("Sounds played when actions occurs.")]
     public AudioClip playerShootingSound, playerMovingSound, shootingSound, hurtSound, dyingSound, landInMaze;
     public HealthBarControl healthBarControl;
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
         touchPlayerMovement();
         #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEBGL //running either in Unity editor, standalone build or webgl. 
             keyboardPlayerMovement();
-            touchControlPanel.SetActive(false);
+            // touchControlPanel.SetActive(false);
         #elif UNITY_IOS || UNITY_ANDROID //running on a mobile device 
             touchControlPanel.SetActive(true);
             if (isFiring)
@@ -88,21 +89,14 @@ public class PlayerController : MonoBehaviour
         // rotate player body in put direction.
         // add force to the player body to move in the given direction.
 
-
         playerBody.AddForce(movement * playerSpeed, ForceMode.VelocityChange);
 
         // todo: instantiate player movement smoke particle system & play movement sound.
         // audioSource.PlayOneShot(playerMovingSound);
     }
 
-    // void rotateBodyInInputDirection(Vector3 movement){
-    //     if(movement.X < 0)//  move in the left direction.
-    //     if(movement.X > 0)// move in the right direction.
-    // }
-
     void touchPlayerMovement(){
-        VariableJoystick joystick = variableJoystick.GetComponent<VariableJoystick>();
-        Vector3 movement = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+        Vector3 movement = new Vector3(variableJoystick.Horizontal, 0, variableJoystick.Vertical);
         playerBody.AddForce(movement * playerSpeed, ForceMode.VelocityChange);
 
         // todo: rotate to the direction of movement the move forward.

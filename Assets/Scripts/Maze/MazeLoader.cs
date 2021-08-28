@@ -10,8 +10,9 @@ public class MazeLoader : MonoBehaviour
 {
     // ===============PUBLIC VARIABLES===============
     public float size;
-    [Tooltip("The wall game object prefab.")]
-    public GameObject wall;
+    public int levelWallIndex = 0;
+    [Tooltip("The walls game object prefab.")]
+    public GameObject[] walls;
     [Tooltip("The ground object prefab.")]
     public GameObject ground;
     [Tooltip("Script reference to the NavMeshSurface.")]
@@ -24,6 +25,30 @@ public class MazeLoader : MonoBehaviour
 
     void Start()
     {   
+        // change wall index based on level category.
+        if (1 <= LevelDifficulty.levelDifficulty && LevelDifficulty.levelDifficulty <= 8)
+        {            
+            levelWallIndex = 0;
+        }else if (9 <= LevelDifficulty.levelDifficulty && LevelDifficulty.levelDifficulty <= 16)
+        {
+            levelWallIndex = 1;
+        }else if (17 <= LevelDifficulty.levelDifficulty && LevelDifficulty.levelDifficulty <= 24)
+        {
+            levelWallIndex = 2;
+        }else if (25 <= LevelDifficulty.levelDifficulty && LevelDifficulty.levelDifficulty <= 32)
+        {
+            levelWallIndex = 3;
+        }else if (33 <= LevelDifficulty.levelDifficulty && LevelDifficulty.levelDifficulty <= 40)
+        {
+            levelWallIndex = 4;
+        }
+        else if (41 <= LevelDifficulty.levelDifficulty && LevelDifficulty.levelDifficulty <= 48)
+        {
+            levelWallIndex = 5;
+        }else{
+            levelNumber = 6;
+        }
+
         if (LevelDifficulty.levelDifficulty == 0)
         {
             setRowAndColumnNumber(3);
@@ -51,28 +76,28 @@ public class MazeLoader : MonoBehaviour
             {
                 mazeCells[r, c] = new MazeCell();
 
-                // For now, use the same wall object for the floor!
+                // For now, use the same walls object for the floor!
                 mazeCells[r, c].floor = Instantiate(ground, new Vector3(r * size, -(size / 2f), c * size), Quaternion.identity) as GameObject;
                 mazeCells[r, c].floor.name = "Floor " + r + "," + c;
                 mazeCells[r, c].floor.transform.Rotate(Vector3.right, 90f);
 
                 if (c == 0)
                 {
-                    mazeCells[r, c].westWall = Instantiate(wall, new Vector3(r * size, 0, (c * size) - (size / 2f)), Quaternion.identity) as GameObject;
+                    mazeCells[r, c].westWall = Instantiate(walls[levelWallIndex], new Vector3(r * size, 0, (c * size) - (size / 2f)), Quaternion.identity) as GameObject;
                     mazeCells[r, c].westWall.name = "West Wall " + r + "," + c;
                 }
 
-                mazeCells[r, c].eastWall = Instantiate(wall, new Vector3(r * size, 0, (c * size) + (size / 2f)), Quaternion.identity) as GameObject;
+                mazeCells[r, c].eastWall = Instantiate(walls[levelWallIndex], new Vector3(r * size, 0, (c * size) + (size / 2f)), Quaternion.identity) as GameObject;
                 mazeCells[r, c].eastWall.name = "East Wall " + r + "," + c;
 
                 if (r == 0)
                 {
-                    mazeCells[r, c].northWall = Instantiate(wall, new Vector3((r * size) - (size / 2f), 0, c * size), Quaternion.identity) as GameObject;
+                    mazeCells[r, c].northWall = Instantiate(walls[levelWallIndex], new Vector3((r * size) - (size / 2f), 0, c * size), Quaternion.identity) as GameObject;
                     mazeCells[r, c].northWall.name = "North Wall " + r + "," + c;
                     mazeCells[r, c].northWall.transform.Rotate(Vector3.up * 90f);
                 }
 
-                mazeCells[r, c].southWall = Instantiate(wall, new Vector3((r * size) + (size / 2f), 0, c * size), Quaternion.identity) as GameObject;
+                mazeCells[r, c].southWall = Instantiate(walls[levelWallIndex], new Vector3((r * size) + (size / 2f), 0, c * size), Quaternion.identity) as GameObject;
                 mazeCells[r, c].southWall.name = "South Wall " + r + "," + c;
                 mazeCells[r, c].southWall.transform.Rotate(Vector3.up * 90f);
             }
