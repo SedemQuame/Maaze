@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public bool isGameOver, isGamePaused, isObjectManagerDisplayed, isPanelActive;
     [Tooltip("Displays the overlayPanel text.")]
     public GameObject overlayPanel, touchControlPanel, objectManager, worldInformationBox, gameWonPanel, gameLostPanel, gameControls;
-    public GameObject pointText, w_score_text, l_score_text;
+    public GameObject pointText, w_score_text, l_score_text, w_message, l_message;
     [Tooltip("Displays the current game level.")]
     public TMP_Text gameLevel;
 
@@ -35,10 +35,10 @@ public class GameManager : MonoBehaviour
     }
 
     void FixedUpdate(){
-        if (!isObjectManagerDisplayed)
+            // except for level #4, where objectiveManager will be displayed when first enemy is spawned.
+        if (!isObjectManagerDisplayed && LevelDifficulty.levelDifficulty != 4)
         {
-            StartCoroutine(displayObjectiveManager());  
-            isObjectManagerDisplayed = true;
+            showObjectivePanel();
         }
     }
 
@@ -56,6 +56,11 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0.0f;
         }
         isGamePaused = !isGamePaused;
+    }
+
+    public void showObjectivePanel(){
+        StartCoroutine(displayObjectiveManager());  
+        isObjectManagerDisplayed = true;
     }
 
     /// <summary>
@@ -87,8 +92,17 @@ public class GameManager : MonoBehaviour
         worldInformationBox.SetActive(false);
         if (gameWon)
         {
+            string message = "Cleared!";
             w_score_text.GetComponent<TextMeshProUGUI>().text = "00" + PointsSystem.points;
             gameWonPanel.SetActive(true);
+
+            if(LevelDifficulty.levelDifficulty%8 == 0){
+                message = "Congratulations, Section\n" + message;
+            }else{
+                message = "Level, " + message;
+            }
+
+            w_message.GetComponent<TextMeshProUGUI>().text = message;
         }
         else
         {

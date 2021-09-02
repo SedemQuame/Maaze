@@ -7,14 +7,19 @@ public class PortalController : MonoBehaviour
     public GameObject player, teleportingFx;
     // ===============PRIVATE VARIABLES===============
     private GameManager gameManager;
+    private int portalPoints = 10;
+    private GameObject pointText;
 
     void Start(){
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
+        pointText = GameObject.Find("pointText");
     }
 
     void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "Player"){
+            // give player X amount of points for using the portal.
+            PointsSystem.updatePointSystem(portalPoints, pointText);
             StartCoroutine(gameEndSequence());
         }
     }

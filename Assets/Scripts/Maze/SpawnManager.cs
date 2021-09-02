@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -14,7 +15,7 @@ public class SpawnManager : MonoBehaviour
 {
 // ===============PUBLIC VARIABLES===============
     public Material[] materials;
-    public GameObject[] reward;
+    public GameObject[] rewards;
     public GameObject[] enemyArr;
     public GameObject healthDock, portal;
     public GameObject eventManager, objectiveStatusIndicator;
@@ -26,13 +27,14 @@ public class SpawnManager : MonoBehaviour
     private float spawnRate, initialSpawnRate = 30.0f;
     private int numberOfRewards;
     private string eventMessage;
-    private bool spawnedPortal, isPortalSpawned, eventBoxedDisplayed = false;
+    private List<string> objectSpawnLocations = new List<string>();
+    private bool spawnedPortal, isPortalSpawned, eventBoxedDisplayed = false, hasDisplayedObjectiveManager;
 
     void Start()
     {
         loader = GameObject.Find("Maze Loader Holder").GetComponent<MazeLoader>();
         isPortalSpawned = false;
-        if(LevelDifficulty.levelDifficulty > 2){ // do not spawn collectibles till level 3.
+        if(LevelDifficulty.levelDifficulty >= 2){ // do not spawn collectibles till level 2.
             StartCoroutine(spawnStart());   
             objectiveStatusIndicator.SetActive(true);
         }
@@ -48,6 +50,13 @@ public class SpawnManager : MonoBehaviour
             {
                 reduceRewardCount();
                 updateRewardCountText();
+                if(LevelDifficulty.levelDifficulty == 4 && !hasDisplayedObjectiveManager){
+                    // spawn enemy when player, takes the first collectible reward.
+                    StartCoroutine(SpawnEnemy(2));
+                    // show game objective windows.
+                    GameObject.Find("Manager").GetComponent<GameManager>().showObjectivePanel();
+                    hasDisplayedObjectiveManager = true;
+                }
             }
             checkGameOverStatus();
         }
@@ -97,7 +106,7 @@ public class SpawnManager : MonoBehaviour
 
     void spawnPortal(){
         if(!spawnedPortal){
-            randomlySpawn(portal, -0.9f);
+            spawnAtRandomLocation(portal, -0.9f);
         }
         spawnedPortal = true;
     }
@@ -114,28 +123,49 @@ public class SpawnManager : MonoBehaviour
     /// Spawns a number of rewards according to the level difficulty.
     /// </summary>
     void spawnRewardsByLevelDifficulty()
-    {
+    {   
+        numberOfRewards = LevelDifficulty.levelDifficulty;
+        if(LevelDifficulty.levelDifficulty == 2){
+            foreach (GameObject reward in rewards)
+            {
+                spawnAtRandomLocation(reward);
+            }
+            return;
+        }
+
         for (int i = 0; i < LevelDifficulty.levelDifficulty; i++)
         {
-            randomlySpawn(reward[Random.Range(0, 3)], -0.4f);
+            spawnAtRandomLocation(rewards[Random.Range(0, 3)]);
         }
-        numberOfRewards = LevelDifficulty.levelDifficulty;
     }
 
     /// <summary>
-    /// Spawns the reward game object, in a random cell.
+    /// Spawns the rewards game object, in a random cell.
     /// </summary>
-    void randomlySpawn(GameObject gameObject, float ySpawnPoint)
+    void spawnAtRandomLocation(GameObject gameObject, float ySpawnPoint = -0.4f)
     {
-        string cell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
+        string cell = generateUnvisitedSpawnPoint();
         Vector3 floorPosition = GameObject.Find(cell).transform.position;
         Instantiate(gameObject, new Vector3(floorPosition.x, ySpawnPoint, floorPosition.z), transform.rotation);
+        objectSpawnLocations.Add(cell);
         if(gameObject.CompareTag("Portal") && LevelDifficulty.levelDifficulty > 1){
             eventMessage = "Portal spawned at cell location: (" + cell.Split(' ')[1] + ").";
             isPortalSpawned = true;
         }
     }
-    
+
+    private string generateUnvisitedSpawnPoint()
+    {
+        while (true)
+        {
+            string possibleSpawnPoint = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
+            if (!objectSpawnLocations.Contains(possibleSpawnPoint))
+            {
+                return possibleSpawnPoint;
+            }
+        }
+    }
+
     /// <summary>
     /// Spawns the Enemy game objects, in a randomized patterns.
     /// Creates a blinking cell to alert the Player that an Enemy is about to be spawned in a particular cell.
@@ -144,7 +174,7 @@ public class SpawnManager : MonoBehaviour
     {
         // if player has not reached a certain level, don't spawn any enemy.
         if (LevelDifficulty.levelDifficulty <= 4) return;
-        StartCoroutine(SpawnEnemy());
+        StartCoroutine(SpawnEnemy(LevelDifficulty.levelDifficulty + 2));
     }
 
     /// <summary>
@@ -167,7 +197,9 @@ public class SpawnManager : MonoBehaviour
         }else{
             spawnRate = 10.0f;
         }
+
         spawnRewardsByLevelDifficulty();
+
         updateRewardCountText();
 
         //wait X amount of seconds before spawning enemies
@@ -175,9 +207,10 @@ public class SpawnManager : MonoBehaviour
 
         if(LevelDifficulty.levelDifficulty > 3){
             spawnEnemiesByLevelDifficulty();
+
             //spawn health dock, if level difficulty > 6.
             if(LevelDifficulty.levelDifficulty > 5){
-                randomlySpawn(healthDock, -0.9f);
+                spawnAtRandomLocation(healthDock, -0.9f);
             }
         }
     }
@@ -185,9 +218,9 @@ public class SpawnManager : MonoBehaviour
     /// <summary>
     /// A coroutine for timing the spawning of Enemy gameObjects.
     /// </summary>
-    IEnumerator SpawnEnemy()
+    IEnumerator SpawnEnemy(int numberOfEnemiesToSpawn)
     {
-        for (int i = 0; i < LevelDifficulty.levelDifficulty + 2; i++)
+        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
         {
             string spawnManagerCell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
             spawnManagerFloor = GameObject.Find(spawnManagerCell);

@@ -34,6 +34,29 @@
     },
     {
       "worldInfo": {
+        "text": "Low level collectibles.",
+        "images": ["Images/coin.PNG"]
+      },
+      "instructions": {
+        "common": [
+          {
+            "text": "Collect all low collectibles in this level.",
+            "images": [
+              "Images/coin.PNG",
+              "Images/cone.PNG",
+              "Images/ball.PNG"
+            ]
+          }
+        ],
+        "mobile": [],
+        "laptop": []
+      },
+      "specialRule": {
+        "text": ""
+      }
+    },
+    {
+      "worldInfo": {
         "text": "Learn shooting",
         "images": ["<image of the shooting nozzel>"]
       },
@@ -58,36 +81,13 @@
     },
     {
       "worldInfo": {
-        "text": "Low level collectibles.",
-        "images": ["Images/coin.PNG"]
-      },
-      "instructions": {
-        "common": [
-          {
-            "text": "Collect all low collectibles in this level.",
-            "images": [
-              "Images/coin.PNG",
-              "Images/cone.PNG",
-              "Images/ball.PNG"
-            ]
-          }
-        ],
-        "mobile": [],
-        "laptop": []
-      },
-      "specialRule": {
-        "text": ""
-      }
-    },
-    {
-      "worldInfo": {
         "text": "Meet the  with low level enemy",
         "images": ["Images/green.PNG"]
       },
       "instructions": {
         "common": [
           {
-            "text": "1)Kill the low level enemies.\n2)Escape.",
+            "text": "1)Kill the low level enemies to activate the portal.\n2)Escape.",
             "images": [
               "Images/green.PNG",
               "Images/yellow.PNG",
@@ -131,11 +131,8 @@
       "instructions": {
         "common": [
           {
-            "text": "1)Kill the low level enemies.\n2)Stand on the healing pad.\n3)Escape.\nPS:You still have to defend against enemies while healing",
+            "text": "The green healing pad is an healing station that can\n heal both the Player and his Enemies.\nSimply stand on the healing pad and wait till full health is restored.\n\nPS: You still have to be defend from being killed.",
             "images": [
-              "Images/green.PNG",
-              "Images/yellow.PNG",
-              "Images/blue.PNG",
               "Images/healing_pad.PNG"
             ]
           }
@@ -149,14 +146,14 @@
     },
     {
       "worldInfo": {
-        "text": "Dinner with the, KingPin",
+        "text": "This level introduces, new enemies.\nMid-Level enemies are much more clever and are more resistant to damage.\nBeware!",
         "images": ["Images/red.PNG"]
       },
       "instructions": {
         "common": [
           {
-            "text": "1)Kill the kingpin.\n2)Escape",
-            "images": ["Images/red.PNG"]
+            "text": "1)Kill all blue and red enemies.\n2)Escape",
+            "images": ["Images/blue.PNG", "Images/red.PNG"]
           }
         ],
         "mobile": [],

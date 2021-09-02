@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         touchPlayerMovement();
         #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEBGL //running either in Unity editor, standalone build or webgl. 
             keyboardPlayerMovement();
-            // touchControlPanel.SetActive(false);
+            touchControlPanel.SetActive(false);
         #elif UNITY_IOS || UNITY_ANDROID //running on a mobile device 
             touchControlPanel.SetActive(true);
             if (isFiring)
