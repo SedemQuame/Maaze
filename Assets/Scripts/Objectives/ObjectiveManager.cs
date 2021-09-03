@@ -45,7 +45,8 @@ public class ObjectiveManager : MonoBehaviour
 
         // set the text and image.
         worldInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "World Information";
-        worldInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = level.worldInfo.text; 
+        // format worldInfo text depending on certain placeholders.
+        worldInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = formatWorldInfoTextMessage(level.worldInfo.text); 
 
         // Instruction Info Box
         GameObject instructionInfoBox = Instantiate(infoBoxPrefabMedium);
@@ -107,6 +108,16 @@ public class ObjectiveManager : MonoBehaviour
             specialRuleInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text =  level.specialRule.text; 
         }
         
+    }
+
+    private string formatWorldInfoTextMessage(string worldInfoMsg){
+        if (!worldInfoMsg.Contains("expanded"))
+        {
+            return worldInfoMsg;
+        }
+        int mazeRowColumn =  GameObject.Find("Maze Loader Holder").GetComponent<MazeLoader>().getRowAndColumnNumber();
+        string formattedMsg = string.Format(worldInfoMsg, mazeRowColumn, mazeRowColumn);
+        return formattedMsg;
     }
 
     private Texture2D createTextureUsingFileName(string image){

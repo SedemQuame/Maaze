@@ -184,7 +184,7 @@
     },
     {
       "worldInfo": {
-        "text": "Congratulations, on completing the tutorial!\nThe world is has expanded by 1RC.\nMaaze now has a nXn layout.",
+        "text": "Congratulations, on completing the tutorial!\nThe world is has expanded by 1RC.\nMaaze now has a {0}x{1} layout.",
         "images": ["Images/expansion.png"]
       },
       "instructions": {
@@ -203,7 +203,7 @@
     },
     {
       "worldInfo": {
-        "text": "The world has expanded by 2RC.\nMaaze now has a (n+1)x(n+1) layout.",
+        "text": "The world has expanded by 2RC.\nMaaze now has a {0}x{1} layout.",
         "images": ["Images/expansion.png"]
       },
       "instructions": {
@@ -222,7 +222,7 @@
     },
     {
       "worldInfo": {
-        "text": "The world has expanded by 3RC.\nMaaze now has a (n+2)x(n+2) layout.",
+        "text": "The world has expanded by 3RC.\nMaaze now has a {0}x{1} layout.",
         "images": ["Images/expansion.png"]
       },
       "instructions": {
@@ -241,7 +241,7 @@
     },
     {
       "worldInfo": {
-        "text": "The world has expanded by 4RC.\nMaaze now has a (n+3)x(n+3) layout.",
+        "text": "The world has expanded by 4RC.\nMaaze now has a {0}x{1} layout.",
         "images": ["Images/expansion.png"]
       },
       "instructions": {
@@ -260,7 +260,7 @@
     },
     {
       "worldInfo": {
-        "text": "The world has expanded by 5RC.\nMaaze now has a (n+4)x(n+4) layout.",
+        "text": "The world has expanded by 5RC.\nMaaze now has a {0}x{1} layout.",
         "images": ["Images/expansion.png"]
       },
       "instructions": {
@@ -279,7 +279,7 @@
     },
     {
       "worldInfo": {
-        "text": "The world has expanded by 6RC.\nMaaze now has a (n+5)x(n+5) layout.",
+        "text": "The world has expanded by 6RC.\nMaaze now has a {0}x{1} layout.",
         "images": ["Images/expansion.png"]
       },
       "instructions": {
@@ -298,7 +298,7 @@
     },
     {
       "worldInfo": {
-        "text": "The world has expanded by 7RC.\nMaaze now has a (n+6)x(n+6) layout.",
+        "text": "The world has expanded by 7RC.\nMaaze now has a {0}x{1} layout.",
         "images": ["Images/expansion.png"]
       },
       "instructions": {
@@ -317,7 +317,7 @@
     },
     {
       "worldInfo": {
-        "text": "The world has expanded by 8RC.\nMaaze now has a (n+7)x(n+7) layout.",
+        "text": "The world has expanded by 8RC.\nMaaze now has a {0}x{1} layout.",
         "images": ["Images/expansion.png"]
       },
       "instructions": {

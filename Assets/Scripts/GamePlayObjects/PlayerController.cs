@@ -129,8 +129,7 @@ public class PlayerController : MonoBehaviour
                 {
                     // dying sequence
                     collider.gameObject.GetComponent<EnemyController>().DestroyEffect(collider.gameObject);
-                    audioSource.PlayOneShot(dyingSound, vol);
-                    StartCoroutine(destroyPlayerGameObject(this.gameObject));
+                    dyingSequence();
                 }
                 break;
             case "Ground":
@@ -226,6 +225,17 @@ public class PlayerController : MonoBehaviour
     {
         health -= damagePoints;
         healthBarControl.SetHealthBarValue(healthBarControl.GetHealthBarValue() - (0.01f * damagePoints));
+    }
+
+    private void dyingSequence(){
+        audioSource.PlayOneShot(dyingSound, vol);
+        StartCoroutine(destroyPlayerGameObject(this.gameObject));
+    }
+
+    public void killPlayerOnTimeOut(){
+        health = 0;
+        healthBarControl.SetHealthBarValue(0);
+        dyingSequence();
     }
 
     void playerOutOfBounds()

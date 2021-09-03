@@ -106,8 +106,27 @@ public class MazeLoader : MonoBehaviour
 
     public void setRowAndColumnNumber(int levelDifficulty = 3)
     {
-        mazeColumns = levelDifficulty + levelNumber;
-        mazeRows = mazeColumns;
+        // change the value for columns and rows based on, section strategy.
+        if(LevelDifficulty.levelDifficulty <= 4){
+            mazeRows = mazeColumns = 4;
+        }else if(LevelDifficulty.levelDifficulty > 4 && LevelDifficulty.levelDifficulty <= 8){
+            mazeRows = mazeColumns = 5;
+        }else if(LevelDifficulty.levelDifficulty > 8 && LevelDifficulty.levelDifficulty <= 16)
+        {
+            mazeRows = mazeColumns = LevelDifficulty.levelDifficulty - 3;
+        }else if(LevelDifficulty.levelDifficulty > 16 && LevelDifficulty.levelDifficulty <= 40)
+        {
+            mazeRows = mazeColumns = 13;
+        }
+        else if(LevelDifficulty.levelDifficulty > 40 && LevelDifficulty.levelDifficulty <= 48)
+        {
+            mazeRows = mazeColumns = LevelDifficulty.levelDifficulty - 27;
+        }else if(LevelDifficulty.levelDifficulty > 48 && LevelDifficulty.levelDifficulty <= 50)
+        {
+            mazeRows = mazeColumns = 21;
+        }
+        // mazeColumns = levelDifficulty + levelNumber;
+        // mazeRows = mazeColumns;
     }
 
     public int getRowAndColumnNumber()

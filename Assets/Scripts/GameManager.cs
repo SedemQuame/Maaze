@@ -16,9 +16,11 @@ public class GameManager : MonoBehaviour
     public bool isGameOver, isGamePaused, isObjectManagerDisplayed, isPanelActive;
     [Tooltip("Displays the overlayPanel text.")]
     public GameObject overlayPanel, touchControlPanel, objectManager, worldInformationBox, gameWonPanel, gameLostPanel, gameControls;
-    public GameObject pointText, w_score_text, l_score_text, w_message, l_message;
+    public GameObject pointText, w_score_text, l_score_text, w_message, l_message, timer;
     [Tooltip("Displays the current game level.")]
     public TMP_Text gameLevel;
+    private int levelTimeLimit = 60;
+    private PlayerController playerController;
 
     /// <summary>
     /// Ensures that the game is not paused. Hides the gameOver canvas to false.
@@ -32,6 +34,11 @@ public class GameManager : MonoBehaviour
         overlayPanel.SetActive(false);
         isObjectManagerDisplayed = false;
         pointText.GetComponent<TextMeshProUGUI>().text = ("00" + PointsSystem.points);
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        // initialise timer values.
+        timer.GetComponent<Timer>().SetDuration(levelTimeLimit)
+            .OnEnd (() => playerController.killPlayerOnTimeOut())
+            .Begin () ;
     }
 
     void FixedUpdate(){
