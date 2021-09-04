@@ -7,6 +7,6 @@ public static class LevelDifficulty
 {
     [Tooltip("Value used in modifying the difficulty of a level.")]
     [Range(1, 50)]
-    public static int levelDifficulty=17;
-    public static int maxLevelReached=17;
+    public static int levelDifficulty=25;
+    public static int maxLevelReached=25;
 }

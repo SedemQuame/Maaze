@@ -50,7 +50,6 @@ public class ObjectiveManager : MonoBehaviour
 
         // Instruction Info Box
         GameObject instructionInfoBox = Instantiate(infoBoxPrefabMedium);
-        instructionInfoBox.transform.SetParent(objectiveManagerBody.transform, false);
 
         // World items Info Box
         GameObject worldPanel = Instantiate(worldItemsPanel);
@@ -77,9 +76,12 @@ public class ObjectiveManager : MonoBehaviour
             #endif
         }
 
-        // instructions
-        instructionInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Instructions";
-        instructionInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = instructionOutput;       
+        if(instructionOutput != ""){
+            // instructions
+            instructionInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Instructions";
+            instructionInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = instructionOutput;
+            instructionInfoBox.transform.SetParent(objectiveManagerBody.transform, false);
+        }
 
         if(imageArr.Count() > 0)
         foreach (string image in imageArr)
@@ -101,13 +103,16 @@ public class ObjectiveManager : MonoBehaviour
         }
 
         // Special Rule Info Box
-        if(level.specialRule.text != ""){
+        specialRuleBoxCreator(level.specialRule.text);
+    }
+
+    private void specialRuleBoxCreator(string levelSpecialRule){
+        if(levelSpecialRule != ""){
             GameObject specialRuleInfoBox = Instantiate(infoBoxPrefabMedium);
             specialRuleInfoBox.transform.SetParent(objectiveManagerBody.transform, false);
             specialRuleInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Special Rules";
-            specialRuleInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text =  level.specialRule.text; 
+            specialRuleInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text =  levelSpecialRule; 
         }
-        
     }
 
     private string formatWorldInfoTextMessage(string worldInfoMsg){

@@ -116,17 +116,17 @@ public class MazeLoader : MonoBehaviour
             mazeRows = mazeColumns = LevelDifficulty.levelDifficulty - 3;
         }else if(LevelDifficulty.levelDifficulty > 16 && LevelDifficulty.levelDifficulty <= 40)
         {
-            mazeRows = mazeColumns = 13;
+            //change later to 13
+            mazeRows = mazeColumns = 10;
         }
         else if(LevelDifficulty.levelDifficulty > 40 && LevelDifficulty.levelDifficulty <= 48)
         {
-            mazeRows = mazeColumns = LevelDifficulty.levelDifficulty - 27;
+            //change later to -27
+            mazeRows = mazeColumns = LevelDifficulty.levelDifficulty - 29;
         }else if(LevelDifficulty.levelDifficulty > 48 && LevelDifficulty.levelDifficulty <= 50)
         {
             mazeRows = mazeColumns = 21;
         }
-        // mazeColumns = levelDifficulty + levelNumber;
-        // mazeRows = mazeColumns;
     }
 
     public int getRowAndColumnNumber()

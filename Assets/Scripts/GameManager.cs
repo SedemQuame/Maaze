@@ -35,10 +35,13 @@ public class GameManager : MonoBehaviour
         isObjectManagerDisplayed = false;
         pointText.GetComponent<TextMeshProUGUI>().text = ("00" + PointsSystem.points);
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        // initialise timer values.
-        timer.GetComponent<Timer>().SetDuration(levelTimeLimit)
-            .OnEnd (() => playerController.killPlayerOnTimeOut())
-            .Begin () ;
+        if(LevelDifficulty.levelDifficulty >= 17 && LevelDifficulty.levelDifficulty <= 20){
+            timer.SetActive(true);
+            // initialise timer values.
+            timer.GetComponent<Timer>().SetDuration(levelTimeLimit)
+                .OnEnd (() => playerController.killPlayerOnTimeOut())
+                .Begin () ;
+        }
     }
 
     void FixedUpdate(){
