@@ -17,6 +17,8 @@ public class SpawnManager : MonoBehaviour
     public Material[] materials;
     public GameObject[] rewards;
     public GameObject[] enemyArr;
+
+    public GameObject[] glitchedGameObjects;
     public GameObject healthDock, portal;
     public GameObject eventManager, objectiveStatusIndicator;
     public TMP_Text rewardCountText;
@@ -140,6 +142,17 @@ public class SpawnManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Spawns a number of rewards according to the level difficulty.
+    /// </summary>
+    void spawnGlitchedReward(int numberOfGlitchedObjectsToSpawn)
+    {
+        for (int i = 0; i < numberOfGlitchedObjectsToSpawn; i++)
+        {
+            spawnAtRandomLocation(glitchedGameObjects[Random.Range(0, 2)]);
+        }
+    }    
+
+    /// <summary>
     /// Spawns the rewards game object, in a random cell.
     /// </summary>
     void spawnAtRandomLocation(GameObject gameObject, float ySpawnPoint = -0.4f)
@@ -199,6 +212,13 @@ public class SpawnManager : MonoBehaviour
         }
 
         spawnRewardsByLevelDifficulty();
+
+        //add spawned glitched gameobjects
+        if (LevelDifficulty.levelDifficulty >= 25 && LevelDifficulty.levelDifficulty < 33)
+        {
+            int numberOfGlitchedObjectsToSpawn = 2;
+            spawnGlitchedReward(numberOfGlitchedObjectsToSpawn);
+        }
 
         updateRewardCountText();
 

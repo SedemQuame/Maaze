@@ -1775,7 +1775,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.75, y: 1}
+    m_SensorSize: {x: 1.124812, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -13664,11 +13664,15 @@ MonoBehaviour:
   - {fileID: 5447498060651899520, guid: 103c6262e3f810e42b21abf31c2c5c4b, type: 3}
   - {fileID: 1881058890254009928, guid: fc3b47b724782114da9d17abde7ae196, type: 3}
   - {fileID: 391677047789095703, guid: 789141fc2e3b8f34986ed94134783d9e, type: 3}
+  - {fileID: 8639011249201252394, guid: c800d4cc6886de34ebc17e9d466a6986, type: 3}
   enemyArr:
   - {fileID: 1391290648877625624, guid: 7ac93cd1e9aeead36b482a1e83242557, type: 3}
   - {fileID: 334535100609521996, guid: 789c7f53eabdd7d44a4aebf1f16ccce0, type: 3}
   - {fileID: 4553447304167223556, guid: 02239676fa9046c0aaf7b25be539c711, type: 3}
   - {fileID: 5550322204951661109, guid: 15f887dff93e118e89740a594179071a, type: 3}
+  glitchedGameObjects:
+  - {fileID: 8639011249201252394, guid: c800d4cc6886de34ebc17e9d466a6986, type: 3}
+  - {fileID: 8639011249201252394, guid: 27d0ff4ed3104ba4fa15f7fc0b3faed6, type: 3}
   healthDock: {fileID: 6809944706259094419, guid: 0a3972e964dcd2b47b2a3bc58d35d554,
     type: 3}
   portal: {fileID: 7380003391365095453, guid: 4f1e8dab6a7a69040a17851139721b10, type: 3}
