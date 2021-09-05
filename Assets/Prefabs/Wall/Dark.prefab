@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2342344}
   - component: {fileID: 541662009899996150}
   m_Layer: 0
-  m_Name: Burple
+  m_Name: Dark
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

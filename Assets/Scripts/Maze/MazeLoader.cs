@@ -117,7 +117,7 @@ public class MazeLoader : MonoBehaviour
         }else if(LevelDifficulty.levelDifficulty > 16 && LevelDifficulty.levelDifficulty <= 40)
         {
             //change later to 13
-            mazeRows = mazeColumns = 10;
+            mazeRows = mazeColumns = 8;
         }
         else if(LevelDifficulty.levelDifficulty > 40 && LevelDifficulty.levelDifficulty <= 48)
         {
