@@ -19,6 +19,7 @@ public class ObjectiveManager : MonoBehaviour
     private WorldInfo worldInfo;
     private Instructions instructions;
     private SpecialRule specialRule;
+    private string instructionOutput;
     private GameObject infoBoxPrefabSmall, infoBoxPrefabMedium, worldItemsPanel, itemBox;
 
     void loadUIGameObjectResources(){
@@ -34,28 +35,52 @@ public class ObjectiveManager : MonoBehaviour
         level = levelList.levels[(LevelDifficulty.levelDifficulty-1)];
     }
 
-    public void populateObjectiveMenu(){   
-        loadUIGameObjectResources();
-        loadJsonDataForLevel();
-
-        // ====================================================
+    void setUpWorldInPanel(){
         // World Info Box
-        GameObject worldInfoBox = Instantiate(infoBoxPrefabSmall);
+        GameObject worldInfoBox = Instantiate(infoBoxPrefabMedium);
         worldInfoBox.transform.SetParent(objectiveManagerBody.transform, false);
-
         // set the text and image.
         worldInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "World Information";
         // format worldInfo text depending on certain placeholders.
         worldInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = formatWorldInfoTextMessage(level.worldInfo.text); 
+    }
 
-        // Instruction Info Box
+    void setUpInstructionPanel(){
         GameObject instructionInfoBox = Instantiate(infoBoxPrefabMedium);
+        if(instructionOutput != ""){
+            // instructions
+            instructionInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Instructions";
+            instructionInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = instructionOutput;
+            instructionInfoBox.transform.SetParent(objectiveManagerBody.transform, false);
+        }
+    }
 
-        // World items Info Box
-        GameObject worldPanel = Instantiate(worldItemsPanel);
-        worldPanel.transform.SetParent(objectiveManagerBody.transform, false);
-        
-        string instructionOutput = "";
+    void setUpNewItemsPanel(string image){
+        GameObject itemBoxGameObject = Instantiate(itemBox);
+
+        // New World items Info Box
+        GameObject newItemPanel = Instantiate(worldItemsPanel);
+        itemBoxGameObject.transform.SetParent(newItemPanel.transform.GetChild(1).transform, false);
+
+        // set item image
+        RawImage itemImage = itemBoxGameObject.transform.GetChild(0).GetComponent<RawImage>();
+        itemImage.texture = createTextureUsingFileName(image);
+
+        // set item name
+        Text itemPanel = itemBoxGameObject.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+        string itemName = (((image.ToString()).Split('/')[1].Split('.')[0]).Replace("_", " "));
+        TextInfo myTI = new CultureInfo("en-US",false).TextInfo;
+        itemPanel.text = myTI.ToTitleCase(itemName);
+
+        newItemPanel.transform.SetParent(objectiveManagerBody.transform, false);
+    }
+    
+    public void populateObjectiveMenu(){   
+        loadUIGameObjectResources();
+        loadJsonDataForLevel();
+        setUpWorldInPanel();
+
+        instructionOutput = "";
         var imageArr = new List<string>{};
         if((level.instructions.common != null) && (level.instructions.common.Length > 0)){
             instructionOutput = level.instructions.common[0].text;
@@ -76,34 +101,19 @@ public class ObjectiveManager : MonoBehaviour
             #endif
         }
 
-        if(instructionOutput != ""){
-            // instructions
-            instructionInfoBox.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Instructions";
-            instructionInfoBox.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = instructionOutput;
-            instructionInfoBox.transform.SetParent(objectiveManagerBody.transform, false);
+        // Instruction Info Box
+        setUpInstructionPanel();
+        if(imageArr.Count() > 0){
+            foreach (string image in imageArr)
+            {
+                setUpNewItemsPanel(image);
+            }
         }
 
-        if(imageArr.Count() > 0)
-        foreach (string image in imageArr)
-        {
-            GameObject itemBoxGameObject = Instantiate(itemBox);
-
-            // append item 
-            itemBoxGameObject.transform.SetParent(worldPanel.transform.GetChild(1).transform, false);
-
-            // set item image
-            RawImage itemImage = itemBoxGameObject.transform.GetChild(0).GetComponent<RawImage>();
-            itemImage.texture = createTextureUsingFileName(image);
-
-            // set item name
-            Text itemPanel = itemBoxGameObject.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-            string itemName = (((image.ToString()).Split('/')[1].Split('.')[0]).Replace("_", " "));
-            TextInfo myTI = new CultureInfo("en-US",false).TextInfo;
-            itemPanel.text = myTI.ToTitleCase(itemName);
+        if(level.specialRule.text != ""){
+            // Special Rule Info Box
+            specialRuleBoxCreator(level.specialRule.text);
         }
-
-        // Special Rule Info Box
-        specialRuleBoxCreator(level.specialRule.text);
     }
 
     private void specialRuleBoxCreator(string levelSpecialRule){
