@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
 public class AdsManager : MonoBehaviour, IUnityAdsListener
@@ -18,15 +18,20 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         // branching depending on environment type.
         #if UNITY_IOS
             _gameId = _iOSGameId;
+            _interstitialAds += "iOS";
+            _rewardedAds += "iOS";
+            _bannerAds += "iOS"; 
+        #else
+            _gameId = _androidGameId;
             _interstitialAds += "Android";
             _rewardedAds += "Android";
             _bannerAds += "Android";
-        #else
-            _gameId = _androidGameId;
-            _interstitialAds += "iOS";
-            _rewardedAds += "iOS";
-            _bannerAds += "iOS";            
         #endif
+
+        Debug.Log(_interstitialAds);
+        Debug.Log(_rewardedAds);
+        Debug.Log(_bannerAds);
+
         Advertisement.AddListener(this);
         Advertisement.Initialize(_gameId, testMode);
     }
@@ -74,11 +79,11 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
 
     public void OnUnityAdsReady(string placementId)
     {
-        if(placementId == _interstitialAds){
-            PlayAds();
-        }else if(placementId == _rewardedAds){
-            PlayRewardedAd();
-        }
+        // if(placementId == _interstitialAds){
+        //     PlayAds();
+        // }else if(placementId == _rewardedAds){
+        //     PlayRewardedAd();
+        // }
         // throw new System.NotImplementedException();
         // ads are ready
         // Debug.Log("");
@@ -101,14 +106,15 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
         // throw new System.NotImplementedException();
-        if(placementId == _rewardedAds && showResult == ShowResult.Finished){
-            // grant some extra coins
-            // other rewards
-            Debug.Log("Perform reward function");
-        }
 
-        if (placementId == _interstitialAds && placementId == _rewardedAds)
+
+        if (placementId == _interstitialAds || placementId == _rewardedAds)
         {
+            if(showResult == ShowResult.Finished){
+                // grant some extra coins
+                // other rewards
+                Debug.Log("Perform reward function");
+            }
             buttonBehaviour.loadNextGamePlayLevelcene();
         }
     }
