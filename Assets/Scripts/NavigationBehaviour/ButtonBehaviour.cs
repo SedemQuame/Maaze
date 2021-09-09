@@ -78,13 +78,12 @@ public class ButtonBehaviour : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         LevelDifficulty.levelDifficulty += 1;
-
         if(LevelDifficulty.levelDifficulty > LevelDifficulty.maxLevelReached){
             LevelDifficulty.maxLevelReached = LevelDifficulty.levelDifficulty;
             PlayerPrefs.SetInt("maxLevelReached", LevelDifficulty.maxLevelReached);
         }
 
-        if(LevelDifficulty.levelDifficulty >= 33 && LevelDifficulty.levelDifficulty <= 48){
+        if(LevelDifficulty.levelDifficulty >= 33 && LevelDifficulty.levelDifficulty <= 40){
             SceneManager.LoadScene("Maaze Game Play Lighting Dark");
             return;
         }

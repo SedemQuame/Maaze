@@ -20,7 +20,7 @@ public class ObjectiveManager : MonoBehaviour
     private Instructions instructions;
     private SpecialRule specialRule;
     private string instructionOutput;
-    private GameObject infoBoxPrefabSmall, infoBoxPrefabMedium, worldItemsPanel, itemBox;
+    private GameObject infoBoxPrefabSmall, infoBoxPrefabMedium, worldItemsPanel, itemBox, newItemPanel;
 
     void loadUIGameObjectResources(){
         infoBoxPrefabSmall = Resources.Load("UI/InfoBox_Small") as GameObject;
@@ -59,7 +59,6 @@ public class ObjectiveManager : MonoBehaviour
         GameObject itemBoxGameObject = Instantiate(itemBox);
 
         // New World items Info Box
-        GameObject newItemPanel = Instantiate(worldItemsPanel);
         itemBoxGameObject.transform.SetParent(newItemPanel.transform.GetChild(1).transform, false);
 
         // set item image
@@ -104,6 +103,7 @@ public class ObjectiveManager : MonoBehaviour
         // Instruction Info Box
         setUpInstructionPanel();
         if(imageArr.Count() > 0){
+            newItemPanel = Instantiate(worldItemsPanel);
             foreach (string image in imageArr)
             {
                 setUpNewItemsPanel(image);

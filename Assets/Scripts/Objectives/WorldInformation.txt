@@ -1042,6 +1042,37 @@
       "specialRule": {
         "text": ""
       }
+    },
+    {
+      "worldInfo": {
+        "text": "Survive",
+        "images": []
+      },
+      "instructions": {
+        "mobile": [
+          {
+            "text": "",
+            "images": []
+          },
+          {
+            "text": "",
+            "images": []
+          }
+        ],
+        "laptop": [
+          {
+            "text": "",
+            "images": []
+          },
+          {
+            "text": "",
+            "images": []
+          }
+        ]
+      },
+      "specialRule": {
+        "text": ""
+      }
     }
   ]
 }
