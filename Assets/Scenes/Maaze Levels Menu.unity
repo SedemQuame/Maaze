@@ -15789,7 +15789,6 @@ GameObject:
   - component: {fileID: 1538743600}
   - component: {fileID: 1538743602}
   - component: {fileID: 1538743601}
-  - component: {fileID: 1538743603}
   m_Layer: 5
   m_Name: Menu Group
   m_TagString: Untagged
@@ -15857,32 +15856,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538743599}
   m_CullTransparentMesh: 1
---- !u!114 &1538743603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538743599}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &1567995244
 GameObject:
   m_ObjectHideFlags: 0
@@ -19593,8 +19566,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 1505146792}
   m_Direction: 2
-  m_Value: 0.9999998
-  m_Size: 0.4966624
+  m_Value: 1
+  m_Size: 0.24423884
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
