@@ -20,9 +20,9 @@ public class LevelVisitToggler : MonoBehaviour
         {
             // get the name of the button.
             int buttonLevel = int.Parse(lockedLevel.transform.name);
-            if(PlayerPrefs.HasKey("maxLevelReached")){
-                LevelDifficulty.maxLevelReached = PlayerPrefs.GetInt("maxLevelReached");
-            }
+            // if(PlayerPrefs.HasKey("maxLevelReached")){
+            //     LevelDifficulty.maxLevelReached = PlayerPrefs.GetInt("maxLevelReached");
+            // }
 
             if (buttonLevel <= LevelDifficulty.maxLevelReached){
                 // make button interactable

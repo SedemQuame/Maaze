@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using UnityEngine.SceneManagement;
 
 public class AdsManager : MonoBehaviour, IUnityAdsListener
 {
@@ -11,8 +12,9 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     [SerializeField] string _iOSGameId = "4227890";
     private string _gameId;
     private string _interstitialAds = "Interstitial_", _rewardedAds = "Rewarded_", _bannerAds = "Banner_";
-    public ButtonBehaviour buttonBehaviour;
-    bool testMode = true;
+    public PlayerController playerController;
+    bool testMode = true, adShown = false, isPlayerResuscitated = false;
+
     void Start()
     {
         // branching depending on environment type.
@@ -27,24 +29,18 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
             _rewardedAds += "Android";
             _bannerAds += "Android";
         #endif
-
-        Debug.Log(_interstitialAds);
-        Debug.Log(_rewardedAds);
-        Debug.Log(_bannerAds);
-
         Advertisement.AddListener(this);
         Advertisement.Initialize(_gameId, testMode);
+
+        // set player controller script
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     // playing interstitial ads
     public void PlayAds(){
         if (Advertisement.IsReady(_interstitialAds))
         {
-            Debug.Log("Show Ads");
             Advertisement.Show(_interstitialAds);
-        }else{
-            Debug.Log("Unable to show ads");
-            buttonBehaviour.loadNextGamePlayLevelcene();
         }
     }
 
@@ -52,9 +48,6 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         if (Advertisement.IsReady(_rewardedAds))
         {
             Advertisement.Show(_rewardedAds);
-        }else{
-            Debug.Log("Unable to show ads");
-            buttonBehaviour.loadNextGamePlayLevelcene();
         }
     }
 
@@ -78,44 +71,54 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     }
 
     public void OnUnityAdsReady(string placementId)
-    {
-        // if(placementId == _interstitialAds){
-        //     PlayAds();
-        // }else if(placementId == _rewardedAds){
-        //     PlayRewardedAd();
-        // }
-        // throw new System.NotImplementedException();
-        // ads are ready
-        // Debug.Log("");
-    }
+    {}
 
     public void OnUnityAdsDidError(string message)
     {
         // throw new System.NotImplementedException();
         // error msg
-        Debug.Log("");
+        Debug.Log("Error occurred with unity ads.");
     }
 
     public void OnUnityAdsDidStart(string placementId)
     {
         // throw new System.NotImplementedException();
         // video started
-        Debug.Log("");        
+        Debug.Log("Unity ads started.");        
     }
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
-        // throw new System.NotImplementedException();
-
-
+        adShown=true;
         if (placementId == _interstitialAds || placementId == _rewardedAds)
         {
-            if(showResult == ShowResult.Finished){
-                // grant some extra coins
-                // other rewards
-                Debug.Log("Perform reward function");
+            if(showResult == ShowResult.Finished && adShown){
+                if(placementId == _rewardedAds){
+                    if(!isPlayerResuscitated){
+                        // revive the player with a certain amount of health points.
+                        // have him protected 0. 
+                        playerController.resusciatePlayer();
+                        isPlayerResuscitated = true;
+                    }else{
+                        changeLevel();
+                    }
+                }
+
+
+                if (placementId == _interstitialAds)
+                {
+                    changeLevel();
+                }
+                adShown=false;
             }
-            buttonBehaviour.loadNextGamePlayLevelcene();
+        }
+    }
+
+    private void changeLevel(){
+        if(LevelDifficulty.levelDifficulty >= 33 && LevelDifficulty.levelDifficulty <= 40){
+            SceneManager.LoadScene("Maaze Game Play Lighting Dark");
+        }else{                    
+            SceneManager.LoadScene("Maaze Game Play");
         }
     }
 }

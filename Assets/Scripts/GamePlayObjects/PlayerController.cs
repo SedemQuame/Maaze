@@ -227,6 +227,11 @@ public class PlayerController : MonoBehaviour
         healthBarControl.SetHealthBarValue(healthBarControl.GetHealthBarValue() - (0.01f * damagePoints));
     }
 
+    public void resusciatePlayer(){
+        updateHealthBar(-40);
+        this.gameObject.SetActive(true);
+    }
+
     private void dyingSequence(){
         audioSource.PlayOneShot(dyingSound, vol);
         StartCoroutine(destroyPlayerGameObject(this.gameObject));

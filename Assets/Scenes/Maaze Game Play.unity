@@ -4341,9 +4341,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1973230739}
-        m_TargetAssemblyTypeName: AdsManager, Assembly-CSharp
-        m_MethodName: PlayAds
+      - m_Target: {fileID: 1958556567}
+        m_TargetAssemblyTypeName: ButtonBehaviour, Assembly-CSharp
+        m_MethodName: loadNextGamePlayLevelcene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4357,6 +4357,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: ButtonBehaviour, Assembly-CSharp
         m_MethodName: playClickSound
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 843805196}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9049,12 +9061,12 @@ GameObject:
   - component: {fileID: 1316935606}
   - component: {fileID: 1316935605}
   m_Layer: 0
-  m_Name: Ads
-  m_TagString: Untagged
+  m_Name: Unity Ads
+  m_TagString: unity_ads
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1316935605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9069,7 +9081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _androidGameId: 4227891
   _iOSGameId: 4227890
-  buttonBehaviour: {fileID: 1958556567}
+  player: {fileID: 1612376246}
 --- !u!4 &1316935606
 Transform:
   m_ObjectHideFlags: 0
@@ -14209,7 +14221,6 @@ GameObject:
   - component: {fileID: 1950213208}
   - component: {fileID: 1950213207}
   - component: {fileID: 1950213206}
-  - component: {fileID: 1950213210}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -14302,21 +14313,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1950213210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1950213205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927919dae204bba4aabf1df73362639e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _androidGameId: 4227891
-  _iOSGameId: 4227890
-  buttonBehaviour: {fileID: 1958556567}
 --- !u!1001 &1958556566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14472,7 +14468,6 @@ GameObject:
   - component: {fileID: 1973230733}
   - component: {fileID: 1973230735}
   - component: {fileID: 1973230738}
-  - component: {fileID: 1973230739}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -14600,21 +14595,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1973230739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1973230732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927919dae204bba4aabf1df73362639e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _androidGameId: 4227891
-  _iOSGameId: 4227890
-  buttonBehaviour: {fileID: 1958556567}
 --- !u!1 &1982060214
 GameObject:
   m_ObjectHideFlags: 0

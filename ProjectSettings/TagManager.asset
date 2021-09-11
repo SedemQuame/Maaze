@@ -20,6 +20,7 @@ TagManager:
   - Unlocked Icon
   - Portal
   - Level Number
+  - unity_ads
   layers:
   - Default
   - TransparentFX

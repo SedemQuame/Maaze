@@ -15,17 +15,29 @@ public class ButtonBehaviour : MonoBehaviour
     public LevelLoader levelLoader;*/
     [Tooltip("The sound played when a UI element is clicked.")]
     public AudioClip clickSound;
+    private AdsManager adsManager;
     /// <summary>
     /// Represents the source that plays the audio sound.
     /// </summary>
     private AudioSource source;
     
+    void Awake()
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("unity_ads");
+        if (objects.Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     /// <summary>
     /// Assigns a value to all the private components
     /// </summary>
     public void Start()
     {
         source = GetComponent<AudioSource>();
+        adsManager = GameObject.FindGameObjectsWithTag("unity_ads")[0].GetComponent<AdsManager>();
     }
 
     /// <summary>
@@ -71,6 +83,16 @@ public class ButtonBehaviour : MonoBehaviour
         }
     }
 
+    public void decideAdToShow(){
+        if(LevelDifficulty.levelDifficulty <= 8){
+            // do not show ads
+            SceneManager.LoadScene("Maaze Game Play");
+        }else{
+            // show interstitial ads.
+            adsManager.PlayAds();
+        }
+    }
+
     /// <summary>
     /// Loads the next level menu scene, and destroys the old scene.
     /// </summary>
@@ -82,12 +104,8 @@ public class ButtonBehaviour : MonoBehaviour
             LevelDifficulty.maxLevelReached = LevelDifficulty.levelDifficulty;
             PlayerPrefs.SetInt("maxLevelReached", LevelDifficulty.maxLevelReached);
         }
-
-        if(LevelDifficulty.levelDifficulty >= 33 && LevelDifficulty.levelDifficulty <= 40){
-            SceneManager.LoadScene("Maaze Game Play Lighting Dark");
-            return;
-        }
-        SceneManager.LoadScene("Maaze Game Play");
+        // decided the type of Ad to show
+        decideAdToShow();
     }
 
     /// <summary>
