@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
             // initialise timer values.
             timer.GetComponent<Timer>().SetDuration(levelTimeLimit)
                 .OnEnd (() => playerController.killPlayerOnTimeOut())
-                .Begin () ;
+                .Begin ();
         }
     }
 

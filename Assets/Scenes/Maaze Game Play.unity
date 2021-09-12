@@ -1915,7 +1915,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.184127, y: 1}
+    m_SensorSize: {x: 1.3058201, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2932,6 +2932,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: ButtonBehaviour, Assembly-CSharp
         m_MethodName: playClickSound
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 522788464}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9081,7 +9093,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _androidGameId: 4227891
   _iOSGameId: 4227890
+  playerController: {fileID: 0}
   player: {fileID: 1612376246}
+  overlayPanel: {fileID: 1424016787}
+  gameLostPanel: {fileID: 862669039}
+  timer: {fileID: 870705397}
 --- !u!4 &1316935606
 Transform:
   m_ObjectHideFlags: 0

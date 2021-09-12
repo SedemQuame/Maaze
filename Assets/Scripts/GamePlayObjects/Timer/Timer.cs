@@ -76,10 +76,6 @@ public class Timer : MonoBehaviour {
       return this ;
    }
 
-
-
-
-
    public void Begin () {
       if (onTimerBeginAction != null)
          onTimerBeginAction.Invoke () ;

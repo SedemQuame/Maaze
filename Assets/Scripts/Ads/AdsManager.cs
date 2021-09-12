@@ -13,7 +13,9 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     private string _gameId;
     private string _interstitialAds = "Interstitial_", _rewardedAds = "Rewarded_", _bannerAds = "Banner_";
     public PlayerController playerController;
-    bool testMode = true, adShown = false, isPlayerResuscitated = false;
+    public GameObject player, overlayPanel, gameLostPanel, timer;
+    // public GameObject rewarded_ads_btn;
+    bool testMode = true, adShown = false, isPlayerResuscitated = false, isLevelReloaded = false;
 
     void Start()
     {
@@ -33,7 +35,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         Advertisement.Initialize(_gameId, testMode);
 
         // set player controller script
-        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        playerController = player.GetComponent<PlayerController>();
     }
 
     // playing interstitial ads
@@ -95,12 +97,19 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
             if(showResult == ShowResult.Finished && adShown){
                 if(placementId == _rewardedAds){
                     if(!isPlayerResuscitated){
-                        // revive the player with a certain amount of health points.
-                        // have him protected 0. 
-                        playerController.resusciatePlayer();
-                        isPlayerResuscitated = true;
+                        revivePlayer();
+
+                        // activate player reward.
+                        activatePlayerReward();
+
+                        // hide the gamelost and overlay panel.
+                        gameLostPanel.SetActive(false);
+                        overlayPanel.SetActive(false);
                     }else{
-                        changeLevel();
+                        if(!isLevelReloaded){
+                            // reload active scene
+                            reloadLevel();
+                        }
                     }
                 }
 
@@ -119,6 +128,28 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
             SceneManager.LoadScene("Maaze Game Play Lighting Dark");
         }else{                    
             SceneManager.LoadScene("Maaze Game Play");
+        }
+    }
+
+    private void reloadLevel(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        isLevelReloaded = true;
+    }
+
+    private void revivePlayer(){
+        // revive player.
+        player.SetActive(true);
+        playerController.resusciatePlayer();
+        isPlayerResuscitated = true;
+    }
+
+    private void activatePlayerReward(){
+        // if in timer section add some more seconds.
+        int rewardedTimeLimit = 40;
+        if(LevelDifficulty.levelDifficulty >= 17 && LevelDifficulty.levelDifficulty <= 32){
+            timer.GetComponent<Timer>().SetDuration(rewardedTimeLimit)
+                .OnEnd(() => playerController.killPlayerOnTimeOut())
+                .Begin();
         }
     }
 }
