@@ -20,7 +20,7 @@ public class MazeLoader : MonoBehaviour
 
     // ===============PRIVATE VARIABLES===============
     [SerializeField]
-    private int mazeRows, mazeColumns, levelNumber = 0;
+    private int mazeRows, mazeColumns;
     private MazeCell[,] mazeCells;
 
     void Start()
@@ -46,7 +46,7 @@ public class MazeLoader : MonoBehaviour
         {
             levelWallIndex = 5;
         }else{
-            levelNumber = 6;
+            levelWallIndex = 6;
         }
 
         if (LevelDifficulty.levelDifficulty == 0)

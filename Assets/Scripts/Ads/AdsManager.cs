@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class AdsManager : MonoBehaviour, IUnityAdsListener
 {
-    // Start is called before the first frame update
-    [SerializeField] string _androidGameId = "4227891";
-    [SerializeField] string _iOSGameId = "4227890";
     private string _gameId;
     private string _interstitialAds = "Interstitial_", _rewardedAds = "Rewarded_", _bannerAds = "Banner_";
     public PlayerController playerController;
@@ -21,12 +18,12 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     {
         // branching depending on environment type.
         #if UNITY_IOS
-            _gameId = _iOSGameId;
+            _gameId = "4227890";
             _interstitialAds += "iOS";
             _rewardedAds += "iOS";
             _bannerAds += "iOS"; 
         #else
-            _gameId = _androidGameId;
+            _gameId = "4227891";
             _interstitialAds += "Android";
             _rewardedAds += "Android";
             _bannerAds += "Android";
@@ -97,23 +94,13 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
             if(showResult == ShowResult.Finished && adShown){
                 if(placementId == _rewardedAds){
                     if(!isPlayerResuscitated){
-                        revivePlayer();
-
                         // activate player reward.
                         activatePlayerReward();
-
-                        // hide the gamelost and overlay panel.
-                        gameLostPanel.SetActive(false);
-                        overlayPanel.SetActive(false);
-                    }else{
-                        if(!isLevelReloaded){
-                            // reload active scene
-                            reloadLevel();
-                        }
+                        // revive player
+                        revivePlayer();
                     }
                 }
-
-
+                
                 if (placementId == _interstitialAds)
                 {
                     changeLevel();
@@ -138,7 +125,9 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
 
     private void revivePlayer(){
         // revive player.
-        player.SetActive(true);
+        if(player.gameObject){
+            player.SetActive(true);
+        }
         playerController.resusciatePlayer();
         isPlayerResuscitated = true;
     }

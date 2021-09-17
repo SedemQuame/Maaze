@@ -49,7 +49,7 @@ public class HealthDockController : MonoBehaviour
         isCoroutineRunning = true;
         while(isPlayer){
             player.GetComponentInParent<PlayerController>().updateHealthBar(-healthIncrementValue);
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(healthIncrementRate);
         }
     }
 }

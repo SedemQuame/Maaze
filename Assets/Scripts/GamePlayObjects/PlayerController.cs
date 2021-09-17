@@ -22,11 +22,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject lastFloor;
     [SerializeField]
-    private bool isColliding, hasHitGround, isFiring, isRotatingLeft, isRotatingRight;
+    private bool isColliding, hasHitGround;
     [SerializeField]
     private float movementX, movementY, vol, volUp = 1.0f, volDown = 0.6f, rotationAngle, playerSpeed;
     [SerializeField]
     private AudioSource audioSource;
+
+    #if UNITY_IOS || UNITY_ANDROID
+    private bool isRotatingLeft, isRotatingRight, isFiring;
+    #endif
 
     void Start()
     {
@@ -181,7 +185,7 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(new Vector3(0, 15 * -rotationVector.x, 0));
     }
  
- #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
+ #if UNITY_IOS || UNITY_ANDROID
     public void OnRotateLeft()
     {
         float rotationVectorX = 1.0f;
@@ -227,8 +231,13 @@ public class PlayerController : MonoBehaviour
         healthBarControl.SetHealthBarValue(healthBarControl.GetHealthBarValue() - (0.01f * damagePoints));
     }
 
+    private void resetPlayerHealth(float healthPoints){
+        health = healthPoints;
+        healthBarControl.SetHealthBarValue((0.01f * healthPoints));
+    }
+
     public void resusciatePlayer(){
-        updateHealthBar(-40);
+        resetPlayerHealth(60.0f);
         this.gameObject.SetActive(true);
     }
 
