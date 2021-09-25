@@ -44,6 +44,10 @@ public class SpawnManager : MonoBehaviour
             objectiveStatusIndicator.SetActive(true);
         }
         eventManagerBody = eventManager.transform.GetChild(0).gameObject;
+
+        // simulating enemy teleportation
+        // todo: refactor code to make teleportation smoother.
+        StartCoroutine(spawnTeleportedEnemies());
     }
 
     void FixedUpdate()
@@ -293,4 +297,12 @@ public class SpawnManager : MonoBehaviour
         // todo: add audio for enemy instantiation.
         spawnEnemy(enemyArr[enemyType], spawnManagerFloor.transform.position + new Vector3(0, 2, 0), Quaternion.Euler(0.0f, 90.0f, 0.0f));
     }
+
+    IEnumerator spawnTeleportedEnemies(){
+        yield return new WaitForSeconds(0.5f);
+        Vector3 enemySpawnPoint = new Vector3(0, 10, 0);
+        Instantiate(LevelDifficulty.objectsToTeleport[0], enemySpawnPoint, enemyArr[0].transform.rotation);
+        LevelDifficulty.objectsToTeleport.RemoveAt(0);
+    }
+
 }

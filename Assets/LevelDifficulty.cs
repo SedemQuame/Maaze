@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -9,5 +11,6 @@ public static class LevelDifficulty
     [Range(1, 50)]
     public static int levelDifficulty=10;
     public static int maxLevelReached=10;
+    public static List<GameObject> objectsToTeleport = new List<GameObject>();
 }
     

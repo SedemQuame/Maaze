@@ -45,7 +45,8 @@ public class ButtonBehaviour : MonoBehaviour
     /// </summary>
     public void playClickSound()
     {
-        source.PlayOneShot(clickSound, 0.8f);
+        // play click sound if unlocked vs locked
+        source.PlayOneShot(clickSound, 1.0f);
     }
 
     /// <summary>

@@ -23,11 +23,18 @@ public class PortalController : MonoBehaviour
         if(other.gameObject.tag == "Player"){
             // give player X amount of points for using the portal.
             PointsSystem.updatePointSystem(portalPoints, pointText);
-            StartCoroutine(gameEndSequence());
+            StartCoroutine(gameEndSequence(other.gameObject));
         }
+
+        if(other.gameObject.tag == "Enemy"){
+            // teleport enemy gameobjects to next level.
+            LevelDifficulty.objectsToTeleport.Add(other.gameObject);
+            StartCoroutine(gameEndSequence(other.gameObject));
+        }
+        
     }
 
-    IEnumerator gameEndSequence(){
+    IEnumerator gameEndSequence(GameObject gameObject){
         yield return new WaitForSeconds(1.0f);
 
         // instantiate teleport particle Fx
@@ -35,9 +42,11 @@ public class PortalController : MonoBehaviour
         // todo play telportation sound
         audioSource.PlayOneShot(teleportationSound);
         yield return new WaitForSeconds(0.2f);
-        player.SetActive(false);
+        gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(1.0f);
-        gameManager.GameOver(true);
+        if(gameObject.tag == "Player"){
+            yield return new WaitForSeconds(1.0f);
+            gameManager.GameOver(true);
+        }
     }
 }
