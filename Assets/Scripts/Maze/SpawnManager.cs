@@ -17,16 +17,18 @@ public class SpawnManager : MonoBehaviour
     public Material[] materials;
     public GameObject[] rewards;
     public GameObject[] enemyArr;
-
     public GameObject[] glitchedGameObjects;
     public GameObject healthDock, portal;
     public GameObject eventManager, objectiveStatusIndicator;
     public TMP_Text rewardCountText;
+    public AudioClip beepSound, buzzerSound;
 // ===============PRIVATE VARIABLES===============
     private GameObject infoBoxPrefabSmall;
     private GameObject spawnManagerFloor, eventManagerBody;
+    private AudioSource audioSource;
     private MazeLoader loader;
     private float spawnRate, initialSpawnRate = 30.0f;
+    private float volUp = 1.0f, volDown = 0.6f;
     private int numberOfRewards;
     private string eventMessage;
     private List<string> objectSpawnLocations = new List<string>();
@@ -34,6 +36,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
+        audioSource = this.GetComponent<AudioSource>();
         loader = GameObject.Find("Maze Loader Holder").GetComponent<MazeLoader>();
         isPortalSpawned = false;
         if(LevelDifficulty.levelDifficulty >= 2){ // do not spawn collectibles till level 2.
@@ -205,11 +208,11 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator spawnStart(){
         //calculate spawnRate using Exponential Decay.
-        if(LevelDifficulty.levelDifficulty < 12){
-            spawnRate = initialSpawnRate*(Mathf.Pow((1 - 0.08f), LevelDifficulty.levelDifficulty));
-        }else{
-            spawnRate = 10.0f;
-        }
+        // if(LevelDifficulty.levelDifficulty < 12){
+        //     spawnRate = initialSpawnRate*(Mathf.Pow((1 - 0.08f), LevelDifficulty.levelDifficulty));
+        // }else{
+            spawnRate = 15.0f;
+        // }
 
         spawnRewardsByLevelDifficulty();
 
@@ -263,22 +266,28 @@ public class SpawnManager : MonoBehaviour
     IEnumerator ToggleColor(string spawnManagerCell, int enemyType, Renderer rend)
     {
         // todo: play bliking buzzer audio.
-        int blinkNumber = 9, i = 0;
-        while (blinkNumber >= i)
+        // todo: play the beep sound here.
+        float vol = Random.Range(volDown, volUp);
+        bool shouldBeep = false;
+        for (int blinkNumber = 9, i = 0; blinkNumber >= i; i++)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
+
             if (rend.sharedMaterial == materials[0])
             {
                 rend.sharedMaterial = materials[enemyType + 1];
+                // audioSource.PlayOneShot(beepSound);
             }
             else
             {
                 // change back to ground material
                 rend.sharedMaterial = materials[0];
             }
-            i++;
         }
         rend.sharedMaterial = materials[0];
+
+        // todo: play the buzzer sound  
+        // audioSource.PlayOneShot(buzzerSound, vol);
 
         // todo: create a smoke prefab
         // todo: add audio for enemy instantiation.

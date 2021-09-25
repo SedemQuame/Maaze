@@ -18,9 +18,11 @@ public class GameManager : MonoBehaviour
     public GameObject overlayPanel, touchControlPanel, objectManager, worldInformationBox, gameWonPanel, gameLostPanel, gameControls;
     public GameObject pointText, w_score_text, l_score_text, w_message, l_message, timer;
     [Tooltip("Displays the current game level.")]
+    public AudioClip [] audioClip;
     public TMP_Text gameLevel;
     private int levelTimeLimit = 60;
     private PlayerController playerController;
+    private AudioSource audioSource;
 
     /// <summary>
     /// Ensures that the game is not paused. Hides the gameOver canvas to false.
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
         isObjectManagerDisplayed = false;
         pointText.GetComponent<TextMeshProUGUI>().text = ("00" + PointsSystem.points);
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        audioSource = this.GetComponent<AudioSource>();
         if(LevelDifficulty.levelDifficulty >= 17 && LevelDifficulty.levelDifficulty <= 32){
             timer.SetActive(true);
             // initialise timer values.
@@ -104,7 +107,6 @@ public class GameManager : MonoBehaviour
         {
             string message = "Cleared!";
             w_score_text.GetComponent<TextMeshProUGUI>().text = "00" + PointsSystem.points;
-            gameWonPanel.SetActive(true);
 
             if(LevelDifficulty.levelDifficulty%8 == 0){
                 message = "Congratulations, Section\n" + message;
@@ -113,11 +115,19 @@ public class GameManager : MonoBehaviour
             }
 
             w_message.GetComponent<TextMeshProUGUI>().text = message;
+
+            gameWonPanel.SetActive(true);
+
+            // play game win sounds.
+            audioSource.PlayOneShot(audioClip[0]);
         }
         else
         {
             l_score_text.GetComponent<TextMeshProUGUI>().text = "00" + PointsSystem.points;
             gameLostPanel.SetActive(true);
+
+            // play game lost sounds.
+            audioSource.PlayOneShot(audioClip[1]);
         }
     }
 

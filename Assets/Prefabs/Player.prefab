@@ -158,6 +158,7 @@ MonoBehaviour:
   hurtSound: {fileID: 8300000, guid: 6945905cc44c9a245ab90bc7600ec64c, type: 3}
   dyingSound: {fileID: 8300000, guid: f27071f98a5efbd4786437ac5f506889, type: 3}
   landInMaze: {fileID: 8300000, guid: 4093967035ab5244a9dffc9292cc14a6, type: 3}
+  wallHitSound: {fileID: 8300000, guid: fb49a3f2c05865740992fa28c0c9253c, type: 3}
   healthBarControl: {fileID: 0}
   lastFloor: {fileID: 0}
   isColliding: 0

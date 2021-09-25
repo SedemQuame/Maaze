@@ -5,7 +5,9 @@ public class PortalController : MonoBehaviour
 {
     // ===============PUBLIC VARIABLES===============
     public GameObject player, teleportingFx;
+    public AudioClip teleportationSound;
     // ===============PRIVATE VARIABLES===============
+    private AudioSource audioSource;
     private GameManager gameManager;
     private int portalPoints = 10;
     private GameObject pointText;
@@ -14,6 +16,7 @@ public class PortalController : MonoBehaviour
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
         pointText = GameObject.Find("pointText");
+        audioSource = this.GetComponent<AudioSource>();
     }
 
     void OnTriggerEnter(Collider other){
@@ -29,6 +32,8 @@ public class PortalController : MonoBehaviour
 
         // instantiate teleport particle Fx
         Instantiate(teleportingFx, transform.position, transform.rotation);
+        // todo play telportation sound
+        audioSource.PlayOneShot(teleportationSound);
         yield return new WaitForSeconds(0.2f);
         player.SetActive(false);
 

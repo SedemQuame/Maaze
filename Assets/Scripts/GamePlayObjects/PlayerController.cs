@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab, nozzel, touchControlPanel;
     public VariableJoystick variableJoystick;
     [Tooltip("Sounds played when actions occurs.")]
-    public AudioClip playerShootingSound, playerMovingSound, shootingSound, hurtSound, dyingSound, landInMaze;
+    public AudioClip playerShootingSound, playerMovingSound, shootingSound, hurtSound, dyingSound, landInMaze, wallHitSound;
     public HealthBarControl healthBarControl;
 
     // ===============PRIVATE VARIABLES===============
@@ -125,6 +125,8 @@ public class PlayerController : MonoBehaviour
             case "NavMesh":
                 break;
             case "Wall":
+                // play sound when play hits walls
+                audioSource.PlayOneShot(wallHitSound, vol);
                 break;
             case "Enemy":
                 audioSource.PlayOneShot(hurtSound, vol);

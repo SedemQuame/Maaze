@@ -8,6 +8,7 @@ using UnityEngine;
 public class GoalBehaviour : MonoBehaviour
 {
     private GameObject pointText;
+    public bool isPickedUp;
     public GameObject pickupEffect;
     public float collectiblePoints;
     public AudioClip pickUpSoundFx; 
@@ -16,21 +17,21 @@ public class GoalBehaviour : MonoBehaviour
     void Start(){
         audioData.enabled = true;
         pointText = GameObject.Find("pointText");
+        isPickedUp = false;
     }
 
     void Update()
     {
         // rotate the goal, about the y-axis per every frame.
         transform.Rotate(0, 2, 0);
+        isPickedUp = false;
     }
 
     public void Pickup()
-    { 
+    {
         PlayPickUpSound();
         Instantiate(pickupEffect, transform.position, transform.rotation);
         StartCoroutine(DestroyGoalObject());
-
-        // update points system
         PointsSystem.updatePointSystem(collectiblePoints, pointText);
     }
 
@@ -40,8 +41,7 @@ public class GoalBehaviour : MonoBehaviour
     }
 
     public void PlayPickUpSound(){
-        // pickup sound
-            float vol = Random.Range (.5f, 1.0f);
-            audioData.PlayOneShot(pickUpSoundFx, vol);
+        float vol = Random.Range (.5f, 1.0f);
+        audioData.PlayOneShot(pickUpSoundFx, vol);
     }
 }

@@ -6,16 +6,19 @@ public class HealthDockController : MonoBehaviour
 {
     // this should be in increments of 2 to 10.
     public int healthIncrementValue;
-    public GameObject player;
+    public AudioClip healingSound;
+    private GameObject player;
     [SerializeField]
     private float healthIncrementRate = 0.1f;
     [SerializeField]
     private bool isStandingOnHealingPad = false, isCoroutineRunning = false, isPlayer = false;
     [SerializeField]
     private Collider collidingGameObject = null;
+    private AudioSource audioSource;
 
     void Start(){
         player = GameObject.Find("Player");
+        audioSource = this.GetComponent<AudioSource>();
     }
 
     void Update(){
@@ -48,6 +51,8 @@ public class HealthDockController : MonoBehaviour
     IEnumerator restoreHealth(){
         isCoroutineRunning = true;
         while(isPlayer){
+            // play healing souns and heal player.
+            audioSource.PlayOneShot(healingSound);
             player.GetComponentInParent<PlayerController>().updateHealthBar(-healthIncrementValue);
             yield return new WaitForSeconds(healthIncrementRate);
         }
