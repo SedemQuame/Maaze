@@ -421,6 +421,7 @@ MonoBehaviour:
   damagePoints: 6
   health: 100
   killPoints: 50
+  enemyType: 4
   damageResistance: 0.6
   healthBarControl: {fileID: 401348376164440011}
   destroyEffect: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561,

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /// <summary>
 /// Modifies the value of the player's health bar.
 /// </summary>
@@ -9,6 +10,7 @@ public class EnemyController : MonoBehaviour
 {
     // ===============PUBLIC VARIABLES===============
     public float speed = 6.0f, damagePoints = 10.0f, health = 100.0f, killPoints;
+    public EnemyType enemyType;
     [Range(0, 1)]
     public float damageResistance;
     public HealthBarControl healthBarControl;

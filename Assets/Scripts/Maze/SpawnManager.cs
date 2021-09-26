@@ -44,10 +44,6 @@ public class SpawnManager : MonoBehaviour
             objectiveStatusIndicator.SetActive(true);
         }
         eventManagerBody = eventManager.transform.GetChild(0).gameObject;
-
-        // simulating enemy teleportation
-        // todo: refactor code to make teleportation smoother.
-        StartCoroutine(spawnTeleportedEnemies());
     }
 
     void FixedUpdate()
@@ -62,7 +58,6 @@ public class SpawnManager : MonoBehaviour
                 if(LevelDifficulty.levelDifficulty == 4 && !hasDisplayedObjectiveManager){
                     // spawn enemy when player, takes the first collectible reward.
                     StartCoroutine(SpawnEnemy(2));
-                    // show game objective windows.
                     GameObject.Find("Manager").GetComponent<GameManager>().showObjectivePanel();
                     hasDisplayedObjectiveManager = true;
                 }
@@ -251,14 +246,11 @@ public class SpawnManager : MonoBehaviour
         {
             string spawnManagerCell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
             spawnManagerFloor = GameObject.Find(spawnManagerCell);
-
             // get the renderer for the floor to spawn the enemy on.
             Renderer rend = spawnManagerFloor.GetComponent<Renderer>();
             rend.enabled = true;
-
             // toggle color for floor.
             StartCoroutine(ToggleColor(spawnManagerCell, Random.Range(0, enemyArr.Length), rend));
-
             // delay when next enemy is spawned.
             yield return new WaitForSeconds(spawnRate);
         }
@@ -269,10 +261,9 @@ public class SpawnManager : MonoBehaviour
     /// </summary>
     IEnumerator ToggleColor(string spawnManagerCell, int enemyType, Renderer rend)
     {
-        // todo: play bliking buzzer audio.
+        // todo: play blinking buzzer audio.
         // todo: play the beep sound here.
         float vol = Random.Range(volDown, volUp);
-        bool shouldBeep = false;
         for (int blinkNumber = 9, i = 0; blinkNumber >= i; i++)
         {
             yield return new WaitForSeconds(2);
@@ -298,11 +289,33 @@ public class SpawnManager : MonoBehaviour
         spawnEnemy(enemyArr[enemyType], spawnManagerFloor.transform.position + new Vector3(0, 2, 0), Quaternion.Euler(0.0f, 90.0f, 0.0f));
     }
 
-    IEnumerator spawnTeleportedEnemies(){
-        yield return new WaitForSeconds(0.5f);
-        Vector3 enemySpawnPoint = new Vector3(0, 10, 0);
-        Instantiate(LevelDifficulty.objectsToTeleport[0], enemySpawnPoint, enemyArr[0].transform.rotation);
-        LevelDifficulty.objectsToTeleport.RemoveAt(0);
+    public IEnumerator spawnTeleportedEnemies(){
+        yield return new WaitForSeconds(2.0f);
+        for (int i = 0; i < LevelDifficulty.objectsToTeleport.Count; i++)
+        {
+            string teleportationFloor = "Floor " + (loader.getRowAndColumnNumber()-1) + ", " + (loader.getRowAndColumnNumber()-1);
+            GameObject teleportationFloorGameObj = GameObject.Find(teleportationFloor);
+            Vector3 enemySpawnPoint = new Vector3(14, 10, 14);
+            Instantiate(simulateTeleportedEnemies(LevelDifficulty.objectsToTeleport[i]), enemySpawnPoint, enemyArr[0].transform.rotation);
+            yield return new WaitForSeconds(0.5f);
+        }
+        // empty list.
+        LevelDifficulty.objectsToTeleport.RemoveAll(checkIfToRemove);
     }
 
+    private GameObject simulateTeleportedEnemies(EnemyType enemyType){
+        // returns a gameObject based on the enemyType received.
+        return enemyType switch
+        {
+            EnemyType.blue => enemyArr[0],
+            EnemyType.green => enemyArr[1],
+            EnemyType.red => enemyArr[2],
+            EnemyType.yellow => enemyArr[3],
+            _ => null
+        };
+    }
+
+    private bool checkIfToRemove(EnemyType enemyType){
+        return ((int)enemyType < 5);
+    }
 }

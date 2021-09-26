@@ -28,7 +28,9 @@ public class PortalController : MonoBehaviour
 
         if(other.gameObject.tag == "Enemy"){
             // teleport enemy gameobjects to next level.
-            LevelDifficulty.objectsToTeleport.Add(other.gameObject);
+            EnemyType enemyType = other.gameObject.GetComponent<EnemyController>().enemyType;
+            Debug.Log(enemyType);
+            LevelDifficulty.objectsToTeleport.Add(enemyType);
             StartCoroutine(gameEndSequence(other.gameObject));
         }
         

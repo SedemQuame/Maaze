@@ -11,6 +11,6 @@ public static class LevelDifficulty
     [Range(1, 50)]
     public static int levelDifficulty=10;
     public static int maxLevelReached=10;
-    public static List<GameObject> objectsToTeleport = new List<GameObject>();
+    public static List<EnemyType> objectsToTeleport = new List<EnemyType>();
 }
     

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
@@ -64,8 +66,11 @@ public class MazeLoader : MonoBehaviour
 
         // bake nav mesh
         surface.BuildNavMesh();
-    }
 
+        // teleport enemies into new maze.
+        StartCoroutine(GameObject.Find("SpawnManager").GetComponent<SpawnManager>().spawnTeleportedEnemies());
+    }
+ 
     void InitializeMaze()
     {
         mazeCells = new MazeCell[mazeRows, mazeColumns];
