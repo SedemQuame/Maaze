@@ -11,24 +11,20 @@ public class EnemyAI : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
     public enum ENEMY_AI_STATES { PATROL = 0, CHASE = 1, ATTACK = 2, DEAD = 3 };
-    public float minimumAttackDistance;
-    public float fieldOfView;
-    public GameObject face;
-    public GameObject projectilePrefab;
+    public float minimumAttackDistance, fieldOfView;
+    public GameObject face, projectilePrefab;
 
 
     private Transform player;
     private string destinationCell;
-    private Vector3 patrolDestination;
-    private Vector3 moveDirection;
+    private bool isOnNavMesh = false;
+    private Vector3 patrolDestination, moveDirection;
 
     [Tooltip("Sets the initial state for enemy objects")]
     [SerializeField]
     private ENEMY_AI_STATES currentState;
     private MazeLoader loader;
-    private bool isDestinationSet;
-
-    private bool isGameOver;
+    private bool isDestinationSet, isGameOver;
     private GameObject mazeLoader;
 
 
@@ -41,7 +37,6 @@ public class EnemyAI : MonoBehaviour
             player = GameObject.Find("Player").transform;
         }
         isGameOver = GameObject.Find("Manager").GetComponent<GameManager>().isGameOver;
-
         mazeLoader = GameObject.Find("Maze Loader Holder");
     }
 
@@ -76,6 +71,12 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "Ground")
+        {
+            isOnNavMesh = true;
+        }
+    }
     public void changeFSMState(ENEMY_AI_STATES value)
     {
         currentState = value;
@@ -123,14 +124,12 @@ public class EnemyAI : MonoBehaviour
 
     public void patrolState()
     {
-        if (!isDestinationSet)
+        if (!isDestinationSet && isOnNavMesh)
         {
             loader = mazeLoader.GetComponent<MazeLoader>();
-
             destinationCell = "Floor " + Random.Range(0, loader.getRowAndColumnNumber()) + "," + Random.Range(0, loader.getRowAndColumnNumber());
             patrolDestination = randomPatrolDestination(destinationCell);
             navMeshAgent.SetDestination(patrolDestination);
-
             if (player.transform != null && checkIfAtDestination(player.transform.position, 2.5f))
             {
                 changeFSMState(ENEMY_AI_STATES.CHASE);

@@ -130,8 +130,12 @@ public class PlayerController : MonoBehaviour
                 audioSource.PlayOneShot(wallHitSound, vol);
                 break;
             case "Enemy":
+                EnemyController enemyController = collider.gameObject.GetComponent<EnemyController>();
                 audioSource.PlayOneShot(hurtSound, vol);
-                this.updateHealthBar(collider.gameObject.GetComponent<EnemyController>().damagePoints);// reduce player health by enemy damage points.
+                // cinemachine camera shake.
+                CinemachineScreenShake.Instance.ShakeCamera(1.0f, 0.50f);
+                // reduce player health by enemy damage points.
+                this.updateHealthBar(enemyController.damagePoints);
                 if (this.health < 1)
                 {
                     // dying sequence
@@ -141,6 +145,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Ground":
                 if(!hasHitGround){
+                    CinemachineScreenShake.Instance.ShakeCamera(2.0f, 0.20f);
                     audioSource.PlayOneShot(landInMaze, 1);
                     hasHitGround = true;
                 }

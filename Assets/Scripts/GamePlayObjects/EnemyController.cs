@@ -26,7 +26,8 @@ public class EnemyController : MonoBehaviour
     private PlayerController player;
     private EnemyAI enemyAI;
     private float volUp = 1.0f, volDown = 0.6f;
-    private bool soundPlayed = false; //used to implement a cool-off time after a sound has been played.
+    //used to implement a cool-off time after a sound has been played.
+    private bool soundPlayed = false;
     private bool prefabEffectInstantiated = false;
 
 
