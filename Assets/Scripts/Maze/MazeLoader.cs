@@ -64,11 +64,17 @@ public class MazeLoader : MonoBehaviour
         MazeAlgorithm ma = new HuntAndKillMazeAlgorithm(mazeCells);
         ma.CreateMaze();
 
-        // bake nav mesh
-        surface.BuildNavMesh();
 
         // teleport enemies into new maze.
         StartCoroutine(GameObject.Find("SpawnManager").GetComponent<SpawnManager>().spawnTeleportedEnemies());
+
+    }
+
+    private void LateUpdate() {
+        
+        // bake nav mesh
+        // todo: build nav mesh after all enemies have touched the navmesh
+        surface.BuildNavMesh();
     }
  
     void InitializeMaze()

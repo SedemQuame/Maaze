@@ -40,7 +40,7 @@ public class SpawnManager : MonoBehaviour
         loader = GameObject.Find("Maze Loader Holder").GetComponent<MazeLoader>();
         isPortalSpawned = false;
         if(LevelDifficulty.levelDifficulty >= 2){ // do not spawn collectibles till level 2.
-            StartCoroutine(spawnStart());   
+            StartCoroutine(spawnStart()); 
             objectiveStatusIndicator.SetActive(true);
         }
         eventManagerBody = eventManager.transform.GetChild(0).gameObject;
@@ -244,7 +244,8 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < numberOfEnemiesToSpawn; i++)
         {
-            string spawnManagerCell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
+            // string spawnManagerCell = "Floor " + Random.Range(0, (loader.getRowAndColumnNumber() - 1)) + "," + Random.Range(0, (loader.getRowAndColumnNumber() - 1));
+            string spawnManagerCell = generateUnvisitedSpawnPoint();
             spawnManagerFloor = GameObject.Find(spawnManagerCell);
             // get the renderer for the floor to spawn the enemy on.
             Renderer rend = spawnManagerFloor.GetComponent<Renderer>();
@@ -293,7 +294,8 @@ public class SpawnManager : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         for (int i = 0; i < LevelDifficulty.objectsToTeleport.Count; i++)
         {
-            string teleportationFloor = "Floor " + (loader.getRowAndColumnNumber()-1) + ", " + (loader.getRowAndColumnNumber()-1);
+            // string teleportationFloor = "Floor " + (loader.getRowAndColumnNumber()-1) + ", " + (loader.getRowAndColumnNumber()-1);
+            string teleportationFloor =  generateUnvisitedSpawnPoint();
             GameObject teleportationFloorGameObj = GameObject.Find(teleportationFloor);
             Vector3 enemySpawnPoint = new Vector3(14, 10, 14);
             Instantiate(simulateTeleportedEnemies(LevelDifficulty.objectsToTeleport[i]), enemySpawnPoint, enemyArr[0].transform.rotation);

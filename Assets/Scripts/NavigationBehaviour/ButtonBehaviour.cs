@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,8 +37,17 @@ public class ButtonBehaviour : MonoBehaviour
     /// </summary>
     public void Start()
     {
-        source = GetComponent<AudioSource>();
-        adsManager = GameObject.FindGameObjectsWithTag("unity_ads")[0].GetComponent<AdsManager>();
+        try
+        {
+            source = GetComponent<AudioSource>();
+            if (SceneManager.GetActiveScene().name == "Maaze Game Play"){
+                adsManager = GameObject.FindGameObjectsWithTag("unity_ads")[0].GetComponent<AdsManager>();
+            }
+        }
+        catch (Exception exception)
+        {
+            Debug.Log(exception, this);
+        }
     }
 
     /// <summary>
